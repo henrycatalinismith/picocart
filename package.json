@@ -4,8 +4,16 @@
   "description": "pico8 web sdk",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "next build",
+    "dev": "next",
+    "heroku-postbuild": "next build",
+    "start": "next start"
   },
   "author": "",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "next": "^7.0.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
 }
