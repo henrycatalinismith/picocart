@@ -1,12 +1,17 @@
-export default () => [
-  <div>picocart</div>,
+import Document from "../components/document"
+import Header from "../components/header"
+import colors from "../colors"
 
-  <style jsx>{`
-    div {
-      font-family: sans-serif;
-      margin: 0;
-      background-color: red;
-    }
-  `}</style>
-]
+export default () => (
+  <Document>
+    <Header />
+    <p>index</p>
+    <style jsx>{`
+      p {
+        color: ${colors[0]};
+        font-weight: 900;
+      }
+    `}</style>
+  </Document>
+)
 
