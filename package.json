@@ -8,9 +8,9 @@
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "build": "next build",
-    "dev": "node server.js",
+    "dev": "node --experimental-modules server.mjs",
     "heroku-postbuild": "next build",
-    "start": "node server.js -p $PORT",
+    "start": "node --experimental-modules server.mjs -p $PORT",
     "storybook-start": "start-storybook -p 8080",
     "storybook-build": "build-storybook",
     "test": "jest"
