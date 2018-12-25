@@ -4,6 +4,9 @@
   "description": "pico8 web sdk",
   "main": "index.js",
   "scripts": {
+    "analyze": "BUNDLE_ANALYZE=both next build",
+    "analyze:server": "BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "build": "next build",
     "dev": "next",
     "heroku-postbuild": "next build",
@@ -13,6 +16,7 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "@zeit/next-bundle-analyzer": "^0.1.2",
     "babel-jest": "^23.6.0",
     "dotenv": "^6.2.0",
     "dotenv-webpack": "^1.5.7",
