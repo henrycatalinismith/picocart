@@ -7,13 +7,18 @@
     "build": "next build",
     "dev": "next",
     "heroku-postbuild": "next build",
-    "start": "next start -p $PORT"
+    "start": "next start -p $PORT",
+    "test": "jest"
   },
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "babel-jest": "^23.6.0",
     "dotenv": "^6.2.0",
     "dotenv-webpack": "^1.5.7",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest": "^23.6.0",
     "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
