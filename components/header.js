@@ -1,14 +1,16 @@
+import Logo from "./logo"
 import colors from "../colors"
 
-export default () => [
-  <h1>picocart</h1>,
+export default () => (
+  <div className="header">
+    <Logo />
 
-  <style jsx>{`
-    h1 {
-      font-family: sans-serif;
-      margin: 0;
-      background-color: ${colors[14]};
-    }
-  `}</style>
-]
+    <style jsx>{`
+      .header {
+        background-color: ${colors[14]};
+        height: 32px;
+      }
+    `}</style>
+  </div>
+)
 
