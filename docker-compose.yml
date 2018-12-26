@@ -11,7 +11,6 @@ services:
       - postgres
     ports:
       - "3000:3000"
-      - "9229:9229"
     environment:
       - DATABASE_URL=postgres://picocart:swordfish@postgres:5432/picocart
 
