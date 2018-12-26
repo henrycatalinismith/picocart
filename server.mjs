@@ -1,6 +1,7 @@
-import express from "express";
-import next from "next";
-import path from "path";
+import express from "express"
+import Sequelize from "sequelize"
+import next from "next"
+import path from "path"
 
 async function main() {
   const port = parseInt(process.env.PORT, 10) || 3000
@@ -13,6 +14,12 @@ async function main() {
 
   server.get("/robots.txt", (req, res) => {
     res.sendFile(path.join(__dirname, "static", "robots.txt"))
+  })
+
+  server.get("/db", async (req, res) => {
+    const sequelize = new Sequelize(process.env.DATABASE_URL)
+    await sequelize.authenticate()
+    res.send("lol")
   })
 
   server.get("*", (req, res) => {

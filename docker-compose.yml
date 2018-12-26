@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  picocart:
+    image: node:11.5.0-alpine
+    volumes:
+      - .:/picocart
+    working_dir: /picocart
+    entrypoint: npm run dev
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    environment:
+      - DATABASE_URL=postgres://picocart:swordfish@postgres:5432/picocart
+
+  postgres:
+    image: postgres:11.1-alpine
+    environment:
+      POSTGRES_USER: picocart
+      POSTGRES_PASSWORD: swordfish
+      POSTGRES_DB: picocart
