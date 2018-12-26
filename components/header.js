@@ -1,8 +1,10 @@
+import Floppy from "./floppy"
 import Logo from "./logo"
 import colors from "../colors"
 
 export default () => (
   <div className="header">
+    <Floppy />
     <Logo />
 
     <style jsx>{`
