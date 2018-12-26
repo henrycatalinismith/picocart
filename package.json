@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "analyze": "BUNDLE_ANALYZE=both next build",
-    "analyze:server": "BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "build": "next build",
+    "db:migrate": "sequelize db:migrate --config sequelize.json",
     "dev": "nodemon server.mjs",
     "heroku-postbuild": "next build",
+    "sequelize": "sequelize",
     "start": "node --experimental-modules server.mjs -p $PORT",
     "storybook-start": "start-storybook -p 8080",
     "storybook-build": "build-storybook",

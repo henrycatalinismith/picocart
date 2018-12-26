@@ -2,6 +2,7 @@ version: "3"
 services:
 
   picocart:
+    container_name: picocart
     image: node:11.5.0-alpine
     volumes:
       - .:/picocart
@@ -15,6 +16,7 @@ services:
       - DATABASE_URL=postgres://picocart:swordfish@postgres:5432/picocart
 
   postgres:
+    container_name: postgres
     image: postgres:11.1-alpine
     environment:
       POSTGRES_USER: picocart
