@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import Document from "../components/document"
 import Header from "../components/header"
+import Toolshed from "../components/toolshed"
 import colors from "../colors"
 
 class Cart extends React.Component {
@@ -18,7 +19,7 @@ class Cart extends React.Component {
     return (
       <Document title="cart editor">
         <Header />
-        <p>cart</p>
+        <Toolshed height={256} />
       </Document>
     )
   }
