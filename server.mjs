@@ -1,8 +1,12 @@
 import express from "express"
 import Sequelize from "sequelize"
+import fs from "fs"
 import next from "next"
 import path from "path"
 import models from './models'
+
+const dir = path.resolve("./static")
+const files = fs.readdirSync(dir)
 
 async function main() {
   const port = parseInt(process.env.PORT, 10) || 3000
@@ -13,8 +17,10 @@ async function main() {
   await app.prepare()
   const server = express()
 
-  server.get("/robots.txt", (req, res) => {
-    res.sendFile(path.resolve("./static/robots.txt"))
+  files.forEach(filename => {
+    server.get(`/${filename}`, (req, res) => {
+      res.sendFile(path.resolve(`./static/${filename}`))
+    })
   })
 
   server.get("/db", async (req, res) => {
