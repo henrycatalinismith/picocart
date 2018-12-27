@@ -60,13 +60,6 @@ export function makeStore (initialState = serverInitialState, options) {
 }
 
 class _App extends App {
-  static async getInitialProps ({ req, res, store }) {
-    console.log("getInitialProps")
-    return {
-      layout: "lol"
-    }
-  }
-
   componentDidMount () {
     window.store.dispatch(
       layoutActions.detectViewport(

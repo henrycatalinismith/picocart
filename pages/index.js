@@ -5,16 +5,6 @@ import Header from "../components/header"
 import colors from "../colors"
 
 class Index extends React.Component {
-  static getInitialProps ({ reduxStore, req }) {
-    const isServer = !!req
-    console.log(isServer)
-    return {}
-  }
-
-  componentDidMount () {
-    console.log("componentDidMount!")
-  }
-
   render() {
     return (
       <Document>
