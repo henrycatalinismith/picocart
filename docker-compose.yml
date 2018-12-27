@@ -22,3 +22,13 @@ services:
       POSTGRES_USER: picocart
       POSTGRES_PASSWORD: swordfish
       POSTGRES_DB: picocart
+
+  storybook:
+    container_name: storybook
+    image: node:11.5.0-alpine
+    volumes:
+      - .:/picocart
+    working_dir: /picocart
+    entrypoint: npm run storybook-start
+    ports:
+      - "3001:3001"
