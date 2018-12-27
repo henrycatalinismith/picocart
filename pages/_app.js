@@ -22,8 +22,13 @@ import {
 
 import withRedux from "next-redux-wrapper"
 
+import { reducer as layoutReducer } from "../reducers/layout"
+
+import layoutActions from "../actions/layout"
+
 const reducer = combineReducers({
-  router: routerReducer
+  layout: layoutReducer,
+  router: routerReducer,
 });
 
 const routerMiddleware = createRouterMiddleware();
@@ -40,10 +45,31 @@ export function makeStore (initialState = {}, options) {
     )
   )
 
-  return createStore(reducer, initialState, middleware)
+  const store = createStore(reducer, initialState, middleware)
+  if (!options.isServer) {
+    window.store = store
+  }
+
+  return store
 }
 
 class _App extends App {
+  static async getInitialProps ({ req, res, store }) {
+    console.log("getInitialProps")
+    return {
+      layout: "lol"
+    }
+  }
+
+  componentDidMount () {
+    window.store.dispatch(
+      layoutActions.detectViewport(
+        window.innerWidth,
+        window.innerHeight
+      )
+    )
+  }
+
   render () {
     const { Component, pageProps, store } = this.props
     return (
