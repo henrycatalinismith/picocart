@@ -1,6 +1,5 @@
 import express from "express"
 import Sequelize from "sequelize"
-import sslRedirect from "heroku-ssl-redirect"
 import fs from "fs"
 import next from "next"
 import path from "path"
@@ -17,7 +16,11 @@ async function main() {
 
   await app.prepare()
   const server = express()
-  server.use(sslRedirect());
+
+  server.use((req, res, next) => {
+    console.log(req.headers["X-Forwarded-Proto"])
+    next()
+  });
 
   files.forEach(filename => {
     server.get(`/${filename}`, (req, res) => {
