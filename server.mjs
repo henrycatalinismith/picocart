@@ -1,6 +1,5 @@
 import express from "express"
 import Sequelize from "sequelize"
-import httpsRedirect from "express-https-redirect"
 import fs from "fs"
 import next from "next"
 import path from "path"
@@ -17,10 +16,6 @@ async function main() {
 
   await app.prepare()
   const server = express()
-
-  if (process.env.NODE_ENV === "production") {
-    server.use("/", httpsRedirect())
-  }
 
   files.forEach(filename => {
     server.get(`/${filename}`, (req, res) => {
