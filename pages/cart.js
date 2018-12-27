@@ -1,10 +1,9 @@
 import { connect } from "react-redux"
-import Link from "next/link"
 import Document from "../components/document"
 import Header from "../components/header"
 import colors from "../colors"
 
-class Index extends React.Component {
+class Cart extends React.Component {
   static getInitialProps ({ reduxStore, req }) {
     const isServer = !!req
     console.log(isServer)
@@ -17,17 +16,14 @@ class Index extends React.Component {
 
   render() {
     return (
-      <Document>
+      <Document title="cart editor">
         <Header />
-        <p>
-          <Link href="/cart">
-            <a>Edit</a>
-          </Link>
-        </p>
+        <p>cart</p>
       </Document>
     )
   }
 }
 
 
-export default connect()(Index)
+export default connect()(Cart)
+
