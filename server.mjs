@@ -17,11 +17,6 @@ async function main() {
   await app.prepare()
   const server = express()
 
-  server.use((req, res, next) => {
-    console.log(req.headers["X-Forwarded-Proto"])
-    next()
-  });
-
   files.forEach(filename => {
     server.get(`/${filename}`, (req, res) => {
       res.sendFile(path.resolve(`./static/${filename}`))
