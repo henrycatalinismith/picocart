@@ -13,7 +13,7 @@ export default ({ children }) => (
       body {
         font-family: sans-serif;
         margin: 0;
-        background-color: ${colors[13]};
+        background-color: ${colors[7]};
       }
     `}</style>
     {children}
