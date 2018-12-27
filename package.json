@@ -11,7 +11,7 @@
     "heroku-postbuild": "next build",
     "sequelize": "sequelize",
     "start": "node --experimental-modules server.mjs -p $PORT",
-    "storybook-start": "start-storybook -p 8080",
+    "storybook-start": "start-storybook -p 3001",
     "storybook-build": "build-storybook",
     "test": "jest"
   },
