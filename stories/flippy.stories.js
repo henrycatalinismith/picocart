@@ -3,18 +3,18 @@ import { storiesOf } from "@storybook/react"
 
 import colors from "../colors"
 import Center from "../components/center"
-import Flop from "../components/flop"
+import Flippy from "../components/flippy"
 
-storiesOf("<Flop ∕>", module)
+storiesOf("<Flippy ∕>", module)
 
   .add("default", () => (
     <Center bg={colors[7]}>
-      <Flop />
+      <Flippy />
     </Center>
   ))
 
   .add("large", () => (
     <Center bg={colors[7]}>
-      <Flop size={256} />
+      <Flippy size={256} />
     </Center>
   ))
