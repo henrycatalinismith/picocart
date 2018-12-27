@@ -1,6 +1,6 @@
 import colors from "../colors"
 
-export default ({ bg, width, height, children }) => {
+export default ({ bg = colors[13], width, height, children }) => {
   return (
     <div className="stage">
       {children}
