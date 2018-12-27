@@ -1,11 +1,11 @@
-import Floppy from "./floppy"
-import Logo from "./logo"
+import Flop from "./flop"
+import Wordmark from "./wordmark"
 import colors from "../colors"
 
 export default () => (
   <div className="header">
-    <Floppy />
-    <Logo />
+    <Flop />
+    <Wordmark />
 
     <style jsx>{`
       .header {
