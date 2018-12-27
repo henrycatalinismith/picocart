@@ -5,8 +5,6 @@ import colors from "../colors"
 class Screen extends React.PureComponent {
   static propTypes = {
     bg: PropTypes.string,
-    width: PropTypes.number,
-    height: PropTypes.number,
     onMount: PropTypes.func,
   }
 
@@ -30,8 +28,8 @@ class Screen extends React.PureComponent {
         <canvas
           ref={this.setElement}s
           className="screen"
-          width={width}
-          height={height}
+          width={128}
+          height={128}
         />
         <style jsx>{`
           .screen {
