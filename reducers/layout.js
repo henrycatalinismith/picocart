@@ -7,6 +7,7 @@ export const reducer = createReducer({}, {
       ...layout,
       viewportWidth: action.viewportWidth,
       viewportHeight: action.viewportHeight,
+      headerWidth: action.viewportWidth,
     }
   },
 })
