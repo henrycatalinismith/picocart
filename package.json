@@ -29,6 +29,7 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "express": "^4.16.4",
+    "express-https-redirect": "^1.0.0",
     "jest": "^23.6.0",
     "next": "^7.0.2",
     "next-offline": "^3.3.1",

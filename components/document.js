@@ -8,6 +8,7 @@ export default ({ children }) => (
         rel="manifest"
         href="/manifest.webmanifest"
       />
+      <meta name="theme-color" content="#ee74a7" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1"
