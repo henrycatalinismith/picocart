@@ -19,7 +19,7 @@ async function main() {
   const server = express()
 
   if (process.env.NODE_ENV === "production") {
-    app.use("/", httpsRedirect())
+    server.use("/", httpsRedirect())
   }
 
   files.forEach(filename => {
