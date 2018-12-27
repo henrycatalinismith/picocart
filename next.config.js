@@ -2,6 +2,7 @@ require("dotenv").config()
 
 const path = require("path")
 const Dotenv = require("dotenv-webpack")
+const withOffline = require("next-offline")
 const withBundleAnalyzer = require("@zeit/next-bundle-analyzer")
 
 const nextConfig = {
@@ -32,4 +33,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withBundleAnalyzer(nextConfig)
+module.exports = withOffline(withBundleAnalyzer(nextConfig))
