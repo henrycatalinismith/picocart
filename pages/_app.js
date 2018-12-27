@@ -33,7 +33,13 @@ const reducer = combineReducers({
 
 const routerMiddleware = createRouterMiddleware();
 
-export function makeStore (initialState = {}, options) {
+const serverInitialState = {
+  layout: {
+    headerHeight: 32,
+  }
+}
+
+export function makeStore (initialState = serverInitialState, options) {
   if (options.isServer) {
     initialState.router = initialRouterState(options.asPath);
   }
