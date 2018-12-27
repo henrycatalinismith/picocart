@@ -23,6 +23,10 @@ async function main() {
     })
   })
 
+  server.get("/service-worker.js", (req, res) => {
+    res.sendFile(path.resolve("./.next/service-worker.js"))
+  })
+
   server.get("/db", async (req, res) => {
     const sequelize = new Sequelize(process.env.DATABASE_URL)
     await sequelize.authenticate()

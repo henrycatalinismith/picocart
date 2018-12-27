@@ -1,0 +1,14 @@
+{
+  "name": "picocart",
+  "short_name": "picocart",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdf0e8",
+  "theme_color": "#fdf1e8",
+  "description": "PICO-8 web SDK",
+  "icons": [{
+    "src": "/icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
