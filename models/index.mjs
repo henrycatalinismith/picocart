@@ -4,7 +4,9 @@ import Sequelize from 'sequelize';
 
 const basename = "index.mjs";
 const db = {};
-const sequelize = new Sequelize(process.env.DATABASE_URL)
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "postgres"
+})
 
 const models = path.resolve("./models")
 
