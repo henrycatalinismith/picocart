@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react"
 
 import colors from "../colors"
 import Center from "../components/center"
+import Grid from "../components/grid"
 import Wordmark from "../components/wordmark"
 
 storiesOf("<Wordmark ∕>", module)
