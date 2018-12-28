@@ -3,7 +3,7 @@ import Document from "../components/document"
 import Header from "../components/header"
 import Stage from "../components/stage"
 import Screen from "../components/screen"
-import Toolshed from "../components/toolshed"
+import Toolbox from "../components/toolbox"
 import actions from "../actions"
 import colors from "../colors"
 
@@ -15,16 +15,16 @@ class Cart extends React.Component {
 
   static mapStateToProps = state => ({
     stageHeight: state.layout.stageHeight,
-    toolshedHeight: state.layout.toolshedHeight,
+    toolboxHeight: state.layout.toolboxHeight,
   })
 
   render() {
     const {
       stageHeight,
-      toolshedHeight,
+      toolboxHeight,
     } = this.props
 
-    console.log(stageHeight, toolshedHeight)
+    console.log(stageHeight, toolboxHeight)
 
     return (
       <Document title="cart editor">
@@ -32,7 +32,7 @@ class Cart extends React.Component {
         <Stage height={stageHeight}>
           <Screen />
         </Stage>
-        <Toolshed height={toolshedHeight} />
+        <Toolbox height={toolboxHeight} />
       </Document>
     )
   }

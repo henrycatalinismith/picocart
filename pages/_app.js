@@ -24,13 +24,13 @@ const serverInitialState = {
   layout: {
     mode: "document",
     stage: false,
-    toolshed: false,
+    toolbox: false,
     headerWidth: 32,
     headerHeight: 32,
     stageWidth: undefined,
     stageHeight: undefined,
-    toolshedWidth: undefined,
-    toolshedHeight: undefined,
+    toolboxWidth: undefined,
+    toolboxHeight: undefined,
   }
 }
 

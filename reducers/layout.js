@@ -7,7 +7,7 @@ export default createReducer({}, {
       ...layout,
       mode: "app",
       stage: true,
-      toolshed: true,
+      toolbox: true,
     }
   },
 
@@ -16,7 +16,7 @@ export default createReducer({}, {
       ...layout,
       mode: "document",
       stage: false,
-      toolshed: false,
+      toolbox: false,
     }
   },
 
