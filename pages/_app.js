@@ -14,43 +14,30 @@ import { Provider } from "react-redux"
 
 import { composeWithDevTools } from "redux-devtools-extension"
 
-import {
-  routerReducer,
-  createRouterMiddleware,
-  initialRouterState
-} from "connected-next-router"
-
 import withRedux from "next-redux-wrapper"
 
 import actions from "../actions"
 import middlewares from "../middlewares"
-
-import { reducer as layoutReducer } from "../reducers/layout"
-
-const reducer = combineReducers({
-  layout: layoutReducer,
-  router: routerReducer,
-});
-
-const routerMiddleware = createRouterMiddleware();
+import reducer from "../reducers"
 
 const serverInitialState = {
   layout: {
-    headerHeight: 32,
+    mode: "document",
     stage: false,
     toolshed: false,
+    headerWidth: 32,
+    headerHeight: 32,
+    stageWidth: undefined,
+    stageHeight: undefined,
+    toolshedWidth: undefined,
+    toolshedHeight: undefined,
   }
 }
 
 export function makeStore (initialState = serverInitialState, options) {
-  if (options.isServer) {
-    initialState.router = initialRouterState(options.asPath);
-  }
-
   const middleware = composeWithDevTools(
     applyMiddleware(
       middlewares,
-      routerMiddleware,
       thunkMiddleware
     )
   )
