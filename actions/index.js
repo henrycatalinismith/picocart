@@ -1,6 +1,8 @@
-const actions = {
-  EXAMPLE: "EXAMPLE",
-  example: () => ({ type: "EXAMPLE" }),
-}
+import browser from "./browser"
 
-export default actions
+const actions = {
+  ...browser,
+};
+
+export default actions;
+

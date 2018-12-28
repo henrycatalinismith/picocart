@@ -1,13 +1,11 @@
 import { createReducer } from "../signalbox";
-import layoutActions from "../actions/layout"
+import actions from "../actions"
 
 export const reducer = createReducer({}, {
-  [layoutActions.DETECT_VIEWPORT](layout, action) {
+  [actions.PAGE_LOAD](layout, action) {
     return {
       ...layout,
-      viewportWidth: action.viewportWidth,
-      viewportHeight: action.viewportHeight,
-      headerWidth: action.viewportWidth,
+      ...action.layout,
     }
   },
 })
