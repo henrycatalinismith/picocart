@@ -6,13 +6,13 @@ const serverInitialState = {
   layout: {
     mode: "document",
     stage: false,
-    toolshed: false,
+    toolbox: false,
     headerWidth: 32,
     headerHeight: 32,
     stageWidth: undefined,
     stageHeight: undefined,
-    toolshedWidth: undefined,
-    toolshedHeight: undefined,
+    toolboxWidth: undefined,
+    toolboxHeight: undefined,
   }
 }
 */
@@ -30,16 +30,16 @@ const middleware = createMiddleware((before, after) => ({
     const stageWidth = viewportWidth
     const stageHeight = mainHeight / 2
 
-    const toolshedWidth = viewportWidth
-    const toolshedHeight = mainHeight / 2
+    const toolboxWidth = viewportWidth
+    const toolboxHeight = mainHeight / 2
 
 
     action.layout = {
       headerWidth,
       stageWidth,
       stageHeight,
-      toolshedWidth,
-      toolshedHeight,
+      toolboxWidth,
+      toolboxHeight,
       viewportWidth,
       viewportHeight,
     }

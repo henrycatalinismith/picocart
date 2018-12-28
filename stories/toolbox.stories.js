@@ -3,13 +3,13 @@ import { storiesOf } from "@storybook/react"
 
 import colors from "../colors"
 import Center from "../components/center"
-import Toolshed from "../components/toolshed"
+import Toolbox from "../components/toolbox"
 
-storiesOf("<Toolshed ∕>", module)
+storiesOf("<Toolbox ∕>", module)
 
   .add("default", () => (
     <Center bg={colors[6]}>
-      <Toolshed
+      <Toolbox
         width={Math.min(window.innerWidth, 320)}
         height={Math.min(window.innerHeight, 480)}
       />

@@ -5,9 +5,9 @@ export default ({ width, height }) => {
   const borderWidth = 4;
 
   return (
-    <div className="toolshed">
+    <div className="toolbox">
       <style jsx>{`
-        .toolshed {
+        .toolbox {
           background-color: ${colors[7]};
           border: 4px solid ${colors[14]};
           height: calc(${height}px - ${borderWidth * 2}px);
