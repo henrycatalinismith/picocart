@@ -24,9 +24,9 @@ class Screen extends React.PureComponent {
   render() {
     const { bg, width, height } = this.props;
     return (
-      <>
+      <div>
         <canvas
-          ref={this.setElement}s
+          ref={this.setElement}
           className="screen"
           width={128}
           height={128}
@@ -36,7 +36,7 @@ class Screen extends React.PureComponent {
             background-color: ${bg};
           }
         `}</style>
-      </>
+      </div>
     )
   }
 }

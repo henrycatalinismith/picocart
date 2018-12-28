@@ -22,9 +22,10 @@ import {
 
 import withRedux from "next-redux-wrapper"
 
-import { reducer as layoutReducer } from "../reducers/layout"
+import actions from "../actions"
+import middlewares from "../middlewares"
 
-import layoutActions from "../actions/layout"
+import { reducer as layoutReducer } from "../reducers/layout"
 
 const reducer = combineReducers({
   layout: layoutReducer,
@@ -36,6 +37,8 @@ const routerMiddleware = createRouterMiddleware();
 const serverInitialState = {
   layout: {
     headerHeight: 32,
+    stage: false,
+    toolshed: false,
   }
 }
 
@@ -46,6 +49,7 @@ export function makeStore (initialState = serverInitialState, options) {
 
   const middleware = composeWithDevTools(
     applyMiddleware(
+      middlewares,
       routerMiddleware,
       thunkMiddleware
     )
@@ -61,12 +65,7 @@ export function makeStore (initialState = serverInitialState, options) {
 
 class _App extends App {
   componentDidMount () {
-    window.store.dispatch(
-      layoutActions.detectViewport(
-        window.innerWidth,
-        window.innerHeight
-      )
-    )
+    window.store.dispatch(actions.pageLoad())
   }
 
   render () {
