@@ -26,4 +26,11 @@ export default createReducer({}, {
       ...action.layout,
     }
   },
+
+  [actions.RESIZE_VIEWPORT](layout, action) {
+    return {
+      ...layout,
+      ...action.layout,
+    }
+  },
 })

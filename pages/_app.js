@@ -29,6 +29,8 @@ const serverInitialState = {
     headerHeight: 32,
     stageWidth: undefined,
     stageHeight: undefined,
+    resizerWidth: undefined,
+    resizerHeight: undefined,
     toolboxWidth: undefined,
     toolboxHeight: undefined,
   }

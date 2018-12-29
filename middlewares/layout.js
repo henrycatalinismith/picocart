@@ -1,6 +1,8 @@
 import { createMiddleware } from "../signalbox";
 import actions from "../actions"
 
+const o = (w, h) => w > h ? "landscape" : "portrait";
+
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
     if (window.location.pathname !== "/cart") {
@@ -18,6 +20,10 @@ const middleware = createMiddleware((before, after) => ({
     const stageWidth = stage.offsetWidth
     const stageHeight = stage.offsetHeight
 
+    const resizer = document.querySelector(".resizer")
+    const resizerWidth = resizer.offsetWidth
+    const resizerHeight = resizer.offsetHeight
+
     const toolbox = document.querySelector(".toolbox")
     const toolboxWidth = toolbox.offsetWidth
     const toolboxHeight = toolbox.offsetHeight
@@ -26,12 +32,56 @@ const middleware = createMiddleware((before, after) => ({
       headerWidth,
       stageWidth,
       stageHeight,
+      resizerWidth,
+      resizerHeight,
       toolboxWidth,
       toolboxHeight,
       viewportWidth,
       viewportHeight,
     }
-  }
+  },
+
+  [before(actions.RESIZE_VIEWPORT)](store, action) {
+    const { viewportWidth, viewportHeight } = action.layout
+
+    const state = store.getState()
+    const orientation = o(viewportWidth, viewportHeight)
+    const { headerHeight } = state.layout
+    const headerWidth = viewportWidth
+
+    if (window.location.pathname === "/cart") {
+      let {
+        stageWidth,
+        stageHeight,
+        resizerWidth,
+        resizerHeight,
+        toolboxWidth,
+        toolboxHeight,
+      } = state.layout
+
+      if (orientation === "portrait") {
+        stageWidth = viewportWidth
+        stageHeight = viewportWidth
+        toolboxWidth = viewportWidth
+        toolboxHeight = viewportHeight - headerHeight - stageHeight - resizerHeight
+      }
+
+      action.layout = {
+        ...action.layout,
+        stageWidth,
+        stageHeight,
+        resizerWidth,
+        resizerHeight,
+        toolboxWidth,
+        toolboxHeight,
+      }
+    }
+
+    action.layout = {
+      ...action.layout,
+      headerWidth,
+    }
+  },
 }))
 
 export default middleware
