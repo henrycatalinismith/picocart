@@ -24,16 +24,23 @@ class Screen extends React.PureComponent {
   render() {
     const { bg, width, height } = this.props;
     return (
-      <div>
+      <div className="screen">
         <canvas
           ref={this.setElement}
-          className="screen"
+          className="screen__canvas"
           width={128}
           height={128}
         />
         <style jsx>{`
           .screen {
+            height: 100%;
+            width: 100%;
+          }
+
+          .screen__canvas {
             background-color: ${bg};
+            height: 100%;
+            width: 100%;
           }
         `}</style>
       </div>

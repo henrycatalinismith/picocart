@@ -1,24 +1,9 @@
 import { createMiddleware } from "../signalbox";
 import actions from "../actions"
 
-/*
-const serverInitialState = {
-  layout: {
-    mode: "document",
-    stage: false,
-    toolbox: false,
-    headerWidth: 32,
-    headerHeight: 32,
-    stageWidth: undefined,
-    stageHeight: undefined,
-    toolboxWidth: undefined,
-    toolboxHeight: undefined,
-  }
-}
-*/
-
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
+    return
     const { layout } = store.getState()
 
     const viewportWidth = window.innerWidth
@@ -32,7 +17,6 @@ const middleware = createMiddleware((before, after) => ({
 
     const toolboxWidth = viewportWidth
     const toolboxHeight = mainHeight / 2
-
 
     action.layout = {
       headerWidth,

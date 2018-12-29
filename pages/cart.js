@@ -24,8 +24,6 @@ class Cart extends React.Component {
       toolboxHeight,
     } = this.props
 
-    console.log(stageHeight, toolboxHeight)
-
     return (
       <Document title="cart editor">
         <Header />
