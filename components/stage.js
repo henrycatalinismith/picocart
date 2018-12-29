@@ -32,6 +32,7 @@ export default ({ bg = colors[13], width, height, children }) => {
               width: ${width}px;
             `) : (`
               width: 100vmin;
+              flex: 1;
             `)}
           }
         }

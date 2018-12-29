@@ -8,6 +8,35 @@ import Toolbox from "../components/toolbox"
 import actions from "../actions"
 import colors from "../colors"
 
+const placeholder = canvas => {
+  const ctx = canvas.getContext('2d');
+  let time = 0;
+
+  const draw = () => {
+    time += 0.1;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    for (let i = 0; i < canvas.width;) {
+      const height = (
+        (canvas.height/2) + (
+          Math.sin(
+            ((i * 100000) + time)
+          ) * 100
+        )
+      );
+      ctx.lineTo(i, height);
+      i++;
+    }
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#000000';
+    ctx.stroke();
+  };
+
+  draw()
+  setInterval(draw, 100)
+}
+
 class Cart extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
     store.dispatch(actions.appMode())
@@ -37,7 +66,7 @@ class Cart extends React.Component {
 
         <div className="cart-maker">
           <Stage width={stageWidth} height={stageHeight}>
-            <Screen />
+            <Screen onMount={placeholder} />
           </Stage>
           <Resizer />
           <Toolbox width={toolboxWidth} height={toolboxHeight} />
