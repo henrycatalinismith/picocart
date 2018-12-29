@@ -49,6 +49,10 @@ class Cart extends React.Component {
     moveResizer: PropTypes.func,
   };
 
+  componentDidMount() {
+    document.addEventListener("touchmove", e => e.preventDefault())
+  }
+
   render() {
     const {
       headerHeight,
@@ -71,6 +75,14 @@ class Cart extends React.Component {
           <Resizer onMove={_.throttle(moveResizer, 100)} />
           <Toolbox width={toolboxWidth} height={toolboxHeight} />
         </div>
+
+        <style global jsx>{`
+          body {
+            height: 100vh;
+            overflow: hidden;
+            -webkit-overflow-scrolling: auto;
+          }
+        `}</style>
 
         <style jsx>{`
           .cart-maker {
