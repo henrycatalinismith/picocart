@@ -55,7 +55,7 @@ class Screen extends React.PureComponent {
             position: relative;
             background-color: ${bg};
             image-rendering: pixelated;
-            transition: width 0.4s linear, height 0.4s linear;
+            transition: width 0.2s linear, height 0.4s linear;
 
             ${size ? (`
               height: ${size}px;

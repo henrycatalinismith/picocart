@@ -110,6 +110,47 @@ const middleware = createMiddleware((before, after) => ({
       headerWidth,
     }
   },
+
+  [before(actions.MOVE_RESIZER)](store, action) {
+    const state = store.getState()
+
+    const {
+      viewportWidth,
+      viewportHeight,
+      headerWidth,
+      headerHeight,
+      resizerWidth,
+      resizerHeight,
+    } = state.layout
+
+    let {
+      screenSize,
+      stageWidth,
+      stageHeight,
+      toolboxWidth,
+      toolboxHeight,
+    } = state.layout
+
+    const orientation = o(viewportWidth, viewportHeight)
+
+    if (orientation === "portrait") {
+      stageHeight = action.y - headerHeight
+      toolboxHeight = viewportHeight - headerHeight - stageHeight - resizerHeight
+    } else {
+      toolboxWidth = action.x;
+      stageWidth = viewportWidth - resizerWidth - toolboxWidth
+    }
+
+    screenSize = Math.min(stageWidth, stageHeight)
+
+    action.layout = {
+      screenSize,
+      stageWidth,
+      stageHeight,
+      toolboxWidth,
+      toolboxHeight,
+    }
+  },
 }))
 
 export default middleware

@@ -1,10 +1,33 @@
 import React from "react"
+import PropTypes from "prop-types"
+import _ from "lodash"
 import colors from "../colors"
 
 export default class Resizer extends React.PureComponent {
+  static propTypes = {
+    onMove: PropTypes.func,
+  };
+
+  onMouseDown = event => {
+    event.preventDefault()
+    console.log("onMouseDown")
+    document.addEventListener("mouseup", this.onMouseUp);
+    document.addEventListener("mousemove", this.onMouseMove);
+  }
+
+  onMouseMove = event => {
+    this.props.onMove(event.clientX, event.clientY)
+  }
+
+  onMouseUp = event => {
+    console.log("onMouseUp")
+    document.removeEventListener("mouseup", this.onMouseUp);
+    document.removeEventListener("mousemove", this.onMouseMove);
+  }
+
   render() {
     return (
-      <div className="resizer">
+      <div className="resizer" onMouseDown={this.onMouseDown}>
         <style jsx>{`
           .resizer {
             background-color: ${colors[14]};
