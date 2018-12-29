@@ -18,6 +18,10 @@ export default class Document extends React.PureComponent {
             rel="manifest"
             href="/manifest.webmanifest"
           />
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, user-scalable=no"
+          />
           <meta name="theme-color" content="#ee74a7" />
           <meta
             name="viewport"

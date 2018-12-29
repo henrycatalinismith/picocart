@@ -55,7 +55,7 @@ export default class Resizer extends React.PureComponent {
         onTouchEnd={this.onTouchEnd}
       >
 
-        {(width > height) ? (
+        {(width && height) && ((width > height) ? (
           <svg className="resizer__handlebar" viewBox="0 -0.5 32 1">
             <path d="M1,0 L31,0" />
           </svg>
@@ -63,7 +63,7 @@ export default class Resizer extends React.PureComponent {
           <svg className="resizer__handlebar" viewBox="-0.5 0 1 32">
             <path d="M0,1 L0,31" />
           </svg>
-        )}
+        ))}
 
         <style jsx>{`
           .resizer {
