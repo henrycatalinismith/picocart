@@ -20,6 +20,26 @@ const placeholder = canvas => {
   }
 }
 
+const ViewportHack = () => (
+  <style jsx>{`
+    @media (orientation: landscape) {
+      .cart-maker { flex-direction: row !important; }
+      .resizer {
+        height: 100% !important;
+        width: 16px !important;
+      }
+      .stage {
+        order: 3 !important;
+        flex: 4 !important;
+      }
+      .toolbox {
+        order: 1 !important;
+        flex: 4 !important;
+      }
+    }
+  `}</style>
+)
+
 class Cart extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
     store.dispatch(actions.appMode())
@@ -36,6 +56,8 @@ class Cart extends React.Component {
     stageHeight: state.layout.stageHeight,
     toolboxWidth: state.layout.toolboxWidth,
     toolboxHeight: state.layout.toolboxHeight,
+    viewportWidth: state.layout.viewportWidth,
+    viewportHeight: state.layout.viewportHeight,
   })
 
   static mapDispatchToProps = (dispatch, props) => ({
@@ -52,6 +74,8 @@ class Cart extends React.Component {
     stageHeight: PropTypes.number,
     toolboxWidth: PropTypes.number,
     toolboxHeight: PropTypes.number,
+    viewportWidth: PropTypes.number,
+    viewportHeight: PropTypes.number,
     moveResizer: PropTypes.func,
   };
 
@@ -70,6 +94,8 @@ class Cart extends React.Component {
       stageHeight,
       toolboxWidth,
       toolboxHeight,
+      viewportWidth,
+      viewportHeight,
       moveResizer,
     } = this.props
 
@@ -102,17 +128,19 @@ class Cart extends React.Component {
           }
         `}</style>
 
+        {(!viewportWidth && !viewportHeight) && <ViewportHack />}
+
         <style jsx>{`
           .cart-maker {
             display: flex;
             height: calc(100vh - ${headerHeight}px);
-          }
 
-          ${(orientation == "portrait") ? (`
-            flex-direction: column;
-          `) : (`
-            flex-direction: row;
-          `)}
+            ${(orientation == "portrait") ? (`
+              flex-direction: column;
+            `) : (`
+              flex-direction: row;
+            `)}
+          }
         `}</style>
       </Document>
     )
