@@ -10,8 +10,6 @@ export default ({ bg = colors[13], width, height, children }) => {
           display: flex;
           justify-content: center;
           align-items: center;
-
-
         }
 
         @media (orientation: portrait) {
