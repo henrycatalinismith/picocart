@@ -1,17 +1,18 @@
 import colors from "../colors"
 
 export default ({ width, height }) => {
-
-  const borderWidth = 4;
-
   return (
     <div className="toolbox">
       <style jsx>{`
         .toolbox {
-          flex: 1;
           background-color: ${colors[7]};
-          height: calc(${height}px - ${borderWidth * 2}px);
-          width: calc(${width}px - ${borderWidth * 2}px);
+
+          ${(width && height) ? (`
+            height: ${height}px;
+            width: ${width}px;
+          `) : (`
+            flex: 1
+          `)}
         }
 
         @media (orientation: portrait) {

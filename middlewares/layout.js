@@ -3,20 +3,24 @@ import actions from "../actions"
 
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
-    return
-    const { layout } = store.getState()
+    if (window.location.pathname !== "/cart") {
+      return
+    }
 
     const viewportWidth = window.innerWidth
     const viewportHeight = window.innerHeight
 
-    const headerWidth = viewportWidth
-    const mainHeight = viewportHeight - layout.headerHeight
+    const header = document.querySelector(".header")
+    const headerWidth = header.offsetWidth
+    const headerHeight = header.offsetHeight
 
-    const stageWidth = viewportWidth
-    const stageHeight = mainHeight / 2
+    const stage = document.querySelector(".stage")
+    const stageWidth = stage.offsetWidth
+    const stageHeight = stage.offsetHeight
 
-    const toolboxWidth = viewportWidth
-    const toolboxHeight = mainHeight / 2
+    const toolbox = document.querySelector(".toolbox")
+    const toolboxWidth = toolbox.offsetWidth
+    const toolboxHeight = toolbox.offsetHeight
 
     action.layout = {
       headerWidth,

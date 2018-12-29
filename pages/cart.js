@@ -16,7 +16,9 @@ class Cart extends React.Component {
 
   static mapStateToProps = state => ({
     headerHeight: state.layout.headerHeight,
+    stageWidth: state.layout.stageWidth,
     stageHeight: state.layout.stageHeight,
+    toolboxWidth: state.layout.toolboxWidth,
     toolboxHeight: state.layout.toolboxHeight,
   })
 
@@ -24,6 +26,8 @@ class Cart extends React.Component {
     const {
       headerHeight,
       stageHeight,
+      stageWidth,
+      toolboxWidth,
       toolboxHeight,
     } = this.props
 
@@ -32,11 +36,11 @@ class Cart extends React.Component {
         <Header />
 
         <div className="cart-maker">
-          <Stage height={stageHeight}>
+          <Stage width={stageWidth} height={stageHeight}>
             <Screen />
           </Stage>
           <Resizer />
-          <Toolbox height={toolboxHeight} />
+          <Toolbox width={toolboxWidth} height={toolboxHeight} />
         </div>
 
         <style jsx>{`
