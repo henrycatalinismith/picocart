@@ -29,6 +29,8 @@ class Cart extends React.Component {
   static mapStateToProps = state => ({
     headerHeight: state.layout.headerHeight,
     screenSize: state.layout.screenSize,
+    resizerWidth: state.layout.resizerWidth,
+    resizerHeight: state.layout.resizerHeight,
     stageWidth: state.layout.stageWidth,
     stageHeight: state.layout.stageHeight,
     toolboxWidth: state.layout.toolboxWidth,
@@ -42,6 +44,8 @@ class Cart extends React.Component {
   static propTypes = {
     headerHeight: PropTypes.number,
     screenSize: PropTypes.number,
+    resizerWidth: PropTypes.number,
+    resizerHeight: PropTypes.number,
     stageWidth: PropTypes.number,
     stageHeight: PropTypes.number,
     toolboxWidth: PropTypes.number,
@@ -57,8 +61,10 @@ class Cart extends React.Component {
     const {
       headerHeight,
       screenSize,
-      stageHeight,
+      resizerWidth,
+      resizerHeight,
       stageWidth,
+      stageHeight,
       toolboxWidth,
       toolboxHeight,
       moveResizer,
@@ -72,7 +78,11 @@ class Cart extends React.Component {
           <Stage width={stageWidth} height={stageHeight}>
             <Screen size={screenSize} onMount={placeholder} />
           </Stage>
-          <Resizer onMove={_.throttle(moveResizer, 100)} />
+          <Resizer
+            onMove={_.debounce(moveResizer, 50)}
+            width={resizerWidth}
+            height={resizerHeight}
+          />
           <Toolbox width={toolboxWidth} height={toolboxHeight} />
         </div>
 
