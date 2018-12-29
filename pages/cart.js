@@ -79,7 +79,7 @@ class Cart extends React.Component {
             <Screen size={screenSize} onMount={placeholder} />
           </Stage>
           <Resizer
-            onMove={_.debounce(moveResizer, 50)}
+            onMove={_.throttle(moveResizer, 100)}
             width={resizerWidth}
             height={resizerHeight}
           />
