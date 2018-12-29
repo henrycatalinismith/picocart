@@ -20,6 +20,9 @@ const middleware = createMiddleware((before, after) => ({
     const stage = document.querySelector(".stage")
     let stageWidth = stage.offsetWidth
     let stageHeight = stage.offsetHeight
+    if (orientation === "landscape") {
+      stageHeight = viewportHeight - headerHeight
+    }
 
     const screen = document.querySelector(".screen__canvas")
     //const screenSize = screen.offsetWidth
