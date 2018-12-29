@@ -6,6 +6,7 @@ class Screen extends React.PureComponent {
   static propTypes = {
     bg: PropTypes.string,
     onMount: PropTypes.func,
+    size: PropTypes.number,
   }
 
   static defaultProps = {
@@ -22,7 +23,7 @@ class Screen extends React.PureComponent {
   }
 
   render() {
-    const { bg, width, height } = this.props;
+    const { bg, size } = this.props;
     return (
       <div className="screen">
         <canvas
@@ -54,7 +55,16 @@ class Screen extends React.PureComponent {
             position: relative;
             background-color: ${bg};
             image-rendering: pixelated;
-            width: 500px;
+            transition: width 0.4s linear, height 0.4s linear;
+
+            ${size ? (`
+              height: ${size}px;
+              width: ${size}px;
+            `) : (`
+              height: 100%;
+              width: 100%;
+            `)}
+
           }
         `}</style>
       </div>

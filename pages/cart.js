@@ -26,6 +26,7 @@ class Cart extends React.Component {
 
   static mapStateToProps = state => ({
     headerHeight: state.layout.headerHeight,
+    screenSize: state.layout.screenSize,
     stageWidth: state.layout.stageWidth,
     stageHeight: state.layout.stageHeight,
     toolboxWidth: state.layout.toolboxWidth,
@@ -35,6 +36,7 @@ class Cart extends React.Component {
   render() {
     const {
       headerHeight,
+      screenSize,
       stageHeight,
       stageWidth,
       toolboxWidth,
@@ -47,7 +49,7 @@ class Cart extends React.Component {
 
         <div className="cart-maker">
           <Stage width={stageWidth} height={stageHeight}>
-            <Screen onMount={placeholder} />
+            <Screen size={screenSize} onMount={placeholder} />
           </Stage>
           <Resizer />
           <Toolbox width={toolboxWidth} height={toolboxHeight} />
