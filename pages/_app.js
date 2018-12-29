@@ -23,6 +23,7 @@ import reducer from "../reducers"
 const serverInitialState = {
   layout: {
     mode: "document",
+    orientation: "portrait",
     stage: false,
     toolbox: false,
     headerWidth: 32,

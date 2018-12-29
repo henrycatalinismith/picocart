@@ -1,7 +1,7 @@
 import { createMiddleware } from "../signalbox";
 import actions from "../actions"
 
-const o = (w, h) => w > h ? "landscape" : "portrait";
+const o = (w, h) => (w > h || (w/h)>0.7) ? "landscape" : "portrait";
 
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
@@ -11,28 +11,41 @@ const middleware = createMiddleware((before, after) => ({
 
     const viewportWidth = window.innerWidth
     const viewportHeight = window.innerHeight
+    const orientation = o(viewportWidth, viewportHeight)
 
     const header = document.querySelector(".header")
     const headerWidth = header.offsetWidth
     const headerHeight = header.offsetHeight
 
     const stage = document.querySelector(".stage")
-    const stageWidth = stage.offsetWidth
-    const stageHeight = stage.offsetHeight
+    let stageWidth = stage.offsetWidth
+    let stageHeight = stage.offsetHeight
 
     const screen = document.querySelector(".screen__canvas")
     //const screenSize = screen.offsetWidth
-    const screenSize = Math.min(stageWidth, stageHeight)
+    let screenSize = Math.min(stageWidth, stageHeight)
 
     const resizer = document.querySelector(".resizer")
-    const resizerWidth = resizer.offsetWidth
-    const resizerHeight = resizer.offsetHeight
+    let resizerWidth = resizer.offsetWidth
+    let resizerHeight = resizer.offsetHeight
 
     const toolbox = document.querySelector(".toolbox")
-    const toolboxWidth = toolbox.offsetWidth
-    const toolboxHeight = toolbox.offsetHeight
+    let toolboxWidth = toolbox.offsetWidth
+    let toolboxHeight = toolbox.offsetHeight
+
+    if (orientation === "landscape" && toolboxWidth === viewportWidth) {
+      resizerWidth = 16
+      resizerHeight = viewportHeight - headerHeight
+      toolboxWidth = 200
+      toolboxHeight = viewportHeight - headerHeight
+      stageWidth = viewportWidth - toolboxWidth
+      stageHeight = viewportHeight - headerHeight
+      screenSize = Math.min(stageWidth, stageHeight)
+    }
+
 
     action.layout = {
+      orientation,
       headerWidth,
       screenSize,
       stageWidth,
@@ -95,6 +108,7 @@ const middleware = createMiddleware((before, after) => ({
 
       action.layout = {
         ...action.layout,
+        orientation,
         screenSize,
         stageWidth,
         stageHeight,
@@ -115,6 +129,7 @@ const middleware = createMiddleware((before, after) => ({
     const state = store.getState()
 
     const {
+      orientation,
       viewportWidth,
       viewportHeight,
       headerWidth,
@@ -130,8 +145,6 @@ const middleware = createMiddleware((before, after) => ({
       toolboxWidth,
       toolboxHeight,
     } = state.layout
-
-    const orientation = o(viewportWidth, viewportHeight)
 
     if (orientation === "portrait") {
       stageHeight = action.y - headerHeight

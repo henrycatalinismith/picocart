@@ -7,6 +7,7 @@ export default class Resizer extends React.PureComponent {
   static propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
+    orientation: PropTypes.string,
     onMove: PropTypes.func,
   };
 
@@ -45,8 +46,8 @@ export default class Resizer extends React.PureComponent {
   }
 
   render() {
-    const { width, height } = this.props
-    console.log(width, height)
+    const { width, height, orientation } = this.props
+    console.log(orientation)
     return (
       <div
         className="resizer"
@@ -72,41 +73,28 @@ export default class Resizer extends React.PureComponent {
             display: flex;
             align-items: center;
             justify-content: center;
+
+            ${(orientation == "portrait") ? (`
+                width: 100%;
+                height: 16px;
+            `) : (`
+                width: 16px;
+                height: 100%;
+            `)}
           }
 
           .resizer__handlebar {
             stroke: ${colors[7]};
             stroke-linecap: round;
-          }
 
-          @media (orientation: portrait) {
-            .resizer {
-              width: 100%;
-              height: 16px;
-            }
-          }
-
-          @media (orientation: portrait) {
-            .resizer__handlebar {
+            ${(orientation == "portrait") ? (`
               width: 128px;
               height: 16px;
-            }
-          }
-
-          @media (orientation: landscape) {
-            .resizer {
-              width: 16px;
-              height: 100%;
-            }
-          }
-
-          @media (orientation: landscape) {
-            .resizer__handlebar {
+            `) : (`
               width: 8px;
               height: 128px;
-            }
+            `)}
           }
-
         `}</style>
 
       </div>

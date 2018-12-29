@@ -27,6 +27,7 @@ class Cart extends React.Component {
   }
 
   static mapStateToProps = state => ({
+    orientation: state.layout.orientation,
     headerHeight: state.layout.headerHeight,
     screenSize: state.layout.screenSize,
     resizerWidth: state.layout.resizerWidth,
@@ -42,6 +43,7 @@ class Cart extends React.Component {
   });
 
   static propTypes = {
+    orientation: PropTypes.string,
     headerHeight: PropTypes.number,
     screenSize: PropTypes.number,
     resizerWidth: PropTypes.number,
@@ -59,6 +61,7 @@ class Cart extends React.Component {
 
   render() {
     const {
+      orientation,
       headerHeight,
       screenSize,
       resizerWidth,
@@ -75,15 +78,20 @@ class Cart extends React.Component {
         <Header />
 
         <div className="cart-maker">
-          <Stage width={stageWidth} height={stageHeight}>
+          <Stage
+            width={stageWidth}
+            height={stageHeight}
+            orientation={orientation}
+          >
             <Screen size={screenSize} onMount={placeholder} />
           </Stage>
           <Resizer
-            onMove={_.throttle(moveResizer, 100)}
+            onMove={_.throttle(moveResizer, 200)}
             width={resizerWidth}
             height={resizerHeight}
+            orientation={orientation}
           />
-          <Toolbox width={toolboxWidth} height={toolboxHeight} />
+          <Toolbox width={toolboxWidth} height={toolboxHeight} orientation={orientation} />
         </div>
 
         <style global jsx>{`
@@ -100,13 +108,11 @@ class Cart extends React.Component {
             height: calc(100vh - ${headerHeight}px);
           }
 
-          @media (orientation: landscape) {
-            flex-direction: row;
-          }
-
-          @media (orientation: portrait) {
+          ${(orientation == "portrait") ? (`
             flex-direction: column;
-          }
+          `) : (`
+            flex-direction: row;
+          `)}
         `}</style>
       </Document>
     )
