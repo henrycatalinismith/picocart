@@ -69,13 +69,13 @@ const middleware = createMiddleware((before, after) => ({
         stageWidth = viewportWidth
         stageHeight = viewportWidth
         resizerWidth = viewportWidth
-        resizerHeight = 8
+        resizerHeight = 16
         toolboxWidth = viewportWidth
         toolboxHeight = viewportHeight - headerHeight - stageHeight - resizerHeight
       } else {
         stageWidth = viewportHeight - headerHeight
         stageHeight = stageWidth
-        resizerWidth = 8
+        resizerWidth = 16
         resizerHeight = viewportHeight - headerHeight
         toolboxWidth = viewportWidth - resizerWidth - stageWidth
         toolboxHeight = viewportHeight - headerHeight
