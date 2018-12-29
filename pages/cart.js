@@ -14,12 +14,14 @@ class Cart extends React.Component {
   }
 
   static mapStateToProps = state => ({
+    headerHeight: state.layout.headerHeight,
     stageHeight: state.layout.stageHeight,
     toolboxHeight: state.layout.toolboxHeight,
   })
 
   render() {
     const {
+      headerHeight,
       stageHeight,
       toolboxHeight,
     } = this.props
@@ -27,10 +29,28 @@ class Cart extends React.Component {
     return (
       <Document title="cart editor">
         <Header />
-        <Stage height={stageHeight}>
-          <Screen />
-        </Stage>
-        <Toolbox height={toolboxHeight} />
+
+        <div className="cart-maker">
+          <Stage height={stageHeight}>
+            <Screen />
+          </Stage>
+          <Toolbox height={toolboxHeight} />
+        </div>
+
+        <style jsx>{`
+          .cart-maker {
+            display: flex;
+            height: calc(100vh - ${headerHeight}px);
+          }
+
+          @media (orientation: landscape) {
+            flex-direction: row;
+          }
+
+          @media (orientation: portrait) {
+            flex-direction: column;
+          }
+        `}</style>
       </Document>
     )
   }

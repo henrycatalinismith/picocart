@@ -11,14 +11,33 @@ export default ({ bg = colors[13], width, height, children }) => {
           justify-content: center;
           align-items: center;
 
-        ${(width && height) ? (`
-          height: ${height}px;
-          width: ${width}px;
-        `) : (`
-          height: 100vmin;
-        `)}
 
         }
+
+        @media (orientation: portrait) {
+          .stage {
+            order: 1;
+            ${(width && height) ? (`
+              height: ${height}px;
+              width: ${width}px;
+            `) : (`
+              height: 100vmin;
+            `)}
+          }
+        }
+
+        @media (orientation: landscape) {
+          .stage {
+            order: 2;
+            ${(width && height) ? (`
+              height: ${height}px;
+              width: ${width}px;
+            `) : (`
+              width: 100vmin;
+            `)}
+          }
+        }
+
       `}</style>
 
     </div>
