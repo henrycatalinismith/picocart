@@ -33,10 +33,28 @@ class Screen extends React.PureComponent {
         />
         <style jsx>{`
           .screen {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .screen__canvas:after {
+            content: "";
+            background-color: red;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: -1;
+            padding-top: 100%;
           }
 
           .screen__canvas {
+            position: relative;
             background-color: ${bg};
+            image-rendering: pixelated;
+            width: 500px;
           }
         `}</style>
       </div>
