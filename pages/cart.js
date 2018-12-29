@@ -90,7 +90,6 @@ class Cart extends React.Component {
           body {
             height: 100vh;
             overflow: hidden;
-            position: fixed;
             -webkit-overflow-scrolling: auto;
           }
         `}</style>
