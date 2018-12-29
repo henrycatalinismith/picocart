@@ -3,6 +3,7 @@ import Document from "../components/document"
 import Header from "../components/header"
 import Stage from "../components/stage"
 import Screen from "../components/screen"
+import Resizer from "../components/resizer"
 import Toolbox from "../components/toolbox"
 import actions from "../actions"
 import colors from "../colors"
@@ -34,6 +35,7 @@ class Cart extends React.Component {
           <Stage height={stageHeight}>
             <Screen />
           </Stage>
+          <Resizer />
           <Toolbox height={toolboxHeight} />
         </div>
 

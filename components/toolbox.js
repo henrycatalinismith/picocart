@@ -17,14 +17,12 @@ export default ({ width, height }) => {
         @media (orientation: portrait) {
           .toolbox {
             order: 2;
-            border-top: 4px solid ${colors[14]};
           }
         }
 
         @media (orientation: landscape) {
           .toolbox {
             order: 1;
-            border-right: 4px solid ${colors[14]};
           }
         }
 
