@@ -5,7 +5,6 @@ const o = (w, h) => w > h ? "landscape" : "portrait";
 
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
-    return
     if (window.location.pathname !== "/cart") {
       return
     }
@@ -77,6 +76,11 @@ const middleware = createMiddleware((before, after) => ({
 
         if (toolboxWidth > 320) {
           toolboxWidth = 320
+          stageWidth = viewportWidth - resizerWidth - toolboxWidth
+        }
+
+        if (toolboxWidth < 200) {
+          toolboxWidth = 200
           stageWidth = viewportWidth - resizerWidth - toolboxWidth
         }
       }
