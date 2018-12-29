@@ -20,6 +20,10 @@ const middleware = createMiddleware((before, after) => ({
     const stageWidth = stage.offsetWidth
     const stageHeight = stage.offsetHeight
 
+    const screen = document.querySelector(".screen__canvas")
+    //const screenSize = screen.offsetWidth
+    const screenSize = Math.min(stageWidth, stageHeight)
+
     const resizer = document.querySelector(".resizer")
     const resizerWidth = resizer.offsetWidth
     const resizerHeight = resizer.offsetHeight
@@ -30,6 +34,7 @@ const middleware = createMiddleware((before, after) => ({
 
     action.layout = {
       headerWidth,
+      screenSize,
       stageWidth,
       stageHeight,
       resizerWidth,
@@ -51,6 +56,7 @@ const middleware = createMiddleware((before, after) => ({
 
     if (window.location.pathname === "/cart") {
       let {
+        screenSize,
         stageWidth,
         stageHeight,
         resizerWidth,
@@ -85,8 +91,11 @@ const middleware = createMiddleware((before, after) => ({
         }
       }
 
+      screenSize = Math.min(stageWidth, stageHeight)
+
       action.layout = {
         ...action.layout,
+        screenSize,
         stageWidth,
         stageHeight,
         resizerWidth,
