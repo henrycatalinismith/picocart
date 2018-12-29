@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+import _ from "lodash"
 import { connect } from "react-redux"
 import Document from "../components/document"
 import Header from "../components/header"
@@ -33,6 +35,20 @@ class Cart extends React.Component {
     toolboxHeight: state.layout.toolboxHeight,
   })
 
+  static mapDispatchToProps = (dispatch, props) => ({
+    moveResizer: (x, y) => dispatch(actions.moveResizer(x, y)),
+  });
+
+  static propTypes = {
+    headerHeight: PropTypes.number,
+    screenSize: PropTypes.number,
+    stageWidth: PropTypes.number,
+    stageHeight: PropTypes.number,
+    toolboxWidth: PropTypes.number,
+    toolboxHeight: PropTypes.number,
+    moveResizer: PropTypes.func,
+  };
+
   render() {
     const {
       headerHeight,
@@ -41,6 +57,7 @@ class Cart extends React.Component {
       stageWidth,
       toolboxWidth,
       toolboxHeight,
+      moveResizer,
     } = this.props
 
     return (
@@ -51,7 +68,7 @@ class Cart extends React.Component {
           <Stage width={stageWidth} height={stageHeight}>
             <Screen size={screenSize} onMount={placeholder} />
           </Stage>
-          <Resizer />
+          <Resizer onMove={_.throttle(moveResizer, 100)} />
           <Toolbox width={toolboxWidth} height={toolboxHeight} />
         </div>
 
@@ -75,5 +92,8 @@ class Cart extends React.Component {
 }
 
 
-export default connect(Cart.mapStateToProps)(Cart)
+export default connect(
+  Cart.mapStateToProps,
+  Cart.mapDispatchToProps
+)(Cart)
 
