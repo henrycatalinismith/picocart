@@ -6,6 +6,7 @@ export default ({ width, height }) => {
       <style jsx>{`
         .toolbox {
           background-color: ${colors[7]};
+          transition: width 0.1s linear, height 0.1s linear;
 
           ${(width && height) ? (`
             height: ${height}px;
@@ -24,6 +25,10 @@ export default ({ width, height }) => {
         @media (orientation: landscape) {
           .toolbox {
             order: 1;
+
+            ${(!width && !height) && (`
+              max-width: 320px;
+            `)}
           }
         }
 
