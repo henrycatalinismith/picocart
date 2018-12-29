@@ -28,7 +28,7 @@ export default ({ bg = colors[13], width, height, children }) => {
 
         @media (orientation: landscape) {
           .stage {
-            order: 2;
+            order: 3;
             ${(width && height) ? (`
               height: ${height}px;
               width: ${width}px;
