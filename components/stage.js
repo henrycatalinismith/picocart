@@ -1,6 +1,6 @@
 import colors from "../colors"
 
-export default ({ bg = colors[13], width, height, children }) => {
+export default ({ bg = colors[13], width, height, children, orientation }) => {
   return (
     <div className="stage">
       {children}
@@ -10,10 +10,8 @@ export default ({ bg = colors[13], width, height, children }) => {
           display: flex;
           justify-content: center;
           align-items: center;
-        }
 
-        @media (orientation: portrait) {
-          .stage {
+          ${(orientation == "portrait") ? (`
             order: 1;
             ${(width && height) ? (`
               height: ${height}px;
@@ -21,11 +19,7 @@ export default ({ bg = colors[13], width, height, children }) => {
             `) : (`
               height: 100vmin;
             `)}
-          }
-        }
-
-        @media (orientation: landscape) {
-          .stage {
+          `) : (`
             order: 3;
             ${(width && height) ? (`
               height: ${height}px;
@@ -34,7 +28,7 @@ export default ({ bg = colors[13], width, height, children }) => {
               width: 100vmin;
               flex: 1;
             `)}
-          }
+          `)}
         }
 
       `}</style>
