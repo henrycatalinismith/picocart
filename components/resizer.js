@@ -5,8 +5,8 @@ import colors from "../colors"
 
 export default class Resizer extends React.PureComponent {
   static propTypes = {
-    height: PropTypes.func,
-    width: PropTypes.func,
+    width: PropTypes.number,
+    height: PropTypes.number,
     onMove: PropTypes.func,
   };
 
@@ -45,6 +45,8 @@ export default class Resizer extends React.PureComponent {
   }
 
   render() {
+    const { width, height } = this.props
+    console.log(width, height)
     return (
       <div
         className="resizer"
@@ -52,24 +54,57 @@ export default class Resizer extends React.PureComponent {
         onTouchStart={this.onTouchStart}
         onTouchEnd={this.onTouchEnd}
       >
+
+        {(width > height) ? (
+          <svg className="resizer__handlebar" viewBox="0 -0.5 32 1">
+            <path d="M1,0 L31,0" />
+          </svg>
+        ) : (
+          <svg className="resizer__handlebar" viewBox="-0.5 0 1 32">
+            <path d="M0,1 L0,31" />
+          </svg>
+        )}
+
         <style jsx>{`
           .resizer {
             background-color: ${colors[14]};
             order: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .resizer__handlebar {
+            stroke: ${colors[7]};
+            stroke-linecap: round;
           }
 
           @media (orientation: portrait) {
-            width: 100%;
-            height: 8px;
-            border-top: 2px solid ${colors[5]};
-            border-bottom: 2px solid ${colors[5]};
+            .resizer {
+              width: 100%;
+              height: 16px;
+            }
+          }
+
+          @media (orientation: portrait) {
+            .resizer__handlebar {
+              width: 128px;
+              height: 16px;
+            }
           }
 
           @media (orientation: landscape) {
-            width: 8px;
-            height: 100%;
-            border-left: 2px solid ${colors[5]};
-            border-right: 2px solid ${colors[5]};
+            .resizer {
+              width: 16px;
+              height: 100%;
+            }
+          }
+
+          @media (orientation: landscape) {
+            .resizer__handlebar {
+              width: 8px;
+              height: 128px;
+            }
           }
 
         `}</style>

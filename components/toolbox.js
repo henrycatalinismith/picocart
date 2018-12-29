@@ -6,7 +6,6 @@ export default ({ width, height }) => {
       <style jsx>{`
         .toolbox {
           background-color: ${colors[7]};
-          transition: width 0.1s linear, height 0.1s linear;
 
           ${(width && height) ? (`
             height: ${height}px;
