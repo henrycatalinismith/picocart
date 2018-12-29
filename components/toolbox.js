@@ -27,6 +27,7 @@ export default ({ width, height }) => {
             order: 1;
 
             ${(!width && !height) && (`
+              min-width: 200px;
               max-width: 320px;
             `)}
           }
