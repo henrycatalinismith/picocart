@@ -7,33 +7,35 @@ import Stage from "../components/stage"
 import Screen from "../components/screen"
 import Resizer from "../components/resizer"
 import Toolbox from "../components/toolbox"
+import Run from "../components/run"
 import actions from "../actions"
 import colors from "../colors"
 
 const placeholder = canvas => {
   const ctx = canvas.getContext('2d');
-  let n = 0
-  setInterval(() => {
+  //let n = 0
+  //setInterval(() => {
     for (let x = 0; x < 128; x++ ) {
       for (let y = 0; y < 128; y++ ) {
-        ctx.fillStyle = colors[((x + y + n) % colors.length)]
+        ctx.fillStyle = colors[((x + y) % colors.length)]
         ctx.fillRect(x, y, 1, 1);
       }
-      n++
-      n++
-      n++
-      n++
-      n++
-      n++
-      n++
+      //n++
+      //n++
+      //n++
+      //n++
+      //n++
+      //n++
+      //n++
     }
-    n++
-    n = n % 10000
-  }, 10)
+    //n++
+    //n = n % 10000
+  //}, 10)
 }
 
 const ViewportHack = () => (
-  <style jsx>{`
+  <div>
+  <style global jsx>{`
     @media (orientation: landscape) {
       .cart-maker { flex-direction: row !important; }
       .resizer {
@@ -50,6 +52,7 @@ const ViewportHack = () => (
       }
     }
   `}</style>
+  </div>
 )
 
 class Cart extends React.Component {
@@ -129,7 +132,13 @@ class Cart extends React.Component {
             height={resizerHeight}
             orientation={orientation}
           />
-          <Toolbox width={toolboxWidth} height={toolboxHeight} orientation={orientation} />
+          <Toolbox
+            width={toolboxWidth}
+            height={toolboxHeight}
+            orientation={orientation}
+          >
+            <Run />
+          </Toolbox>
         </div>
 
         <style global jsx>{`
@@ -140,7 +149,7 @@ class Cart extends React.Component {
           }
         `}</style>
 
-        {(!viewportWidth && !viewportHeight) && <ViewportHack />}
+        <ViewportHack />
 
         <style jsx>{`
           .cart-maker {
