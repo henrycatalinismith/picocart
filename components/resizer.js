@@ -13,7 +13,6 @@ export default class Resizer extends React.PureComponent {
 
   onMouseDown = event => {
     event.preventDefault()
-    console.log("onMouseDown")
     document.addEventListener("mouseup", this.onMouseUp);
     document.addEventListener("mousemove", this.onMouseMove);
   }
@@ -23,31 +22,26 @@ export default class Resizer extends React.PureComponent {
   }
 
   onMouseUp = event => {
-    console.log("onMouseUp")
     document.removeEventListener("mouseup", this.onMouseUp);
     document.removeEventListener("mousemove", this.onMouseMove);
   }
 
   onTouchStart = event => {
-    console.log("onTouchStart")
     document.addEventListener("touchmove", this.onTouchMove);
     //document.addEventListener("mousemove", this.onMouseMove);
   }
 
   onTouchMove = event => {
-    console.log("onTouchMove")
     const touch = event.touches[0]
     this.props.onMove(touch.clientX, touch.clientY)
   }
 
   onTouchEnd = event => {
-    console.log("onTouchEnd")
     document.removeEventListener("touchmove", this.onTouchMove);
   }
 
   render() {
     const { width, height, orientation } = this.props
-    console.log(orientation)
     return (
       <div
         className="resizer"

@@ -1,9 +1,9 @@
 import colors from "../colors"
 
-export default ({ width, height, orientation }) => {
-  console.log(width, height)
+export default ({ children, width, height, orientation }) => {
   return (
     <div className="toolbox">
+      {children}
       <style jsx>{`
         .toolbox {
           background-color: ${colors[7]};
