@@ -89,21 +89,24 @@ const middleware = createMiddleware((before, after) => ({
         toolboxWidth = viewportWidth
         toolboxHeight = viewportHeight - headerHeight - stageHeight - resizerHeight
       } else {
-        stageWidth = viewportHeight - headerHeight
-        stageHeight = stageWidth
+
         resizerWidth = 16
         resizerHeight = viewportHeight - headerHeight
-        toolboxWidth = viewportWidth - resizerWidth - stageWidth
+        const halfWidth = (viewportWidth - resizerWidth) / 2
+
+        stageWidth = halfWidth
+        stageHeight = viewportHeight - headerHeight
+        toolboxWidth = halfWidth
         toolboxHeight = viewportHeight - headerHeight
 
         if (toolboxWidth > 320) {
-          toolboxWidth = 320
-          stageWidth = viewportWidth - resizerWidth - toolboxWidth
+          //toolboxWidth = 320
+          //stageWidth = viewportWidth - resizerWidth - toolboxWidth
         }
 
         if (toolboxWidth < 200) {
-          toolboxWidth = 200
-          stageWidth = viewportWidth - resizerWidth - toolboxWidth
+          //toolboxWidth = 200
+          //stageWidth = viewportWidth - resizerWidth - toolboxWidth
         }
       }
 
