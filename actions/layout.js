@@ -4,6 +4,7 @@ export default createActions([
   "APP_MODE",
   "DOCUMENT_MODE",
   "MOVE_RESIZER",
+  "UPDATE_LAYOUT",
 ], types => ({
   appMode: () => ({
     type: types.APP_MODE,
@@ -19,6 +20,11 @@ export default createActions([
     type: types.MOVE_RESIZER,
     x,
     y,
+  }),
+
+  updateLayout: layout => ({
+    type: types.UPDATE_LAYOUT,
+    layout,
   }),
 }));
 
