@@ -68,9 +68,12 @@ export class Run extends React.Component {
         </svg>
 
         <style jsx>{`
+          div {
+            height: 48px;
+          }
           svg {
             height: 32px;
-            margin: 16px;
+            margin: 12px 12px;
           }
         `}</style>
       </div>
