@@ -40,7 +40,6 @@
     "nodemon": "^1.18.9",
     "pg": "^7.7.1",
     "pg-hstore": "^2.3.2",
-    "postcss-loader": "^3.0.0",
     "react": "^16.7.0",
     "react-codemirror2": "^5.1.0",
     "react-dom": "^16.7.0",
