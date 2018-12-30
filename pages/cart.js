@@ -8,8 +8,12 @@ import Screen from "../components/screen"
 import Resizer from "../components/resizer"
 import Toolbox from "../components/toolbox"
 import Run from "../components/run"
+import Editor from "../components/editor"
 import actions from "../actions"
 import colors from "../colors"
+
+import withStyles from "isomorphic-style-loader/lib/withStyles"
+import codemirrorStyles from "codemirror/lib/codemirror.css"
 
 const placeholder = canvas => {
   const ctx = canvas.getContext('2d');
@@ -114,6 +118,8 @@ class Cart extends React.Component {
       moveResizer,
     } = this.props
 
+    const server = !viewportWidth && !viewportHeight
+
     return (
       <Document title="cart editor">
         <Header />
@@ -138,6 +144,7 @@ class Cart extends React.Component {
             orientation={orientation}
           >
             <Run />
+            <Editor server={server} />
           </Toolbox>
         </div>
 
@@ -173,4 +180,5 @@ export default connect(
   Cart.mapStateToProps,
   Cart.mapDispatchToProps
 )(Cart)
+
 

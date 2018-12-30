@@ -17,7 +17,7 @@ export class Run extends React.Component {
   }
 
   render() {
-    console.log(this.context)
+    //console.log(this.context)
     return (
       <div>
         <svg viewBox="0 0 23 13">
