@@ -39,7 +39,7 @@ export class Editor extends React.PureComponent {
             font-family: Monaco, Courier, monospace;
             font-size: 18px;
             font-weight: bold;
-            background-color: white;
+            background-color: ${colors[7]};
             overflow: scroll;
             height: 100%;
 

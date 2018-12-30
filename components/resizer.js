@@ -68,13 +68,18 @@ export default class Resizer extends React.PureComponent {
             align-items: center;
             justify-content: center;
 
-            ${(orientation == "portrait") ? (`
+            ${(width && height) ? (`
+              width: ${width}px;
+              height: ${height}px;
+            `) : (
+              (orientation === "portrait") ? (`
                 width: 100%;
                 height: 16px;
-            `) : (`
+              `) : (`
                 width: 16px;
                 height: 100%;
-            `)}
+              `)
+            )}
           }
 
           .resizer__handlebar {
