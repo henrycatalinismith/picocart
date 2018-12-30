@@ -6,13 +6,13 @@ import colors from "../colors"
 export class Editor extends React.PureComponent {
   static propTypes = {
     server: PropTypes.bool,
+    orientation: PropTypes.string,
   };
 
   constructor(props) {
     super(props)
-    this.contentEditable = React.createRef();
     this.state = {
-      code: "<p>hello</p>",
+      code: "<p>-- code goes here ↓</p>",
     }
   }
 
@@ -22,22 +22,34 @@ export class Editor extends React.PureComponent {
   }
 
   render() {
-    const { server } = this.props
+    const { server, orientation } = this.props
 
     return (
-      <div className="editor" onChange={this.onChange}>
+      <>
         <ContentEditable
-          innerRef={this.contentEditable}
+          className="code"
           html={this.state.code}
           onChange={this.onChange}
         />
         <style jsx>{`
-          .editor {
-            margin: 18px;
-            border: 4px solid ${colors[15]};
+          .code {
+            font-family: Monaco, Courier, monospace;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: white;
+            overflow: scroll;
+            max-height: 100%;
+          }
+
+          .code:focus {
+            outline: none;
+          }
+
+          .code p {
+            margin: 0;
           }
         `}</style>
-      </div>
+      </>
     )
   }
 }

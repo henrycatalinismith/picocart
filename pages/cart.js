@@ -35,6 +35,18 @@ const placeholder = canvas => {
   //}, 10)
 }
 
+const EditorWrapper = ({ children }) => (
+  <div className="editor-wrapper">
+    {children}
+    <style jsx>{`
+      .editor-wrapper {
+        background-color: ${colors[7]};
+        flex: 4;
+      }
+    `}</style>
+  </div>
+)
+
 const ViewportHack = () => (
   <div>
   <style global jsx>{`
@@ -142,7 +154,12 @@ class Cart extends React.Component {
             orientation={orientation}
           >
             <Run />
-            <Editor server={server} />
+            <EditorWrapper>
+              <Editor
+                orientation={orientation}
+                server={server}
+              />
+            </EditorWrapper>
           </Toolbox>
         </div>
 
@@ -154,7 +171,7 @@ class Cart extends React.Component {
           }
         `}</style>
 
-        <ViewportHack />
+       {(!viewportWidth && !viewportHeight) && <ViewportHack />}
 
         <style jsx>{`
           .cart-maker {
@@ -168,10 +185,6 @@ class Cart extends React.Component {
             `)}
           }
         `}</style>
-
-        <Head>
-          <link href="/codemirror.css" rel="stylesheet" />
-        </Head>
       </Document>
     )
   }

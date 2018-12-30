@@ -17,7 +17,7 @@ export default ({ bg = colors[13], width, height, children, orientation }) => {
               height: ${height}px;
               width: ${width}px;
             `) : (`
-              height: 100vmin;
+              height: calc(100vmin - 32px);
             `)}
           `) : (`
             order: 3;
@@ -25,7 +25,7 @@ export default ({ bg = colors[13], width, height, children, orientation }) => {
               height: ${height}px;
               width: ${width}px;
             `) : (`
-              width: 100vmin;
+              width: calc(100vmin - 32px);
               flex: 1;
             `)}
           `)}
