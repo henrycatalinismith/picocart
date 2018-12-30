@@ -26,6 +26,7 @@
     "babel-jest": "^23.6.0",
     "codemirror": "^5.42.2",
     "connected-next-router": "0.0.4",
+    "copy-webpack-plugin": "^4.6.0",
     "dotenv": "^6.2.0",
     "dotenv-webpack": "^1.5.7",
     "enzyme": "^3.8.0",
