@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-
-let CodeMirror
+import ContentEditable from "react-contenteditable"
+import colors from "../colors"
 
 export class Editor extends React.PureComponent {
   static propTypes = {
@@ -10,39 +10,34 @@ export class Editor extends React.PureComponent {
 
   constructor(props) {
     super(props)
+    this.contentEditable = React.createRef();
     this.state = {
-      code: "",
+      code: "<p>hello</p>",
     }
   }
 
-  componentDidMount() {
-    // lol
-    CodeMirror = require("react-codemirror2").Controlled
+  onChange = event => {
+    console.log("onChange", event)
+    this.setState({ code: event.target.value });
   }
 
   render() {
     const { server } = this.props
 
-    if (server || !CodeMirror) {
-      return <textarea></textarea>
-    }
-
-    const props = {
-      options: {
-        autofocus: false,
-        cursorBlinkRate: 500,
-        mode: "lua",
-        indentUnit: 1,
-        indentWithTabs: false,
-      },
-      value: this.state.code,
-      onBeforeChange: (editor, data, value) => {
-        this.setState({ code: value });
-      },
-    }
-
     return (
-      <CodeMirror {...props} />
+      <div className="editor" onChange={this.onChange}>
+        <ContentEditable
+          innerRef={this.contentEditable}
+          html={this.state.code}
+          onChange={this.onChange}
+        />
+        <style jsx>{`
+          .editor {
+            margin: 18px;
+            border: 4px solid ${colors[15]};
+          }
+        `}</style>
+      </div>
     )
   }
 }
