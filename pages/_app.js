@@ -21,6 +21,15 @@ import actions from "../actions"
 import middlewares from "../middlewares"
 import reducer from "../reducers"
 
+const context = {
+  insertCss: (...styles) => {
+    const removeCss = styles.map(x => x._insertCss());
+    return () => {
+      removeCss.forEach(f => f());
+    };
+  },
+}
+
 const serverInitialState = {
   layout: {
     mode: "document",

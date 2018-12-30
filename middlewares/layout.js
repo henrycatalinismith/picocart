@@ -1,7 +1,18 @@
 import { createMiddleware } from "../signalbox";
 import actions from "../actions"
 
-const o = (w, h) => (w > h || (w/h)>0.9) ? "landscape" : "portrait";
+
+
+
+
+              const o = (w, h) =>
+                (w > h || (w/h)>0.9)
+                  ? "landscape"
+                  : "portrait"
+
+
+
+
 
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
