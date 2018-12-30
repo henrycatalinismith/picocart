@@ -34,6 +34,13 @@ export default createReducer({}, {
     }
   },
 
+  [actions.UPDATE_LAYOUT](layout, action) {
+    return {
+      ...layout,
+      ...action.layout,
+    }
+  },
+
   [actions.MOVE_RESIZER](layout, action) {
     return {
       ...layout,

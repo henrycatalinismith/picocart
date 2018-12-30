@@ -142,6 +142,32 @@ const middleware = createMiddleware((before, after) => ({
     }
   },
 
+  [after(actions.PAGE_LOAD)](store, action) {
+    setTimeout(() => {
+      const editor = document.querySelector(".editor-wrapper")
+      let editorHeight = editor.offsetHeight
+      store.dispatch(actions.updateLayout({
+        editorHeight,
+      }))
+    }, 100)
+  },
+
+  [after(actions.MOVE_RESIZER)](store, action) {
+    const editor = document.querySelector(".editor-wrapper")
+    let editorHeight = editor.offsetHeight
+    store.dispatch(actions.updateLayout({
+      editorHeight,
+    }))
+  },
+
+  [after(actions.RESIZE_VIEWPORT)](store, action) {
+    const editor = document.querySelector(".editor-wrapper")
+    let editorHeight = editor.offsetHeight
+    store.dispatch(actions.updateLayout({
+      editorHeight,
+    }))
+  },
+
   [before(actions.MOVE_RESIZER)](store, action) {
     const state = store.getState()
 

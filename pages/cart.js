@@ -63,6 +63,7 @@ const ViewportHack = () => (
       .toolbox {
         order: 1 !important;
         flex: 4 !important;
+        border-right-width: 0px !important;
       }
     }
   `}</style>
@@ -78,6 +79,7 @@ class Cart extends React.Component {
   static mapStateToProps = state => ({
     orientation: state.layout.orientation,
     headerHeight: state.layout.headerHeight,
+    editorHeight: state.layout.editorHeight,
     screenSize: state.layout.screenSize,
     resizerWidth: state.layout.resizerWidth,
     resizerHeight: state.layout.resizerHeight,
@@ -96,6 +98,7 @@ class Cart extends React.Component {
   static propTypes = {
     orientation: PropTypes.string,
     headerHeight: PropTypes.number,
+    editorHeight: PropTypes.number,
     screenSize: PropTypes.number,
     resizerWidth: PropTypes.number,
     resizerHeight: PropTypes.number,
@@ -116,6 +119,7 @@ class Cart extends React.Component {
     const {
       orientation,
       headerHeight,
+      editorHeight,
       screenSize,
       resizerWidth,
       resizerHeight,
@@ -157,6 +161,7 @@ class Cart extends React.Component {
             <EditorWrapper>
               <Editor
                 orientation={orientation}
+                height={editorHeight}
                 server={server}
               />
             </EditorWrapper>

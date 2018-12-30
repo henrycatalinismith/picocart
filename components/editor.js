@@ -7,6 +7,7 @@ export class Editor extends React.PureComponent {
   static propTypes = {
     server: PropTypes.bool,
     orientation: PropTypes.string,
+    height: PropTypes.number,
   };
 
   constructor(props) {
@@ -22,7 +23,9 @@ export class Editor extends React.PureComponent {
   }
 
   render() {
-    const { server, orientation } = this.props
+    const { server, orientation, height } = this.props
+
+    console.log(height)
 
     return (
       <>
@@ -38,7 +41,13 @@ export class Editor extends React.PureComponent {
             font-weight: bold;
             background-color: white;
             overflow: scroll;
-            max-height: 100%;
+            height: 100%;
+
+            ${height ? (`
+              max-height: ${height}px;
+            `) : (`
+              max-height: 100%;
+            `)}
           }
 
           .code:focus {

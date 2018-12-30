@@ -38,7 +38,6 @@ const serverInitialState = {
     toolbox: false,
     headerWidth: 32,
     headerHeight: 32,
-    editorWidth: undefined,
     editorHeight: undefined,
     screenSize: undefined,
     stageWidth: undefined,
