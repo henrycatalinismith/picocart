@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import _ from "lodash"
 import { connect } from "react-redux"
+import Head from "next/head"
 import Document from "../components/document"
 import Header from "../components/header"
 import Stage from "../components/stage"
@@ -11,9 +12,6 @@ import Run from "../components/run"
 import Editor from "../components/editor"
 import actions from "../actions"
 import colors from "../colors"
-
-import withStyles from "isomorphic-style-loader/lib/withStyles"
-import codemirrorStyles from "codemirror/lib/codemirror.css"
 
 const placeholder = canvas => {
   const ctx = canvas.getContext('2d');
@@ -170,6 +168,10 @@ class Cart extends React.Component {
             `)}
           }
         `}</style>
+
+        <Head>
+          <link href="/codemirror.css" rel="stylesheet" />
+        </Head>
       </Document>
     )
   }

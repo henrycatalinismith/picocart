@@ -4,6 +4,7 @@ const path = require("path")
 const Dotenv = require("dotenv-webpack")
 const withOffline = require("next-offline")
 const withBundleAnalyzer = require("@zeit/next-bundle-analyzer")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 const nextConfig = {
   analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
@@ -29,17 +30,13 @@ const nextConfig = {
       })
     ]
 
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        "isomorphic-style-loader", {
-          loader: "css-loader",
-          options: {
-            importLoaders: 1
-          }
-        },
-      ]
-    })
+    config.plugins = [
+      ...config.plugins,
+      new CopyWebpackPlugin([{
+        from: path.join(__dirname, "node_modules/codemirror/lib/codemirror.css"),
+        to: path.join(__dirname, "static/codemirror.css"),
+      }])
+    ]
 
     return config
   }

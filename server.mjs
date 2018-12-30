@@ -19,6 +19,7 @@ async function main() {
 
   files.forEach(filename => {
     server.get(`/${filename}`, (req, res) => {
+      console.log(`/${filename}`)
       res.sendFile(path.resolve(`./static/${filename}`))
     })
   })
