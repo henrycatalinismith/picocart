@@ -143,6 +143,9 @@ const middleware = createMiddleware((before, after) => ({
   },
 
   [after(actions.PAGE_LOAD)](store, action) {
+    if (window.location.pathname !== "/cart") {
+      return
+    }
     setTimeout(() => {
       const editor = document.querySelector(".editor-wrapper")
       let editorHeight = editor.offsetHeight
@@ -161,6 +164,9 @@ const middleware = createMiddleware((before, after) => ({
   },
 
   [after(actions.RESIZE_VIEWPORT)](store, action) {
+    if (window.location.pathname !== "/cart") {
+      return
+    }
     const editor = document.querySelector(".editor-wrapper")
     let editorHeight = editor.offsetHeight
     store.dispatch(actions.updateLayout({
