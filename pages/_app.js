@@ -31,6 +31,11 @@ const context = {
 }
 
 const serverInitialState = {
+  editor: {
+    code: "-- code goes here ↓",
+  },
+  emulator: {
+  },
   layout: {
     mode: "document",
     orientation: "portrait",
