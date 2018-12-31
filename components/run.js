@@ -7,8 +7,12 @@ if (typeof window !== "undefined") {
 }
 
 export class Run extends React.Component {
+  static propTypes = {
+    onClick: PropTypes.func,
+  };
+
   handleShortcut = () => {
-    alert("lol")
+    this.props.onClick()
     return false
   }
 
@@ -17,9 +21,10 @@ export class Run extends React.Component {
   }
 
   render() {
-    //console.log(this.context)
+    const { onClick } = this.props
+
     return (
-      <div>
+      <button onClick={onClick}>
         <svg viewBox="0 0 23 13">
           <rect id="Rectangle-1" fill="#FE0039"  x="1" y="1" width="21" height="9"></rect>
           <g id="Border" transform="translate(-1.000000, -1.000000)" strokeLinecap="square">
@@ -68,15 +73,22 @@ export class Run extends React.Component {
         </svg>
 
         <style jsx>{`
-          div {
-            height: 48px;
+          button {
+            height: 46px;
+            background: none;
+            border: 0;
           }
+
+          button:focus {
+            outline: none;
+          }
+
           svg {
             height: 32px;
-            margin: 12px 12px;
+            margin: 8px 8px;
           }
         `}</style>
-      </div>
+      </button>
     )
   }
 }

@@ -21,6 +21,11 @@ const nextConfig = {
   webpack (config) {
     config.plugins = config.plugins || []
 
+    config.module.rules.push({
+      test: /\.(pegjs|raw\.js)/,
+      use: "raw-loader",
+    });
+
     config.plugins = [
       ...config.plugins,
       new Dotenv({
