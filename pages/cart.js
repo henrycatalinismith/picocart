@@ -92,6 +92,7 @@ class Cart extends React.Component {
   })
 
   static mapDispatchToProps = (dispatch, props) => ({
+    changeCode: code => dispatch(actions.changeCode(code)),
     moveResizer: (x, y) => dispatch(actions.moveResizer(x, y)),
     startEmulator: () => dispatch(actions.startEmulator()),
   });
@@ -109,6 +110,7 @@ class Cart extends React.Component {
     toolboxHeight: PropTypes.number,
     viewportWidth: PropTypes.number,
     viewportHeight: PropTypes.number,
+    changeCode: PropTypes.func,
     moveResizer: PropTypes.func,
     startEmulator: PropTypes.func,
   };
@@ -131,6 +133,7 @@ class Cart extends React.Component {
       toolboxHeight,
       viewportWidth,
       viewportHeight,
+      changeCode,
       moveResizer,
       startEmulator,
     } = this.props
@@ -166,6 +169,7 @@ class Cart extends React.Component {
                 orientation={orientation}
                 height={editorHeight}
                 server={server}
+                onChange={changeCode}
               />
             </EditorWrapper>
           </Toolbox>

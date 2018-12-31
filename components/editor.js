@@ -8,6 +8,7 @@ export class Editor extends React.PureComponent {
     server: PropTypes.bool,
     orientation: PropTypes.string,
     height: PropTypes.number,
+    onChange: PropTypes.func,
   };
 
   constructor(props) {
@@ -18,14 +19,13 @@ export class Editor extends React.PureComponent {
   }
 
   onChange = event => {
-    console.log("onChange", event)
-    this.setState({ code: event.target.value });
+    const code = event.target.value
+    this.setState({ code })
+    this.props.onChange(code)
   }
 
   render() {
     const { server, orientation, height } = this.props
-
-    console.log(height)
 
     return (
       <>
