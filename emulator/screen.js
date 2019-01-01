@@ -67,7 +67,6 @@ export default class Screen {
       const i = addr - 0x6000;
       const x = (i * 2) % 128;
       const y = Math.floor(i / 64)
-      debugger
       const left = this.memory[addr] & 0x0f;
       const right = this.memory[addr] >> 4;
 
