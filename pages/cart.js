@@ -77,19 +77,8 @@ class Cart extends React.Component {
   }
 
   static mapStateToProps = state => ({
-    code: state.editor.code,
-    orientation: state.layout.orientation,
-    headerHeight: state.layout.headerHeight,
-    editorHeight: state.layout.editorHeight,
-    screenSize: state.layout.screenSize,
-    resizerWidth: state.layout.resizerWidth,
-    resizerHeight: state.layout.resizerHeight,
-    stageWidth: state.layout.stageWidth,
-    stageHeight: state.layout.stageHeight,
-    toolboxWidth: state.layout.toolboxWidth,
-    toolboxHeight: state.layout.toolboxHeight,
-    viewportWidth: state.layout.viewportWidth,
-    viewportHeight: state.layout.viewportHeight,
+    editor: state.editor,
+    layout: state.layout,
   })
 
   static mapDispatchToProps = (dispatch, props) => ({
@@ -99,23 +88,12 @@ class Cart extends React.Component {
   });
 
   static propTypes = {
-    code: PropTypes.string,
-    orientation: PropTypes.string,
-    headerHeight: PropTypes.number,
-    editorHeight: PropTypes.number,
-    screenSize: PropTypes.number,
-    resizerWidth: PropTypes.number,
-    resizerHeight: PropTypes.number,
-    stageWidth: PropTypes.number,
-    stageHeight: PropTypes.number,
-    toolboxWidth: PropTypes.number,
-    toolboxHeight: PropTypes.number,
-    viewportWidth: PropTypes.number,
-    viewportHeight: PropTypes.number,
+    editor: PropTypes.object,
+    layout: PropTypes.object,
     changeCode: PropTypes.func,
     moveResizer: PropTypes.func,
     startEmulator: PropTypes.func,
-  };
+  }
 
   componentDidMount() {
     document.addEventListener("touchmove", e => e.preventDefault())
@@ -123,25 +101,15 @@ class Cart extends React.Component {
 
   render() {
     const {
-      code,
-      orientation,
-      headerHeight,
-      editorHeight,
-      screenSize,
-      resizerWidth,
-      resizerHeight,
-      stageWidth,
-      stageHeight,
-      toolboxWidth,
-      toolboxHeight,
-      viewportWidth,
-      viewportHeight,
+      editor,
+      layout,
       changeCode,
       moveResizer,
       startEmulator,
     } = this.props
 
-    const server = !viewportWidth && !viewportHeight
+
+    const server = !layout.viewportWidth && !layout.viewportHeight
 
     return (
       <Document title="cart editor">
@@ -149,31 +117,34 @@ class Cart extends React.Component {
 
         <div className="cart-maker">
           <Stage
-            width={stageWidth}
-            height={stageHeight}
-            orientation={orientation}
+            width={layout.stageWidth}
+            height={layout.stageHeight}
+            orientation={layout.orientation}
           >
-            <Screen size={screenSize} onMount={placeholder} />
+            <Screen
+              size={layout.screenSize}
+              onMount={placeholder}
+            />
           </Stage>
           <Resizer
             onMove={_.throttle(moveResizer, 200)}
-            width={resizerWidth}
-            height={resizerHeight}
-            orientation={orientation}
+            width={layout.resizerWidth}
+            height={layout.resizerHeight}
+            orientation={layout.orientation}
           />
           <Toolbox
-            width={toolboxWidth}
-            height={toolboxHeight}
-            orientation={orientation}
+            width={layout.toolboxWidth}
+            height={layout.toolboxHeight}
+            orientation={layout.orientation}
           >
             <Play onClick={startEmulator} />
             <EditorWrapper>
               <Editor
-                orientation={orientation}
-                height={editorHeight}
+                orientation={layout.orientation}
+                height={layout.editorHeight}
                 server={server}
                 onChange={changeCode}
-                code={code}
+                code={editor.code}
               />
             </EditorWrapper>
           </Toolbox>
@@ -187,14 +158,14 @@ class Cart extends React.Component {
           }
         `}</style>
 
-       {(!viewportWidth && !viewportHeight) && <ViewportHack />}
+       {(!layout.viewportWidth && !layout.viewportHeight) && <ViewportHack />}
 
         <style jsx>{`
           .cart-maker {
             display: flex;
-            height: calc(100vh - ${headerHeight}px);
+            height: calc(100vh - ${layout.headerHeight}px);
 
-            ${(orientation == "portrait") ? (`
+            ${(layout.orientation == "portrait") ? (`
               flex-direction: column;
             `) : (`
               flex-direction: row;
