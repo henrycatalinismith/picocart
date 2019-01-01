@@ -1,5 +1,6 @@
 import _ from "lodash"
 import actions from "../actions"
+import emulator from "./emulator"
 
 const editorHeightHack = _.debounce(dispatch => {
   if (window.location.pathname !== "/cart") {
@@ -38,6 +39,7 @@ const thunks = {
 
       window.addEventListener("resize", throttledDispatchResize)
       editorHeightHack(dispatch)
+      dispatch(emulator.startEmulator())
     }
   },
 

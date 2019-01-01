@@ -1,5 +1,5 @@
 import escodegen from "escodegen";
-import esprima from "esprima";
+const esprima = require("esprima")
 import esprimaWalk from "esprima-walk";
 import {keys, clone} from "underscore";
 

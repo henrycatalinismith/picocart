@@ -1,3 +1,5 @@
+/* Helpers include here by build script */
+
 start = &{ init(); return true; } ("#" [^\n]* "\n")? ws? t:BlockStatement ws? { return finalize(t); }
 
 ws = ([ \r\t\n] / "--[" balstringinsde "]"  / ("--" ( [^\n]* "\n" / .* ) )) +
@@ -685,7 +687,7 @@ Literal =
     } /
     b: "0" [Xx] b:$([0-9a-fA-F]+)
     {
-        return { type: "Literal", value: parseInt(b, 16), loc: loc(), range: range()  }
+        return { type: "Literal", value: parseInt(b), loc: loc(), range: range()  }
 
     } /
     b: Number

@@ -33,7 +33,7 @@ const context = {
 
 const serverInitialState = {
   editor: {
-    code: "-- code goes here ↓",
+    code: "-- code ghere ↓\nline(0, 0, 128, 128, 12)\n",
   },
   emulator: {
   },
