@@ -6,12 +6,14 @@ const first = colors.slice(0, 7)
 
 export class Run extends React.Component {
   static defaultProps = {
+    cart: {},
     bg: colors[0],
     size: 64,
     onClick: () => {},
   };
 
   static propTypes = {
+    cart: PropTypes.object,
     bg: PropTypes.string,
     size: PropTypes.number,
     onClick: PropTypes.func,
@@ -24,40 +26,82 @@ export class Run extends React.Component {
   }
 
   render() {
-    const { bg, size } = this.props
+    const { cart, bg, size } = this.props
 
     return (
-      <a className="cart" href="/cart" onClick={this.handleClick}>
+      <a className="cart" href="/cart">
         <svg className="cart__border" viewBox="0 0 16 16">
+          <defs>
+            <clipPath id="corner" transform="translate(-1.000000, -1.000000)">
+              <path d="M1.5,1.5 L14.5,1.5 L14.5,3.5 L16.5,3.5 L16.5,16.5 L1.5,16.5 L1.5,1.5" className="cart__borderLine"></path>
+            </clipPath>
+          </defs>
+
           <path id="Case" fill={bg} d="M0,0 C0,0 14.1624756,4.84345139e-16 14.0817871,0 C14.0010986,-4.84345139e-16 14.0130005,1.99951172 14.0130005,1.99951172 L16,1.99951172 L16,16 L0,16 L0,0 Z"></path>
-          <g transform="translate(-1.000000, -1.000000)" stroke="#000000" strokeLinecap="square">
-            <path d="M1.5,1.5 L14.5,1.5" className="cart__borderLine"></path>
-            <path d="M14.5,3.5 L14.5,1.5" className="cart__borderLine"></path>
-            <path d="M16.5,3.5 L14.5,3.5" className="cart__borderLine"></path>
-            <path d="M1.5,16.5 L16.5,16.5" className="cart__borderLine"></path>
-            <path d="M1.5,1.5 L1.5,16.5" className="cart__borderLine"></path>
-            <path d="M16.5,16.5 L16.5,3.5" className="cart__borderLine"></path>
+
+          {cart && cart.code && (
+            <text
+              className="cart__code"
+              fill={colors[15]}
+              clipPath="url(#corner)"
+              x={2}
+              y={4}
+            >
+              {cart
+                .code
+                .split("\n")
+                .slice(0, 3)
+                .join("\n")
+              }
+            </text>
+          )}
+
+          <g
+            transform="translate(-1.000000, -1.000000)"
+            stroke={colors[6]}
+            strokeWidth={0.4}
+            strokeLinecap="square"
+            fill="none"
+          >
+            <path
+              className="cart__borderLine"
+              d="M1.5,1.5 L14.5,1.5 L14.5,3.5 L16.5,3.5 L16.5,16.5 L1.5,16.5 L1.5,1.5"
+            />
           </g>
+
         </svg>
+
+        <div className="cart__name">
+          {cart.name}
+        </div>
 
         <style jsx>{`
           .cart {
-            height: ${size}px;
+            height: ${size + 18}px;
             width: ${size}px;
             background: none;
             border: 0;
             display: flex;
+            flex-direction: column;
+            text-decoration: none;
           }
 
           .cart__border {
-            height: 100%;
-            width: 100%;
+            height: ${size}px;
+            width: ${size}px;
           }
 
-          .cart__borderLine {
-            stroke: ${colors[6]};
-            stroke-width: 0.4;
+          .cart__code {
+            font: bold 2px Monaco, Courier monospace;
           }
+
+          .cart__name {
+            color: ${colors[0]};
+            font-family: sans-serif;
+            margin-top: 8px;
+            text-align: center;
+          }
+
         `}</style>
       </a>
     )

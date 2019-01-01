@@ -8,9 +8,12 @@ import Cart from "../components/cart"
 
 storiesOf("<Cart ∕>", module)
 
-  .add("default", () => (
+  .add("example", () => (
     <Center bg={colors[7]}>
-      <Cart />
+      <Cart bg={colors[1]} size={96} cart={{
+        name: "example",
+        code: "poke(0x6000, 1)\n",
+      }} />
     </Center>
   ))
 
