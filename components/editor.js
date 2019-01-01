@@ -9,29 +9,37 @@ export class Editor extends React.PureComponent {
     orientation: PropTypes.string,
     height: PropTypes.number,
     onChange: PropTypes.func,
+    code: PropTypes.string,
   };
 
   constructor(props) {
     super(props)
+    this.div = React.createRef();
     this.state = {
-      code: "<p>-- code goes here ↓</p>",
+      code: undefined
     }
   }
 
   onChange = event => {
-    const code = event.target.value
-    this.setState({ code })
-    this.props.onChange(code)
+    const html = event.target.value
+    const ascii = event.nativeEvent.target.innerText
+    this.setState({ code: html })
+    this.props.onChange(ascii)
   }
 
   render() {
     const { server, orientation, height } = this.props
 
+    const html = this.state.code
+    const ascii = this.props.code
+    const code = html || ascii.split("\n").join("<br>")
+
     return (
       <>
         <ContentEditable
           className="code"
-          html={this.state.code}
+          innerRef={this.div}
+          html={code}
           onChange={this.onChange}
         />
         <style jsx>{`

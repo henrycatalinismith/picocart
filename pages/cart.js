@@ -77,6 +77,7 @@ class Cart extends React.Component {
   }
 
   static mapStateToProps = state => ({
+    code: state.editor.code,
     orientation: state.layout.orientation,
     headerHeight: state.layout.headerHeight,
     editorHeight: state.layout.editorHeight,
@@ -98,6 +99,7 @@ class Cart extends React.Component {
   });
 
   static propTypes = {
+    code: PropTypes.string,
     orientation: PropTypes.string,
     headerHeight: PropTypes.number,
     editorHeight: PropTypes.number,
@@ -121,6 +123,7 @@ class Cart extends React.Component {
 
   render() {
     const {
+      code,
       orientation,
       headerHeight,
       editorHeight,
@@ -170,6 +173,7 @@ class Cart extends React.Component {
                 height={editorHeight}
                 server={server}
                 onChange={changeCode}
+                code={code}
               />
             </EditorWrapper>
           </Toolbox>

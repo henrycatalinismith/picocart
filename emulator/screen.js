@@ -61,9 +61,13 @@ export default class Screen {
   }
 
   render() {
-    for (let addr = 0; addr <= 8191; addr++) {
-      const x = addr % 64 * 2;
-      const y = Math.floor(addr / 64);
+    for (let addr = 0x6000; addr <= 0x7FFF; addr++) {
+      //const x = addr % 64 * 2;
+      //const y = Math.floor(addr / 64);
+      const i = addr - 0x6000;
+      const x = (i * 2) % 128;
+      const y = Math.floor(i / 64)
+      debugger
       const left = this.memory[addr] & 0x0f;
       const right = this.memory[addr] >> 4;
 

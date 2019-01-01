@@ -7,20 +7,27 @@ import helpers from "../emulator/helpers.raw.js"
 import saferEval from "safer-eval"
 import actions from "../actions"
 
+import api from "../emulator/api"
 import compile from "../emulator/compiler"
-import run from "../emulator/runner"
 import Screen from "../emulator/screen"
 
-const parse = (dispatch, code) => {
-  console.log(helpers)
-  console.log(grammar)
-  const parser = peg.generate(helpers + grammar);
+const parse = code => {
+  const parser = peg.buildParser(helpers + grammar)
   return parser.parse(code)
+}
+
+const run = (code, memory) => {
+  const evalContext = {
+    __lua: lua2js.stdlib.__lua,
+    ...api(memory),
+  }
+  delete global['__core-js_shared__']
+  return saferEval(code, evalContext)
 }
 
 const thunks = {
   startEmulator() {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
       const canvas = document.querySelector("canvas")
       const screen = new Screen(canvas)
 
@@ -28,7 +35,12 @@ const thunks = {
 
       const { editor } = getState()
       const ast = parse(editor.code)
-      console.log(ast)
+      const code = compile(ast)
+
+      await run(code, screen.memory)
+      screen.render()
+
+      console.log("💘")
     }
   },
 }
