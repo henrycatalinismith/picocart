@@ -7,7 +7,6 @@ import colors from "../colors"
 
 class Index extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
-    store.dispatch(actions.documentMode())
     return {}
   }
 
