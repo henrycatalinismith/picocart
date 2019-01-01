@@ -20,6 +20,7 @@ import withRedux from "next-redux-wrapper"
 import actions from "../actions"
 import middlewares from "../middlewares"
 import reducer from "../reducers"
+import thunks from "../thunks"
 
 const context = {
   insertCss: (...styles) => {
@@ -72,7 +73,7 @@ export function makeStore (initialState = serverInitialState, options) {
 
 class _App extends App {
   componentDidMount () {
-    window.store.dispatch(actions.pageLoad())
+    window.store.dispatch(thunks.pageLoad())
   }
 
   render () {

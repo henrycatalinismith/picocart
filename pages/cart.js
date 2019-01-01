@@ -12,6 +12,7 @@ import Run from "../components/run"
 import Editor from "../components/editor"
 import actions from "../actions"
 import colors from "../colors"
+import thunks from "../thunks"
 
 const placeholder = canvas => {
   const ctx = canvas.getContext('2d');
@@ -93,7 +94,7 @@ class Cart extends React.Component {
 
   static mapDispatchToProps = (dispatch, props) => ({
     changeCode: code => dispatch(actions.changeCode(code)),
-    moveResizer: (x, y) => dispatch(actions.moveResizer(x, y)),
+    moveResizer: (x, y) => dispatch(thunks.moveResizer(x, y)),
     startEmulator: () => dispatch(actions.startEmulator()),
   });
 
