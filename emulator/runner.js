@@ -1,8 +1,8 @@
-require("babel-polyfill");
-const lua2js = require("lua2js");
-const saferEval = require("safer-eval");
+//require("babel-polyfill");
+import lua2js from "lua2js";
 
-const api = require("./api");
+import saferEval from "safer-eval";
+import api from "./api";
 
 export default function run(code, memory) {
   const evalContext = {

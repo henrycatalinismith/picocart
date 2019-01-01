@@ -94,7 +94,7 @@ class Cart extends React.Component {
   static mapDispatchToProps = (dispatch, props) => ({
     changeCode: code => dispatch(actions.changeCode(code)),
     moveResizer: (x, y) => dispatch(thunks.moveResizer(x, y)),
-    startEmulator: () => dispatch(actions.startEmulator()),
+    startEmulator: () => dispatch(thunks.startEmulator()),
   });
 
   static propTypes = {

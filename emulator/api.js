@@ -27,7 +27,7 @@ const pset = (memory, x, y, c) => {
     : (c << 4) | (memory[pixel[x][y]] & 0x0f);
 };
 
-module.exports = memory => {
+export default memory => {
   const api = {
     abs(num) {
       return Math.abs(num);
