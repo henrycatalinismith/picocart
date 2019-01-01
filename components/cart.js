@@ -56,6 +56,24 @@ export class Run extends React.Component {
             </text>
           )}
 
+          <g transform="translate(0, 12)">
+            <rect
+              width={16}
+              height={4}
+              fill={colors[13]}
+            />
+          </g>
+
+          <g transform="translate(0, 12)">
+            <text
+              className="cart__name2"
+              fill={colors[7]}
+              clipPath="url(#corner)"
+              x={1.4}
+              y={2.4}
+            >{cart.name}</text>
+          </g>
+
           <g
             transform="translate(-1.000000, -1.000000)"
             stroke={colors[6]}
@@ -70,10 +88,6 @@ export class Run extends React.Component {
           </g>
 
         </svg>
-
-        <div className="cart__name">
-          {cart.name}
-        </div>
 
         <style jsx>{`
           .cart {
@@ -95,11 +109,8 @@ export class Run extends React.Component {
             font: bold 2px Monaco, Courier monospace;
           }
 
-          .cart__name {
-            color: ${colors[0]};
-            font-family: sans-serif;
-            margin-top: 8px;
-            text-align: center;
+          .cart__name2 {
+            font: bold 2px sans-serif;
           }
 
         `}</style>

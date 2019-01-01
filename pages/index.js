@@ -33,11 +33,11 @@ class Index extends React.Component {
         <Header />
 
         <div className="library">
-          <Grid n={4} w={128}>
+          <Grid n={4} w={96}>
             {_.keys(carts).map((e, i) => (
               <Cart
                 key={carts[e].id}
-                bg={colors[1]}
+                bg={colors[5]}
                 cart={carts[e]}
                 size={96}
               />
