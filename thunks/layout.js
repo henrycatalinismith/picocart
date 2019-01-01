@@ -45,8 +45,10 @@ const thunks = {
       )
 
       window.addEventListener("resize", throttledDispatchResize)
-      canvasSizeHack()
-      editorHeightHack(dispatch)
+      if (window.location.pathname === "/cart") {
+        canvasSizeHack()
+        editorHeightHack(dispatch)
+      }
     }
   },
 
@@ -56,8 +58,10 @@ const thunks = {
         window.innerWidth,
         window.innerHeight
       ))
-      canvasSizeHack()
-      editorHeightHack(dispatch)
+      if (window.location.pathname === "/cart") {
+        canvasSizeHack()
+        editorHeightHack(dispatch)
+      }
     }
   }
 }
