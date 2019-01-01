@@ -14,28 +14,6 @@ import actions from "../actions"
 import colors from "../colors"
 import thunks from "../thunks"
 
-const placeholder = canvas => {
-  const ctx = canvas.getContext('2d');
-  //let n = 0
-  //setInterval(() => {
-    for (let x = 0; x < 128; x++ ) {
-      for (let y = 0; y < 128; y++ ) {
-        ctx.fillStyle = colors[((x + y) % colors.length)]
-        ctx.fillRect(x, y, 1, 1);
-      }
-      //n++
-      //n++
-      //n++
-      //n++
-      //n++
-      //n++
-      //n++
-    }
-    //n++
-    //n = n % 10000
-  //}, 10)
-}
-
 const EditorWrapper = ({ children }) => (
   <div className="editor-wrapper">
     {children}
@@ -121,10 +99,7 @@ class Cart extends React.Component {
             height={layout.stageHeight}
             orientation={layout.orientation}
           >
-            <Screen
-              size={layout.screenSize}
-              onMount={placeholder}
-            />
+            <Screen size={layout.screenSize} />
           </Stage>
           <Resizer
             onMove={_.throttle(moveResizer, 200)}
