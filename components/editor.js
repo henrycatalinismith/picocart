@@ -41,6 +41,7 @@ export class Editor extends React.PureComponent {
           innerRef={this.div}
           html={code}
           onChange={this.onChange}
+          autocapitalize="none"
         />
         <style jsx>{`
           .code {
