@@ -5,7 +5,6 @@ import colors from "../colors"
 
 export class Editor extends React.PureComponent {
   static propTypes = {
-    server: PropTypes.bool,
     orientation: PropTypes.string,
     height: PropTypes.number,
     onChange: PropTypes.func,
@@ -28,7 +27,7 @@ export class Editor extends React.PureComponent {
   }
 
   render() {
-    const { server, orientation, height } = this.props
+    const { orientation, height } = this.props
 
     const html = this.state.code
     const ascii = this.props.code
@@ -41,7 +40,7 @@ export class Editor extends React.PureComponent {
           innerRef={this.div}
           html={code}
           onChange={this.onChange}
-          autocapitalize="none"
+          autoCapitalize="none"
         />
         <style jsx>{`
           .code {
