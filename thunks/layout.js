@@ -2,6 +2,12 @@ import _ from "lodash"
 import actions from "../actions"
 import emulator from "./emulator"
 
+const canvasSizeHack =  _.debounce(dispatch => {
+  const c = document.querySelector("canvas")
+  c.width = 128
+  c.height = 128
+}, 100)
+
 const editorHeightHack = _.debounce(dispatch => {
   if (window.location.pathname !== "/cart") {
     return
@@ -17,6 +23,7 @@ const thunks = {
   moveResizer(x, y) {
     return (dispatch, getState) => {
       dispatch(actions.moveResizer(x, y))
+      canvasSizeHack()
       editorHeightHack(dispatch)
     }
   },
@@ -38,8 +45,8 @@ const thunks = {
       )
 
       window.addEventListener("resize", throttledDispatchResize)
+      canvasSizeHack()
       editorHeightHack(dispatch)
-      dispatch(emulator.startEmulator())
     }
   },
 
@@ -49,6 +56,7 @@ const thunks = {
         window.innerWidth,
         window.innerHeight
       ))
+      canvasSizeHack()
       editorHeightHack(dispatch)
     }
   }
