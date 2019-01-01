@@ -63,7 +63,7 @@ const ViewportHack = () => (
       }
       .toolbox {
         order: 1 !important;
-        flex: 2 !important;
+        flex: 4 !important;
         border-right-width: 0px !important;
       }
     }
