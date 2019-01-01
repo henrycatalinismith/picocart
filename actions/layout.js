@@ -1,25 +1,28 @@
 import { createActions } from "../signalbox";
 
 export default createActions([
-  "APP_MODE",
-  "DOCUMENT_MODE",
   "MOVE_RESIZER",
+  "PAGE_LOAD",
+  "RESIZE_VIEWPORT",
   "UPDATE_LAYOUT",
 ], types => ({
-  appMode: () => ({
-    type: types.APP_MODE,
-    layout: {},
-  }),
-
-  documentMode: () => ({
-    type: types.DOCUMENT_MODE,
-    layout: {},
-  }),
-
   moveResizer: (x, y) => ({
     type: types.MOVE_RESIZER,
     x,
     y,
+  }),
+
+  pageLoad: () => ({
+    type: types.PAGE_LOAD,
+    layout: {},
+  }),
+
+  resizeViewport: (viewportWidth, viewportHeight) => ({
+    type: types.RESIZE_VIEWPORT,
+    layout: {
+      viewportWidth,
+      viewportHeight,
+    }
   }),
 
   updateLayout: layout => ({

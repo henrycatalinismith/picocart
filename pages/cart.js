@@ -73,7 +73,6 @@ const ViewportHack = () => (
 
 class Cart extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
-    store.dispatch(actions.appMode())
     return {}
   }
 
