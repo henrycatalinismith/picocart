@@ -32,6 +32,8 @@ const context = {
 }
 
 const serverInitialState = {
+  carts: {
+  },
   editor: {
     code: "-- code ghere ↓\nline(0, 0, 128, 128, 12)\n",
   },
