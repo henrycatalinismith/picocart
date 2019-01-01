@@ -1,4 +1,3 @@
-exports.compile = require("./compiler").default;
-exports.parse = require("./parser").default;
-exports.run = require("./runner").default;
-exports.Screen = require("./screen").default;
+export var compile = require("./compiler").default;
+export var run = require("./runner").default;
+export var Screen = require("./screen").default;

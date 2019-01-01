@@ -1,9 +1,12 @@
-const escodegen = require("escodegen");
-const lua2js = require("lua2js");
-const pegjs = require("pegjs");
+import escodegen from "escodegen"
+import lua2js from "lua2js"
+import pegjs from "pegjs"
 
-const grammar = require("./grammar.pegjs");
-const helpers = require("./helpers.raw.js");
-const parser = pegjs.buildParser(helpers + grammar);
+import grammar from "./grammar.pegjs"
+import helpers from "./helpers.raw.js"
 
-export default parser.parse;
+export default code => {
+  const parser = pegjs.generate(helpers + grammar);
+  return parser.parse(code)
+}
+

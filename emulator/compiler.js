@@ -1,7 +1,7 @@
-const escodegen = require("escodegen");
-const esprima = require("esprima");
-const esprimaWalk = require("esprima-walk");
-const { keys, clone } = require("underscore");
+import escodegen from "escodegen";
+import esprima from "esprima";
+import esprimaWalk from "esprima-walk";
+import {keys, clone} from "underscore";
 
 const options = {
   format: {

@@ -5,6 +5,8 @@ export default createActions([
 ], types => ({
   startEmulator: () => ({
     type: types.START_EMULATOR,
+    editor: {},
+    emulator: {},
   }),
 }));
 
