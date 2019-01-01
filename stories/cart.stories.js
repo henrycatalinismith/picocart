@@ -10,7 +10,7 @@ storiesOf("<Cart ∕>", module)
 
   .add("example", () => (
     <Center bg={colors[7]}>
-      <Cart bg={colors[2]} size={96} cart={{
+      <Cart bg={colors[5]} size={96} cart={{
         name: "example",
         code: "poke(0x6000, 1)\n",
       }} />
