@@ -15,6 +15,7 @@ export default createActions([
   pageLoad: () => ({
     type: types.PAGE_LOAD,
     layout: {},
+    carts: {},
   }),
 
   resizeViewport: (viewportWidth, viewportHeight) => ({

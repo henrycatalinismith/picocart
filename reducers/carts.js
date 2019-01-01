@@ -10,4 +10,5 @@ const update = (carts, action) => {
 
 export default createReducer({}, {
   [actions.PAGE_LOAD]: update,
+  [actions.LOAD_CARTS]: update,
 })
