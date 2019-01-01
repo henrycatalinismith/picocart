@@ -13,7 +13,20 @@ const middleware = createMiddleware((before, after) => ({
     })
 
     db.carts.toArray().then(carts => {
-      action.carts = _.keyBy(carts, "id")
+      const loaded = _.keyBy(carts, "id")
+
+      loaded.example = {
+        id: "example",
+        createdAt: new Date,
+        updatedAt: new Date,
+        name: "example",
+        code: ([
+          "line(0, 0, 128, 128, 12)",
+          "line(0, 128, 128, 0, 14)",
+        ]).join("\n"),
+      }
+
+      store.dispatch(actions.loadCarts(loaded))
     })
   },
 }))

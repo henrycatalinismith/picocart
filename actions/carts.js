@@ -1,14 +1,14 @@
 import { createActions } from "../signalbox";
 
 export default createActions([
-  //"CHANGE_CODE",
+  "LOAD_CARTS",
 ], types => ({
-  //changeCode: code => ({
-    //type: types.CHANGE_CODE,
-    //editor: {
-      //code,
-    //}
-  //}),
-}));
+
+  loadCarts: carts => ({
+    type: types.LOAD_CARTS,
+    carts,
+  })
+
+}))
 
 
