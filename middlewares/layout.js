@@ -27,6 +27,7 @@ const middleware = createMiddleware((before, after) => ({
       if (o(layout.viewportWidth, layout.viewportHeight) === "portrait") {
         layout.viewportHeight -= 44
       }
+      window.scrollTo(0, 0)
     }
 
     layout.orientation = o(layout.viewportWidth, layout.viewportHeight)
