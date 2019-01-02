@@ -32,7 +32,7 @@ class Index extends React.Component {
     const { carts, layout } = this.props
 
     return (
-      <Document>
+      <Document title="picocart">
         <Header />
         <Bucket
           width={layout.bucketWidth}
