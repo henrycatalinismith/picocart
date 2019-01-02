@@ -1,76 +1,100 @@
-import { createMiddleware } from "../signalbox";
+import { createMiddleware } from "../signalbox"
 import actions from "../actions"
 
+const innerHeight = typeof window === "undefined"
+  ? () => {}
+  : require("ios-inner-height")
 
-
-
-
-              const o = (w, h) =>
-                (w > h || (w/h)>0.9)
-                  ? "landscape"
-                  : "portrait"
-
-
-
-
+const o = (w, h) =>
+  (w > h || (w/h)>0.9)
+    ? "landscape"
+    : "portrait"
 
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
-    if (window.location.pathname !== "/cart") {
-      return
-    }
-
-    const viewportWidth = window.innerWidth
-    const viewportHeight = window.innerHeight
-    const orientation = o(viewportWidth, viewportHeight)
-
+    const layout = {}
     const header = document.querySelector(".header")
-    const headerWidth = header.offsetWidth
-    const headerHeight = header.offsetHeight
+    const iOS = window.navigator.userAgent.match(/(iPad|iPhone|iPod)/g)
 
-    const stage = document.querySelector(".stage")
-    let stageWidth = stage.offsetWidth
-    let stageHeight = stage.offsetHeight
-    if (orientation === "landscape") {
-      stageHeight = viewportHeight - headerHeight
+
+    //const bucket = document.querySelector(".bucket")
+
+    layout.viewportWidth = window.innerWidth
+    layout.viewportHeight = window.innerHeight
+
+    if (iOS) {
+      layout.viewportHeight = innerHeight()
     }
 
-    const screen = document.querySelector(".screen__canvas")
-    //const screenSize = screen.offsetWidth
-    let screenSize = Math.min(stageWidth, stageHeight)
+    layout.orientation = o(layout.viewportWidth, layout.viewportHeight)
+    layout.headerWidth = header.offsetWidth
+    layout.headerHeight = header.offsetHeight
+    //layout.bucketWidth = bucket.offsetWidth
+    //layout.bucketHeight = bucket.offsetHeight
 
-    const resizer = document.querySelector(".resizer")
-    let resizerWidth = resizer.offsetWidth
-    let resizerHeight = resizer.offsetHeight
+    switch (window.location.pathname) {
+      case "/":
+        break;
 
-    const toolbox = document.querySelector(".toolbox")
-    let toolboxWidth = toolbox.offsetWidth
-    let toolboxHeight = toolbox.offsetHeight
+      case "/cart":
+        const stage = document.querySelector(".stage")
+        const screen = document.querySelector(".screen__canvas")
+        const resizer = document.querySelector(".resizer")
+        const toolbox = document.querySelector(".toolbox")
 
-    if (orientation === "landscape" && toolboxWidth === viewportWidth) {
-      resizerWidth = 16
-      resizerHeight = viewportHeight - headerHeight
-      toolboxWidth = 200
-      toolboxHeight = viewportHeight - headerHeight
-      stageWidth = viewportWidth - toolboxWidth
-      stageHeight = viewportHeight - headerHeight
-      screenSize = Math.min(stageWidth, stageHeight)
+        layout.stageWidth = stage.offsetWidth
+        layout.stageHeight = stage.offsetHeight
+
+        if (layout.orientation === "landscape") {
+          layout.stageHeight = (
+            layout.viewportHeight
+            - layout.headerHeight
+          )
+        }
+
+        layout.screenSize = Math.min(
+          layout.stageWidth,
+          layout.stageHeight
+        )
+
+        layout.resizerWidth = resizer.offsetWidth
+        layout.resizerHeight = resizer.offsetHeight
+        layout.toolboxWidth = toolbox.offsetWidth
+        layout.toolboxHeight = toolbox.offsetHeight
+
+        const isLandscape = layout.orientation === "landscape"
+        const looksPortrait = (
+          layout.toolboxWidth === layout.viewportWidth
+        )
+        if (isLandscape && looksPortrait) {
+          layout.resizerWidth = 16
+          layout.resizerHeight = (
+            layout.viewportHeight
+            - layout.headerHeight
+          )
+          layout.toolboxWidth = 200
+          layout.toolboxHeight = (
+            layout.viewportHeight
+            - layout.headerHeight
+          )
+          layout.stageWidth = (
+            layout.viewportWidth
+            - layout.toolboxWidth
+          )
+          layout.stageHeight = (
+            layout.viewportHeight
+            - layout.headerHeight
+          )
+          layout.screenSize = Math.min(
+            layout.stageWidth,
+            layout.stageHeight
+          )
+        }
+
+        break;
     }
 
-
-    action.layout = {
-      orientation,
-      headerWidth,
-      screenSize,
-      stageWidth,
-      stageHeight,
-      resizerWidth,
-      resizerHeight,
-      toolboxWidth,
-      toolboxHeight,
-      viewportWidth,
-      viewportHeight,
-    }
+    action.layout = layout
   },
 
   [before(actions.RESIZE_VIEWPORT)](store, action) {
