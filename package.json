@@ -34,6 +34,7 @@
     "esprima": "^4.0.1",
     "esprima-walk": "^0.1.0",
     "express": "^4.16.4",
+    "inobounce": "^0.1.6",
     "ios-inner-height": "^1.1.0",
     "jest": "^23.6.0",
     "keymaster": "^1.6.2",
