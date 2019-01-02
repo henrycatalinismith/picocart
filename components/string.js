@@ -1,42 +1,154 @@
+import React from "react"
+import PropTypes from "prop-types"
 import colors from "../colors"
-
-/*
-  <path key="p" className="wordmark__letter" d="M131.524+147.854L131.524+97.8537L81.5245+97.8537L81.5245+147.854L131.524+147.854ZM31.5245+247.854L31.5245+47.8537L181.524+47.8537L181.524+197.854L81.5245+197.854L81.5245+247.854L31.5245+247.854Z" />
-  <path key="i" className="wordmark__letter" d="M231.524+247.854L231.524+197.854L281.524+197.854L281.524+97.8537L231.524+97.8537L231.524+47.8537L381.524+47.8537L381.524+97.8537L331.524+97.8537L331.524+197.854L381.524+197.854L381.524+247.854L231.524+247.854Z" />
-  <path key="c" className="wordmark__letter" d="M431.524+247.854L431.524+47.8537L581.524+47.8537L581.524+97.8537L481.524+97.8537L481.524+197.854L581.524+197.854L581.524+247.854L431.524+247.854Z" />
-  <path key="o" className="wordmark__letter" d="M631.524+247.854L631.524+97.8537L681.524+97.8537L681.524+197.854L731.524+197.854L731.524+247.854L631.524+247.854ZM731.524+197.854L731.524+97.8537L681.524+97.8537L681.524+47.8537L781.524+47.8537L781.524+197.854L731.524+197.854Z" />
-  <path key="c2" className="wordmark__letter" d="M831.524+247.854L831.524+47.8537L981.524+47.8537L981.524+97.8537L881.524+97.8537L881.524+197.854L981.524+197.854L981.524+247.854L831.524+247.854Z" />
-  <path key="a" className="wordmark__letter" d="M1131.52+147.854L1131.52+97.8537L1081.52+97.8537L1081.52+147.854L1131.52+147.854ZM1031.52+247.854L1031.52+47.8537L1181.52+47.8537L1181.52+247.854L1131.52+247.854L1131.52+197.854L1081.52+197.854L1081.52+247.854L1031.52+247.854Z" />
-  <path key="r" className="wordmark__letter" d="M1331.52+247.854L1331.52+197.854L1381.52+197.854L1381.52+247.854L1331.52+247.854ZM1231.52+247.854L1231.52+47.8537L1381.52+47.8537L1381.52+147.854L1331.52+147.854L1331.52+97.8537L1281.52+97.8537L1281.52+147.854L1331.52+147.854L1331.52+197.854L1281.52+197.854L1281.52+247.854L1231.52+247.854Z" />
-  <path key="t" className="wordmark__letter" d="M1481.52+247.854L1481.52+97.8537L1431.52+97.8537L1431.52+47.8537L1581.52+47.8537L1581.52+97.8537L1531.52+97.8537L1531.52+247.854L1481.52+247.854Z" />
-          <g key={`letter-${c}-${i}`}>
-            {value.split("").map((c, i) => (
-          </g>
-          <path
-            d={letterPath(c)}
-            stroke={colors[0]}
-            strokeWidth={0.5}
-            fill={colors[12]}
-          />
-        ))}
-*/
 
 const letterPaths = letter => {
   const letters = {
 
-    a: [
-      "M0,0 L2,0",
-      "M2,0 L2,3",
+    A: [
+      "M0,4 L0,0 L2,0 L2,4",
       "M0,2 L2,2",
-      "M0,0 L0,3",
+    ],
+
+    a: [
+      "M0,4 L0,1 L2,1 L2,4",
+      "M0,3 L2,3",
     ],
 
     b: [
-      "M0,0 L2,0",
-      "M0,3 L2,3",
-      //"M2,0 L2,3",
-      //"M0,2 L2,2",
-      //"M0,0 L0,3",
+      "M0,1 L1,1 L1,2 L0,2 L0,4 L2,4 L2,3",
+    ],
+
+    c: [
+      "M2,1 L0,1 L0,4 L2,4",
+    ],
+
+    d: [
+      "M1,1 L0,1 L0,4 L1,4",
+      "M2,2 L2,3",
+    ],
+
+    e: [
+      "M2,1 L0,1 L0,4 L2,4",
+      "M1,2 L1,2",
+    ],
+
+    f: [
+      "M2,1 L0,1 L0,4",
+      "M1,2 L1,2",
+    ],
+
+    g: [
+      "M2,1 L0,1 L0,4 L2,4 L2,3",
+    ],
+
+    h: [
+      "M0,1 L0,4",
+      "M2,1 L2,4",
+      "M1,3 L1,3",
+    ],
+
+    i: [
+      "M0,1 L2,1",
+      "M0,4 L2,4",
+      "M1,2 L1,3",
+    ],
+
+    j: [
+      "M0,1 L2,1",
+      "M0,4 L1,4 L1,2",
+    ],
+
+    j: [
+      "M0,1 L2,1",
+      "M0,4 L1,4 L1,2",
+    ],
+
+    k: [
+      "M0,1 L0,4",
+      "M1,2 L1,2",
+      "M2,1 L2,1",
+      "M2,3 L2,4",
+    ],
+
+    l: [
+      "M0,1 L0,4 L2,4",
+    ],
+
+    m: [
+      "M0,4 L0,1 L2,1 L2,4",
+      "M1,2 L1,2",
+    ],
+
+    n: [
+      "M0,4 L0,1 L1,1",
+      "M2,2 L2,4",
+    ],
+
+    o: [
+      "M0,2 L0,4 L1,4",
+      "M1,1 L2,1 L2,3",
+    ],
+
+    p: [
+      "M0,4 L0,1 L2,1 L2,3 L1,3",
+    ],
+
+    q: [
+      "M0,2 L0,3 L1,3 L1,4 L2,4",
+      "M1,1 L1,1",
+      "M2,2 L2,2",
+    ],
+
+    r: [
+      "M0,4 L0,1 L2,1 L2,2",
+      "M1,3 L1,3",
+      "M2,4 L2,4",
+    ],
+
+    s: [
+      "M1,1 L2,1",
+      "M0,4 L1,4",
+      "M0,2 L0,2",
+      "M2,3 L2,3",
+    ],
+
+    t: [
+      "M0,1 L2,1",
+      "M1,2 L1,4",
+    ],
+
+    u: [
+      "M0,1 L0,3",
+      "M1,4 L2,4 L2,1",
+    ],
+
+    v: [
+      "M0,1 L0,3 L2,3 L2,1",
+      "M1,4 L1,4",
+    ],
+
+    w: [
+      "M0,1 L0,4 L2,4 L2,1",
+      "M1,3 L1,3",
+    ],
+
+    x: [
+      "M0,1 L0,1",
+      "M2,1 L2,1",
+      "M1,2 L1,2",
+      "M0,3 L0,4",
+      "M2,3 L2,4",
+    ],
+
+    y: [
+      "M2,1 L2,4 L0,4",
+      "M0,1 L0,2 L1,2",
+    ],
+
+    z: [
+      "M0,1 L2,1 L2,2",
+      "M2,4 L0,4 L0,3",
     ],
 
   }
@@ -48,47 +160,67 @@ const letterPaths = letter => {
   }
 }
 
+export default class String extends React.PureComponent {
+  static propTypes = {
+    value: PropTypes.string,
+    fontSize: PropTypes.number,
+    stroke: PropTypes.string,
+  };
 
-export default ({
-  value = "",
-  fontSize = 16,
-  fill = colors[7],
-  stroke = colors[2],
-}) => {
+  static defaultProps = {
+    value: "",
+    fontSize: 16,
+    stroke: colors[0],
+  };
 
-  console.log(value)
-  return (
-    <div className="string">
-      <svg width={32} height={32} viewBox="-0.5 -0.5 3 4">
-        {value.split("").map((letter, i) => {
-          const paths = letterPaths(letter)
-          return (
-            <g
-              key={`${letter}${i}`}
-              stroke={colors[0]}
-              strokeLinecap="square"
-            >
-              {paths.map((path, j) => (
-                <path
-                  key={`${letter}${i}:${j}`}
-                  d={path}
-                />
-              ))}
-            </g>
-          )
-        })}
-      </svg>
+  render() {
+    const { value, fontSize, stroke } = this.props
 
-      <span>{value}</span>
+    const viewbox = [
+      -0.5,
+      -0,
+      (value.length * 3) + (Math.max(0, value.length - 1)),
+      4
+    ].join(" ")
 
-      <style jsx>{`
-        .string {
-          height: 32px;
-          padding: 32px;
-        }
-      `}</style>
+    const pixelSize = fontSize / 5
 
-    </div>
-  );
+    const fontWidth = fontSize * 0.6
+    const fontHeight = fontSize
+
+    const svgWidth = (
+      (fontWidth * value.length)
+      + (pixelSize * Math.max(0, value.length - 1))
+    )
+    const svgHeight = fontHeight
+
+    return (
+        <svg width={svgWidth} height={svgHeight} viewBox={viewbox}>
+          {value.split("").map((letter, i) => {
+            const paths = letterPaths(letter)
+            const translate = `translate(${i * 4}, 0)`
+            return (
+              <g
+                key={`${letter}${i}`}
+                fill="none"
+                stroke={stroke}
+                strokeLinecap="square"
+                transform={translate}
+              >
+                {paths.map((path, j) => (
+                  <path
+                    key={`${letter}${i}:${j}`}
+                    d={path}
+                  />
+                ))}
+              </g>
+            )
+          })}
+          <style jsx>{`
+          `}</style>
+        </svg>
+    );
+
+  }
 }
 
