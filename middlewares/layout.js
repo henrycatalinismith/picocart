@@ -24,6 +24,9 @@ const middleware = createMiddleware((before, after) => ({
     if (iOS) {
       require("inobounce")
       layout.viewportHeight = innerHeight()
+      if (o(layout.viewportWidth, layout.viewportHeight) === "portrait") {
+        layout.viewportHeight -= 44
+      }
     }
 
     layout.orientation = o(layout.viewportWidth, layout.viewportHeight)

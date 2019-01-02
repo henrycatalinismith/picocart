@@ -74,7 +74,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener("touchmove", e => e.preventDefault())
+    //document.addEventListener("touchmove", e => e.preventDefault())
   }
 
   render() {
