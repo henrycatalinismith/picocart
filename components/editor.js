@@ -19,6 +19,10 @@ export class Editor extends React.PureComponent {
     }
   }
 
+  onBlur = event => {
+    setTimeout(() => window.scrollTo(0, 0), 50)
+  }
+
   onChange = event => {
     const html = event.target.value
     const ascii = event.nativeEvent.target.innerText
@@ -39,6 +43,7 @@ export class Editor extends React.PureComponent {
           className="code"
           innerRef={this.div}
           html={code}
+          onBlur={this.onBlur}
           onChange={this.onChange}
           autoCapitalize="none"
         />
