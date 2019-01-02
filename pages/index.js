@@ -3,6 +3,7 @@ import _ from "lodash"
 import { connect } from "react-redux"
 import Link from "next/link"
 import Document from "../components/document"
+import Bucket from "../components/bucket"
 import Grid from "../components/grid"
 import Cart from "../components/cart"
 import Header from "../components/header"
@@ -16,6 +17,7 @@ class Index extends React.Component {
 
   static mapStateToProps = state => ({
     carts: state.carts,
+    layout: state.layout,
   })
 
   static mapDispatchToProps = (dispatch, props) => ({
@@ -23,27 +25,33 @@ class Index extends React.Component {
 
   static propTypes = {
     carts: PropTypes.object,
+    layout: PropTypes.object,
   }
 
   render() {
-    const { carts } = this.props
+    const { carts, layout } = this.props
 
     return (
       <Document>
         <Header />
-
-        <div className="library">
-          <Grid n={4} w={96}>
-            {_.keys(carts).map((e, i) => (
-              <Cart
-                key={carts[e].id}
-                bg={colors[5]}
-                cart={carts[e]}
-                size={96}
-              />
-            ))}
-          </Grid>
-        </div>
+        <Bucket
+          width={layout.bucketWidth}
+          height={layout.bucketHeight}
+          thickness={layout.bucketThickness}
+        >
+          <div className="library">
+            <Grid n={4} w={96}>
+              {_.keys(carts).map((e, i) => (
+                <Cart
+                  key={carts[e].id}
+                  bg={colors[5]}
+                  cart={carts[e]}
+                  size={96}
+                />
+              ))}
+            </Grid>
+          </div>
+        </Bucket>
 
         <style jsx>{`
           .library {
