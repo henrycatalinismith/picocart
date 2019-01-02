@@ -16,13 +16,13 @@ const middleware = createMiddleware((before, after) => ({
     const header = document.querySelector(".header")
     const iOS = window.navigator.userAgent.match(/(iPad|iPhone|iPod)/g)
 
-
     //const bucket = document.querySelector(".bucket")
 
     layout.viewportWidth = window.innerWidth
     layout.viewportHeight = window.innerHeight
 
     if (iOS) {
+      require("inobounce")
       layout.viewportHeight = innerHeight()
     }
 
