@@ -8,6 +8,7 @@ import Stage from "../components/stage"
 import Screen from "../components/screen"
 import Resizer from "../components/resizer"
 import Toolbox from "../components/toolbox"
+import Toolbar from "../components/toolbar"
 import Button from "../components/button"
 import Editor from "../components/editor"
 import actions from "../actions"
@@ -112,9 +113,11 @@ class Cart extends React.Component {
             height={layout.toolboxHeight}
             orientation={layout.orientation}
           >
-            <Button onClick={startEmulator}>
-              PLAY
-            </Button>
+            <Toolbar bg={colors[15]}>
+              <Button bg={colors[8]} onClick={startEmulator}>
+                PLAY
+              </Button>
+            </Toolbar>
             <EditorWrapper>
               <Editor
                 orientation={layout.orientation}
