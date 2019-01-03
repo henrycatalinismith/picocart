@@ -5,32 +5,98 @@ import Character from "./character"
 
 class Button extends React.PureComponent {
   static propTypes = {
+    onClick: PropTypes.func,
     children: PropTypes.any,
     bg: PropTypes.string,
-    width: PropTypes.number,
-    height: PropTypes.number,
   }
 
   static defaultProps = {
+    onClick: () => {},
     children: "",
     bg: colors[8],
-    width: 96,
-    height: 32,
+  }
+
+  handleClick = event => {
+    this.props.onClick()
+    this.setState({ pushed: true })
+    setTimeout(() => this.setState({ pushed: false }), 100)
+  }
+
+  handleMouseDown = event => {
+    event.preventDefault()
+    this.setState({ pushed: true })
+    document.addEventListener("mouseup", this.handleMouseUp)
+  }
+
+  handleMouseUp = event => {
+    event.preventDefault()
+    this.setState({ pushed: false })
+    document.removeEventListener("mouseup", this.handleMouseUp)
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      pushed: false,
+    }
   }
 
   render() {
-    const {
-      children,
-      bg,
-      width,
-      height
-    } = this.props
+    const { children, bg } = this.props
+    const { pushed } = this.state
 
     const label = typeof children === "string" ? children : children.toString()
 
+    const n = label.length
+
+    const offset = {
+      x: 6,
+      y: 4,
+    }
+
+    switch (n) {
+      case 1:
+        offset.x = 12
+        break
+
+      case 2:
+        offset.x = 10
+        break
+
+      case 3:
+        offset.x = 8
+        break
+
+      case 4:
+        offset.x = 6
+        break
+
+      case 5:
+        offset.x = 4
+        break
+    }
+
+    const sw = 4
+
+    const viewBox = [
+      0,
+      0,
+      26,
+      13,
+    ].join(" ")
+
+    const yo = pushed ? 1 : 0
+
+    const border = ([x1,y1], [x2,y2]) => (
+      <path
+        d={`M${x1},${y1 + yo} L${x2},${y2 + yo}`}
+        stroke={colors[0]}
+        strokeWidth={1.9}
+      />
+    )
     const letters = label.split("").map((letter, i) => {
-      const x = 6 + (i * 4)
-      const y = 4
+      const x = offset.x + (i * 4)
+      const y = 4 + yo
       return [
 
         <Character
@@ -38,7 +104,7 @@ class Button extends React.PureComponent {
           x={x}
           y={y}
           color={colors[0]}
-          scale={2.3}
+          scale={1}
           strokeMultiplier={3.3}
         >{letter}</Character>,
 
@@ -47,37 +113,42 @@ class Button extends React.PureComponent {
           x={x}
           y={y}
           color={colors[7]}
-          scale={2.3}
+          scale={1}
         >{letter}</Character>,
 
       ]
     })
 
-    /*
-            <!--
-            <path d={`M3,${height-4} L${width-6},${height-4}`} stroke={colors[0]} strokeWidth={4}/>
-            <path d={`M2,2 L2,${height-2}`} stroke={colors[0]} strokeWidth={4}/>
-            <path d={`M${width-4},2 L${width-4},${height-2}`} stroke={colors[0]} strokeWidth={4}/>
-            -->
-    */
-
-    const sw = 4
 
     return (
-      <button>
-        <svg
-          width={width}
-          height={height}
-          viewBox={`0 0 ${width} ${height}`}>
-          <g strokeLinejoin="round">
-            <path d={`M${sw},${sw/2} L${width-sw},${sw/2}`} stroke={colors[0]} strokeWidth={sw}/>
-            <path d={`M${sw},${height-sw*1.5} L${width-sw},${height-sw*1.5}`} stroke={colors[0]} strokeWidth={sw}/>
-            <path d={`M${sw/2},${sw} L${sw/2},${height-sw*2}`} stroke={colors[0]} strokeWidth={sw}/>
-            <path d={`M${width-sw/2},${sw} L${width-sw/2},${height-sw*2}`} stroke={colors[0]} strokeWidth={sw}/>
+      <button
+        aria-label={label}
+        onClick={this.handleClick}
+        onMouseDown={this.handleMouseDown}
+      >
+        <svg viewBox={viewBox} focusable="false">
 
-            <path d={`M${sw},${height-sw/2} L${width-sw},${height-sw/2}`} stroke={colors[6]} strokeWidth={sw}/>
+          <g className="border">
+            {border([1, 1], [25, 1])}
+            {border([1, 12], [25, 12])}
+            {border([0, 1], [0, 11])}
+            {border([26, 1], [26, 11])}
           </g>
-          {letters}
+
+          <rect fill={bg} x={1} y={1 + yo} width={24} height={10} />
+
+          <g className="label">
+            {letters}
+          </g>
+
+          {!pushed && (
+            <g className="shadow">
+              <path d="M0,11 L0,12" stroke={colors[6]} strokeWidth={2} />
+              <path d="M26,11 L26,12" stroke={colors[6]} strokeWidth={2} />
+              <path d="M1,13 L25,13" stroke={colors[6]} strokeWidth={2} />
+            </g>
+          )}
+
         </svg>
         <style jsx>{`
           button {
@@ -85,6 +156,13 @@ class Button extends React.PureComponent {
             border: 0;
             margin: 0;
             padding: 0;
+            height: 32px;
+            width: 64px;
+            cursor: pointer;
+          }
+
+          button:focus {
+            outline: none;
           }
         `}</style>
       </button>
