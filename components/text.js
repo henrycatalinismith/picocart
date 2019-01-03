@@ -465,26 +465,26 @@ const letterPaths = letter => {
   }
 }
 
-export default class String extends React.PureComponent {
+export default class Text extends React.PureComponent {
   static propTypes = {
-    value: PropTypes.string,
     fontSize: PropTypes.number,
     stroke: PropTypes.string,
+    children: PropTypes.string,
   };
 
   static defaultProps = {
-    value: "",
     fontSize: 16,
     stroke: colors[0],
+    children: "",
   };
 
   render() {
-    const { value, fontSize, stroke } = this.props
+    const { children, fontSize, stroke } = this.props
 
     const viewbox = [
       -0.5,
       -0,
-      (value.length * 3) + (Math.max(0, value.length - 1)),
+      (children.length * 3) + (Math.max(0, children.length - 1)),
       4
     ].join(" ")
 
@@ -494,14 +494,14 @@ export default class String extends React.PureComponent {
     const fontHeight = fontSize
 
     const svgWidth = (
-      (fontWidth * value.length)
-      + (pixelSize * Math.max(0, value.length - 1))
+      (fontWidth * children.length)
+      + (pixelSize * Math.max(0, children.length - 1))
     )
     const svgHeight = fontHeight
 
     return (
         <svg width={svgWidth} height={svgHeight} viewBox={viewbox}>
-          {value.split("").map((letter, i) => {
+          {children.split("").map((letter, i) => {
             const paths = letterPaths(letter)
             const translate = `translate(${i * 4}, 0)`
             return (
@@ -521,8 +521,6 @@ export default class String extends React.PureComponent {
               </g>
             )
           })}
-          <style jsx>{`
-          `}</style>
         </svg>
     );
 
