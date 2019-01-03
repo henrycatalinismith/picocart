@@ -16,22 +16,31 @@ class Button extends React.PureComponent {
     bg: colors[8],
   }
 
-  handleClick = event => {
+  onClick = event => {
     this.props.onClick()
     this.setState({ pushed: true })
     setTimeout(() => this.setState({ pushed: false }), 100)
   }
 
-  handleMouseDown = event => {
+  onMouseDown = event => {
     event.preventDefault()
     this.setState({ pushed: true })
-    document.addEventListener("mouseup", this.handleMouseUp)
+    document.addEventListener("mouseup", this.onMouseUp)
   }
 
-  handleMouseUp = event => {
+  onMouseUp = event => {
     event.preventDefault()
     this.setState({ pushed: false })
-    document.removeEventListener("mouseup", this.handleMouseUp)
+    document.removeEventListener("mouseup", this.onMouseUp)
+  }
+
+  onTouchStart = event => {
+    this.setState({ pushed: true })
+    document.addEventListener("touchmove", this.onTouchMove);
+  }
+
+  onTouchEnd = event => {
+    document.removeEventListener("touchmove", this.onTouchMove);
   }
 
   constructor(props) {
@@ -123,8 +132,9 @@ class Button extends React.PureComponent {
     return (
       <button
         aria-label={label}
-        onClick={this.handleClick}
-        onMouseDown={this.handleMouseDown}
+        onClick={this.onClick}
+        onMouseDown={this.onMouseDown}
+        onTouchStart={this.onTouchStart}
       >
         <svg viewBox={viewBox} focusable="false">
 
