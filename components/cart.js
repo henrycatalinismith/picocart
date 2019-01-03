@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import colors from "../colors"
+import Text from "./text"
 
 const first = colors.slice(0, 7)
 
@@ -40,20 +41,17 @@ export class Run extends React.Component {
           <path id="Case" fill={bg} d="M0,0 C0,0 14.1624756,4.84345139e-16 14.0817871,0 C14.0010986,-4.84345139e-16 14.0130005,1.99951172 14.0130005,1.99951172 L16,1.99951172 L16,16 L0,16 L0,0 Z"></path>
 
           {cart && cart.code && (
-            <text
-              className="cart__code"
-              fill={colors[15]}
-              clipPath="url(#corner)"
-              x={2}
-              y={4}
-            >
-              {cart
-                .code
-                .split("\n")
-                .slice(0, 3)
-                .join("\n")
-              }
-            </text>
+            <g transform="translate(2, 4) scale(0.3)">
+              <Text raw stroke={colors[15]}>
+                {cart
+                  .code
+                  .split("\n")
+                  .slice(0, 3)
+                  .join("\n")
+                  .toUpperCase()
+                }
+              </Text>
+            </g>
           )}
 
           <g transform="translate(0, 12)">
@@ -64,20 +62,18 @@ export class Run extends React.Component {
             />
           </g>
 
-          <g transform="translate(0, 12)">
-            <text
-              className="cart__name2"
-              fill={colors[7]}
+          <g transform="translate(1.5, 13) scale(0.3)">
+            <Text
+              raw
+              stroke={colors[7]}
               clipPath="url(#corner)"
-              x={1.4}
-              y={2.4}
-            >{cart.name}</text>
+            >{cart.name.toUpperCase()}</Text>
           </g>
 
           <g
             transform="translate(-1.000000, -1.000000)"
-            stroke={colors[6]}
-            strokeWidth={0.4}
+            stroke={colors[13]}
+            strokeWidth={1}
             strokeLinecap="square"
             fill="none"
           >
@@ -107,10 +103,6 @@ export class Run extends React.Component {
 
           .cart__code {
             font: bold 2px Monaco, Courier monospace;
-          }
-
-          .cart__name2 {
-            font: bold 2px sans-serif;
           }
 
         `}</style>
