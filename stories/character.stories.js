@@ -18,7 +18,7 @@ const symbols = [
 
 const style ={
   backgroundColor: colors[7],
-  border: `8px solid ${colors[7]}`,
+  border: `8px solid ${colors[6]}`,
 }
 
 storiesOf("<Character ∕>", module)
@@ -77,6 +77,18 @@ storiesOf("<Character ∕>", module)
         {[...Array(16)].map((e, i) => (
           <svg style={style} width="38.4" height="64" viewBox="-0.5 0 3 4">
             <Character color={colors[i]}>{hex[i]}</Character>
+          </svg>
+        ))}
+      </Grid>
+    </Center>
+  ))
+
+  .add("scale(0.5)", () => (
+    <Center bg={colors[1]}>
+      <Grid n={6} w={(Math.min(window.innerHeight, window.innerWidth) / 6) - 32}>
+        {lowerCase.map(c => (
+          <svg style={style} width="38.4" height="64" viewBox="-0.5 0 3 4">
+            <Character scale={0.5}>{c}</Character>
           </svg>
         ))}
       </Grid>

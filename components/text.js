@@ -46,11 +46,13 @@ export default class Text extends React.PureComponent {
     const svgHeight = fontHeight
 
     const letters = string.split("").map((letter, i) => {
-      const translate = `translate(${i * 4}, 0)`
       return (
-        <Character x={x + (i * 4)} y={y} color={color}>
-          {letter}
-        </Character>
+        <Character
+          key={`${i}${letter}`}
+          x={x + (i * 4)}
+          y={y}
+          color={color}
+        >{letter}</Character>
       )
     })
 
