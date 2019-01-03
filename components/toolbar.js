@@ -2,44 +2,21 @@ import React from "react"
 import PropTypes from "prop-types"
 import colors from "../colors"
 
-/*
-        <Corner key={1} top left path="M2,6 L2,2 L6,2" />
-        <Corner key={1} bottom left path="M2,2 L2,6 L6,6" />
-        <Corner key={1} top right path="M2,2 L6,2 L6,6" />
-        <Corner key={1} bottom right path="M2,6 L6,6 L6,2" />
-const Corner = ({ path, key, top, left }) => (
-  <svg
-    key={key}
-    className="corner"
-    width={32}
-    height={32}
-    viewBox="0 0 8 8"
-    style={{
-      position: "absolute",
-      [top?"top":"bottom"]: 0,
-      [left?"left":"right"]: 0,
-    }}
-  >
-    <path
-      d={path}
-      stroke={colors[9]}
-      strokeWidth={0.3}
-      fill="none"
-    />
-  </svg>
-)
-*/
+const shadow = {
+  [colors[13]]: colors[2],
+  [colors[15]]: colors[9],
+}
 
-const BorderHack = () => (
+const BorderHack = ({ bg }) => (
   <div style={{
     position: "absolute",
     top: "0px",
     right: "0px",
     bottom: "0px",
     left: "0px",
-    border: `1px solid ${colors[9]}`,
+    border: `1px solid ${shadow[bg]}`,
     borderWidth: "0 0 1px 0",
-    borderTop: `2px solid ${colors[9]}`,
+    borderTop: `2px solid ${shadow[bg]}`,
     borderBottom: `1px solid rgba(171, 82, 54, 0.1);`,
     zIndex: 0,
   }}/>
@@ -72,8 +49,10 @@ class Toolbar extends React.PureComponent {
 
     return (
       <div className="toolbar">
-        <BorderHack />
-        {children}
+        <BorderHack bg={bg} />
+        <div style={{zIndex:1}}>
+          {children}
+        </div>
 
         <style jsx>{`
           .toolbar {
