@@ -6,6 +6,8 @@ import Document from "../components/document"
 import Bucket from "../components/bucket"
 import Grid from "../components/grid"
 import Cart from "../components/cart"
+import Toolbar from "../components/toolbar"
+import Button from "../components/button"
 import Header from "../components/header"
 import actions from "../actions"
 import colors from "../colors"
@@ -39,6 +41,13 @@ class Index extends React.Component {
           height={layout.bucketHeight}
           thickness={layout.bucketThickness}
         >
+
+         <Toolbar bg={colors[13]}>
+           <Button bg={colors[12]} onClick={() => {}}>
+             NEW
+           </Button>
+         </Toolbar>
+
           <div className="library">
             <Grid n={4} w={96}>
               {_.keys(carts).map((e, i) => (
