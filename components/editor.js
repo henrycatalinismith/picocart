@@ -46,6 +46,9 @@ export class Editor extends React.PureComponent {
           onBlur={this.onBlur}
           onChange={this.onChange}
           autoCapitalize="none"
+          autoCorrect="none"
+          autoComplete="none"
+          spellCheck={false}
         />
         <style jsx>{`
           .code {
