@@ -8,6 +8,11 @@ import String from "../components/string"
 
 const lowerCase = [...Array(26)].map((e,i)=>(i+10).toString(36))
 const upperCase = lowerCase.map(c => c.toUpperCase())
+const symbols = [
+  "!", `"`, "#", "$", "%", "&", "'", "(", ")", "*", "+",
+  "-", ",", ".", "/", ":", ";", "<", ">", "?", "^", "_",
+  "{", "}", "|", "~", "`", "[", "\\", "]", "@",
+]
 
 storiesOf("<String ∕>", module)
 
@@ -40,9 +45,25 @@ storiesOf("<String ∕>", module)
     </Center>
   ))
 
+  .add("symbols", () => (
+    <Center bg={colors[7]}>
+      <Grid n={6} w={(Math.min(window.innerHeight, window.innerWidth) / 6) - 32}>
+        {symbols.map(c => (
+          <String value={c} fontSize={64} />
+        ))}
+      </Grid>
+    </Center>
+  ))
+
   .add("whole word", () => (
     <Center bg={colors[7]}>
       <String value="picocart" fontSize={64} />
+    </Center>
+  ))
+
+  .add("teeny tiny text", () => (
+    <Center bg={colors[7]}>
+      <String value="the quick brown fox jumps over the lazy dog" fontSize={16} />
     </Center>
   ))
 
