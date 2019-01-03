@@ -18,7 +18,7 @@ storiesOf("<Text ∕>", module)
 
   .add("teeny tiny text", () => (
     <Center bg={colors[7]}>
-      <Text fontSize={64}>
+      <Text fontSize={16}>
         the quick brown fox jumps over the lazy dog
       </Text>
     </Center>
