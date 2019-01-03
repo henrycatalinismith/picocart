@@ -8,6 +8,7 @@ import Text from "../components/text"
 
 const lowerCase = [...Array(26)].map((e,i)=>(i+10).toString(36))
 const upperCase = lowerCase.map(c => c.toUpperCase())
+const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 const symbols = [
   "!", `"`, "#", "$", "%", "&", "'", "(", ")", "*", "+",
   "-", ",", ".", "/", ":", ";", "<", ">", "?", "^", "_",
@@ -50,6 +51,16 @@ storiesOf("<Text ∕>", module)
       <Grid n={6} w={(Math.min(window.innerHeight, window.innerWidth) / 6) - 32}>
         {symbols.map(c => (
           <Text fontSize={64}>{c}</Text>
+        ))}
+      </Grid>
+    </Center>
+  ))
+
+  .add("numbers", () => (
+    <Center bg={colors[7]}>
+      <Grid n={5} w={(Math.min(window.innerHeight, window.innerWidth) / 5) - 32}>
+        {numbers.map(n => (
+          <Text fontSize={64}>{n}</Text>
         ))}
       </Grid>
     </Center>

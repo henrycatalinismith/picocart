@@ -5,6 +5,50 @@ import colors from "../colors"
 const letterPaths = letter => {
   const letters = {
 
+    "0": [
+      "M0,0 L2,0 L2,4 L0,4 L0,1",
+    ],
+
+    "1": [
+      "M0,0 L1,0 L1,3",
+      "M0,4 L2,4",
+    ],
+
+    "2": [
+      "M0,0 L2,0 L2,2 L0,2 L0,4 L2,4",
+    ],
+
+    "3": [
+      "M0,0 L2,0 L2,4 L0,4",
+      "M1,2 L1,2",
+    ],
+
+    "4": [
+      "M0,0 L0,2 L1,2",
+      "M2,0 L2,4",
+    ],
+
+    "5": [
+      "M2,0 L0,0 L0,2 L2,2 L2,4 L0,4",
+    ],
+
+    "6": [
+      "M0,0 L0,4 L2,4 L2,2 L1,2",
+    ],
+
+    "7": [
+      "M0,0 L2,0 L2,4",
+    ],
+
+    "8": [
+      "M0,0 L2,0 L2,4 L0,4 L0,1",
+      "M1,2 L1,2",
+    ],
+
+    "9": [
+      "M1,2 L0,2 L0,0 L2,0 L2,4",
+    ],
+
     "!": [
       "M1,0 L1,2",
       "M1,4 L1,4",
@@ -469,22 +513,26 @@ export default class Text extends React.PureComponent {
   static propTypes = {
     fontSize: PropTypes.number,
     stroke: PropTypes.string,
-    children: PropTypes.string,
+    children: PropTypes.any,
+    raw: PropTypes.bool,
   };
 
   static defaultProps = {
     fontSize: 16,
     stroke: colors[0],
     children: "",
+    raw: false,
   };
 
   render() {
-    const { children, fontSize, stroke } = this.props
+    const { children, fontSize, stroke, raw } = this.props
+
+    const string = typeof children === "string" ? children : children.toString()
 
     const viewbox = [
       -0.5,
       -0,
-      (children.length * 3) + (Math.max(0, children.length - 1)),
+      (string.length * 3) + (Math.max(0, string.length - 1)),
       4
     ].join(" ")
 
@@ -494,34 +542,40 @@ export default class Text extends React.PureComponent {
     const fontHeight = fontSize
 
     const svgWidth = (
-      (fontWidth * children.length)
-      + (pixelSize * Math.max(0, children.length - 1))
+      (fontWidth * string.length)
+      + (pixelSize * Math.max(0, string.length - 1))
     )
     const svgHeight = fontHeight
 
+    const letters = string.split("").map((letter, i) => {
+      const paths = letterPaths(letter)
+      const translate = `translate(${i * 4}, 0)`
+      return (
+        <g
+          key={`${letter}${i}`}
+          fill="none"
+          stroke={stroke}
+          strokeLinecap="square"
+          transform={translate}
+        >
+          {paths.map((path, j) => (
+            <path
+              key={`${letter}${i}:${j}`}
+              d={path}
+            />
+          ))}
+        </g>
+      )
+    })
+
+    if (raw) {
+      return letters
+    }
+
     return (
-        <svg width={svgWidth} height={svgHeight} viewBox={viewbox}>
-          {children.split("").map((letter, i) => {
-            const paths = letterPaths(letter)
-            const translate = `translate(${i * 4}, 0)`
-            return (
-              <g
-                key={`${letter}${i}`}
-                fill="none"
-                stroke={stroke}
-                strokeLinecap="square"
-                transform={translate}
-              >
-                {paths.map((path, j) => (
-                  <path
-                    key={`${letter}${i}:${j}`}
-                    d={path}
-                  />
-                ))}
-              </g>
-            )
-          })}
-        </svg>
+      <svg width={svgWidth} height={svgHeight} viewBox={viewbox}>
+        {letters}
+      </svg>
     );
 
   }
