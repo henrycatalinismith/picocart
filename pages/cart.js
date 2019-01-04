@@ -66,6 +66,7 @@ class Cart extends React.Component {
     changeCode: code => dispatch(thunks.changeCode(code)),
     moveResizer: (x, y) => dispatch(thunks.moveResizer(x, y)),
     startEmulator: () => dispatch(thunks.startEmulator()),
+    exitEditor: () => dispatch(thunks.exitEditor()),
   });
 
   static propTypes = {
@@ -75,6 +76,7 @@ class Cart extends React.Component {
     changeCode: PropTypes.func,
     moveResizer: PropTypes.func,
     startEmulator: PropTypes.func,
+    exitEditor: PropTypes.func,
   }
 
   render() {
@@ -85,6 +87,7 @@ class Cart extends React.Component {
       changeCode,
       moveResizer,
       startEmulator,
+      exitEditor,
     } = this.props
 
     const server = !layout.viewportWidth && !layout.viewportHeight
@@ -115,6 +118,9 @@ class Cart extends React.Component {
             <Toolbar bg={colors[15]}>
               <Button bg={colors[8]} onClick={startEmulator}>
                 PLAY
+              </Button>
+              <Button bg={colors[12]} onClick={exitEditor}>
+                EXIT
               </Button>
             </Toolbar>
             <EditorWrapper>
