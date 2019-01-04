@@ -52,12 +52,14 @@ export class Editor extends React.PureComponent {
         />
         <style jsx>{`
           .code {
-            font-family: Monaco, Courier, monospace;
+            font-family: "PICO-8", Monaco, Courier, monospace;
             font-size: 18px;
             font-weight: bold;
             background-color: ${colors[7]};
             overflow: scroll;
             height: 100%;
+            line-height: 1.7rem;
+            color: ${colors[1]};
 
             ${height ? (`
               max-height: ${height}px;
