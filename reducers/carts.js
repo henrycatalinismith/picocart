@@ -14,6 +14,7 @@ const updateOne = (carts, action) => {
     [action.cart.id]: {
       ...carts[action.cart.id],
       ...action.cart,
+      updatedAt: new Date,
     }
   }
 }
