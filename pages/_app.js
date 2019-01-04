@@ -34,7 +34,9 @@ const context = {
 const serverInitialState = {
   carts: {},
   editor: {},
-  emulator: {},
+  emulator: {
+    status: "idle",
+  },
   layout: {
     mode: "document",
     orientation: "portrait",

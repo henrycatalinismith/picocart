@@ -42,6 +42,7 @@ const thunks = {
       screen.render()
 
       console.log("💘")
+      dispatch(actions.stopEmulator())
     }
   },
 }
