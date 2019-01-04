@@ -11,6 +11,12 @@ const thunks = {
       dispatch(actions.changeCode(cart))
     }
   },
+
+  exitEditor() {
+    return (dispatch, getState) => {
+      window.location.href = "/"
+    }
+  },
 }
 
 export default thunks

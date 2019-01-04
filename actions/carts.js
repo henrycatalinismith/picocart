@@ -7,7 +7,7 @@ export default createActions([
   loadCarts: carts => ({
     type: types.LOAD_CARTS,
     carts,
-  })
+  }),
 
 }))
 
