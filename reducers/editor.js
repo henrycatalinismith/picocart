@@ -9,6 +9,7 @@ const update = (editor, action) => {
 }
 
 export default createReducer({}, {
+  [actions.EDIT_CART]: update,
   [actions.CHANGE_CODE]: update,
 })
 

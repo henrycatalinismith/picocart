@@ -33,8 +33,9 @@ const thunks = {
 
       dispatch(actions.startEmulator())
 
-      const { editor } = getState()
-      const ast = parse(editor.code)
+      const { carts, editor } = getState()
+      const cart = carts[editor.cartId]
+      const ast = parse(cart.code)
       const code = compile(ast)
 
       await run(code, screen.memory)

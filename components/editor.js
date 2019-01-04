@@ -35,7 +35,7 @@ export class Editor extends React.PureComponent {
 
     const html = this.state.code
     const ascii = this.props.code
-    const code = html || ascii.split("\n").join("<br>")
+    const code = (html || ascii || "").split("\n").join("<br>")
 
     return (
       <>
