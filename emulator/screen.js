@@ -38,8 +38,8 @@ const pxc = (x, y, memory) => {
 export default class Screen {
   constructor(canvas) {
     this.canvas = canvas;
-    this.canvas.width = this.canvas.offsetWidth;
-    this.canvas.height = this.canvas.offsetHeight;
+    this.canvas.width = 128;
+    this.canvas.height = 128;
     this.memory = new Uint8Array(0x8000);
     this.running = false;
     this.ctx = this.canvas.getContext('2d');
@@ -73,6 +73,7 @@ export default class Screen {
       this.ctx.beginPath()
       this.ctx.fillStyle = colors[left];
       this.ctx.strokeStyle = colors[left];
+      //this.ctx.lineWidth = 1;
       this.ctx.rect(
         x * this.px,
         y * this.px,
@@ -80,7 +81,7 @@ export default class Screen {
         Math.floor(this.px)
       );
       this.ctx.fill()
-      this.ctx.stroke()
+      //this.ctx.stroke()
       this.ctx.closePath()
 
       this.ctx.beginPath()
@@ -93,7 +94,7 @@ export default class Screen {
         Math.floor(this.px)
       );
       this.ctx.fill()
-      this.ctx.stroke()
+      //this.ctx.stroke()
       this.ctx.closePath()
     }
 
