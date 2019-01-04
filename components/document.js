@@ -3,6 +3,19 @@ import PropTypes from "prop-types"
 import NextHead from "next/head"
 import colors from "../colors"
 
+const Font = () => (
+  <style key="style" global jsx>{`
+    @font-face {
+      font-family: "PICO-8";
+      src: url("/pico8.woff2") format("woff2"),
+           url("/pico8.woff")   format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  `}</style>
+)
+
+
 export default class Document extends React.PureComponent {
   static propTypes = {
     children: PropTypes.any,
@@ -32,6 +45,7 @@ export default class Document extends React.PureComponent {
             background-color: ${colors[7]};
           }
         `}</style>
+        <Font />
         {children}
       </>
     )
