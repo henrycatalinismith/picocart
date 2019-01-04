@@ -36,66 +36,60 @@ const middleware = createMiddleware((before, after) => ({
     //layout.bucketWidth = bucket.offsetWidth
     //layout.bucketHeight = bucket.offsetHeight
 
-    switch (window.location.pathname) {
-      case "/":
-        break;
+    if (window.location.pathname.startsWith("/cart")) {
+      const stage = document.querySelector(".stage")
+      const screen = document.querySelector(".screen__canvas")
+      const resizer = document.querySelector(".resizer")
+      const toolbox = document.querySelector(".toolbox")
 
-      case "/cart":
-        const stage = document.querySelector(".stage")
-        const screen = document.querySelector(".screen__canvas")
-        const resizer = document.querySelector(".resizer")
-        const toolbox = document.querySelector(".toolbox")
+      layout.stageWidth = stage.offsetWidth
+      layout.stageHeight = stage.offsetHeight
 
-        layout.stageWidth = stage.offsetWidth
-        layout.stageHeight = stage.offsetHeight
+      if (layout.orientation === "landscape") {
+        layout.stageHeight = (
+          layout.viewportHeight
+          - layout.headerHeight
+        )
+      }
 
-        if (layout.orientation === "landscape") {
-          layout.stageHeight = (
-            layout.viewportHeight
-            - layout.headerHeight
-          )
-        }
+      layout.screenSize = Math.min(
+        layout.stageWidth,
+        layout.stageHeight
+      )
 
+      layout.resizerWidth = resizer.offsetWidth
+      layout.resizerHeight = resizer.offsetHeight
+      layout.toolboxWidth = toolbox.offsetWidth
+      layout.toolboxHeight = toolbox.offsetHeight
+
+      const isLandscape = layout.orientation === "landscape"
+      const looksPortrait = (
+        layout.toolboxWidth === layout.viewportWidth
+      )
+      if (isLandscape && looksPortrait) {
+        layout.resizerWidth = 16
+        layout.resizerHeight = (
+          layout.viewportHeight
+          - layout.headerHeight
+        )
+        layout.toolboxWidth = 200
+        layout.toolboxHeight = (
+          layout.viewportHeight
+          - layout.headerHeight
+        )
+        layout.stageWidth = (
+          layout.viewportWidth
+          - layout.toolboxWidth
+        )
+        layout.stageHeight = (
+          layout.viewportHeight
+          - layout.headerHeight
+        )
         layout.screenSize = Math.min(
           layout.stageWidth,
           layout.stageHeight
         )
-
-        layout.resizerWidth = resizer.offsetWidth
-        layout.resizerHeight = resizer.offsetHeight
-        layout.toolboxWidth = toolbox.offsetWidth
-        layout.toolboxHeight = toolbox.offsetHeight
-
-        const isLandscape = layout.orientation === "landscape"
-        const looksPortrait = (
-          layout.toolboxWidth === layout.viewportWidth
-        )
-        if (isLandscape && looksPortrait) {
-          layout.resizerWidth = 16
-          layout.resizerHeight = (
-            layout.viewportHeight
-            - layout.headerHeight
-          )
-          layout.toolboxWidth = 200
-          layout.toolboxHeight = (
-            layout.viewportHeight
-            - layout.headerHeight
-          )
-          layout.stageWidth = (
-            layout.viewportWidth
-            - layout.toolboxWidth
-          )
-          layout.stageHeight = (
-            layout.viewportHeight
-            - layout.headerHeight
-          )
-          layout.screenSize = Math.min(
-            layout.stageWidth,
-            layout.stageHeight
-          )
-        }
-
-        break;
+      }
     }
 
     action.layout = layout
@@ -109,7 +103,7 @@ const middleware = createMiddleware((before, after) => ({
     const { headerHeight } = state.layout
     const headerWidth = viewportWidth
 
-    if (window.location.pathname === "/cart") {
+    if (window.location.pathname.startsWith("/cart")) {
       let {
         screenSize,
         stageWidth,

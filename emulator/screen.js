@@ -70,11 +70,31 @@ export default class Screen {
       const left = this.memory[addr] & 0x0f;
       const right = this.memory[addr] >> 4;
 
+      this.ctx.beginPath()
       this.ctx.fillStyle = colors[left];
-      this.ctx.fillRect(x * this.px, y * this.px, this.px, this.px);
+      this.ctx.strokeStyle = colors[left];
+      this.ctx.rect(
+        x * this.px,
+        y * this.px,
+        Math.floor(this.px),
+        Math.floor(this.px)
+      );
+      this.ctx.fill()
+      this.ctx.stroke()
+      this.ctx.closePath()
 
+      this.ctx.beginPath()
       this.ctx.fillStyle = colors[right];
-      this.ctx.fillRect((x+1) * this.px, y * this.px, this.px, this.px);
+      this.ctx.strokeStyle = colors[right];
+      this.ctx.rect(
+        (x+1) * this.px,
+        y * this.px,
+        Math.floor(this.px),
+        Math.floor(this.px)
+      );
+      this.ctx.fill()
+      this.ctx.stroke()
+      this.ctx.closePath()
     }
 
     if (this.running) {
