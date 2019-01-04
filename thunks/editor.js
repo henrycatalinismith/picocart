@@ -1,13 +1,16 @@
 import actions from "../actions"
 
 const thunks = {
-  /*
-  startEmulator() {
+  changeCode(code) {
     return (dispatch, getState) => {
-      dispatch(actions.startEmulator())
+      const { editor } = getState()
+      const cart = {
+        id: editor.cartId,
+        code,
+      }
+      dispatch(actions.changeCode(cart))
     }
   },
-  */
 }
 
 export default thunks

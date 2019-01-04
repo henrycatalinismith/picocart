@@ -35,6 +35,11 @@ async function main() {
     res.send(`lol ${users.length}`)
   })
 
+  server.get('/cart/:id', (req, res) => {
+    const mergedQuery = Object.assign({}, req.query, req.params);
+    return app.render(req, res, '/cart', mergedQuery);
+  });
+
   server.get("*", (req, res) => {
     return handle(req, res)
   })

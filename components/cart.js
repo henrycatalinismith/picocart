@@ -30,7 +30,7 @@ export class Run extends React.Component {
     const { cart, bg, size } = this.props
 
     return (
-      <a className="cart" href="/cart">
+      <a className="cart" href={`/cart/${cart.id}`}>
         <svg className="cart__border" viewBox="0 0 16 16">
           <defs>
             <clipPath id="corner" transform="translate(-1.000000, -1.000000)">

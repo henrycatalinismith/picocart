@@ -52,21 +52,24 @@ const ViewportHack = () => (
 
 class Cart extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
-    return {}
+    store.dispatch(actions.editCart(query.id))
+    return { id: query.id }
   }
 
   static mapStateToProps = state => ({
+    cart: state.carts[state.editor.cartId],
     editor: state.editor,
     layout: state.layout,
   })
 
   static mapDispatchToProps = (dispatch, props) => ({
-    changeCode: code => dispatch(actions.changeCode(code)),
+    changeCode: code => dispatch(thunks.changeCode(code)),
     moveResizer: (x, y) => dispatch(thunks.moveResizer(x, y)),
     startEmulator: () => dispatch(thunks.startEmulator()),
   });
 
   static propTypes = {
+    cart: PropTypes.object,
     editor: PropTypes.object,
     layout: PropTypes.object,
     changeCode: PropTypes.func,
@@ -74,19 +77,15 @@ class Cart extends React.Component {
     startEmulator: PropTypes.func,
   }
 
-  componentDidMount() {
-    //document.addEventListener("touchmove", e => e.preventDefault())
-  }
-
   render() {
     const {
+      cart,
       editor,
       layout,
       changeCode,
       moveResizer,
       startEmulator,
     } = this.props
-
 
     const server = !layout.viewportWidth && !layout.viewportHeight
 
@@ -124,7 +123,7 @@ class Cart extends React.Component {
                 height={layout.editorHeight}
                 server={server}
                 onChange={changeCode}
-                code={editor.code}
+                code={cart && cart.code}
               />
             </EditorWrapper>
           </Toolbox>
