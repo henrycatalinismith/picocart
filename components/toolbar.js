@@ -49,10 +49,7 @@ class Toolbar extends React.PureComponent {
 
     return (
       <div className="toolbar">
-        <BorderHack bg={bg} />
-        <div style={{zIndex:1}}>
-          {children}
-        </div>
+        {children}
 
         <style jsx>{`
           .toolbar {
@@ -69,6 +66,9 @@ class Toolbar extends React.PureComponent {
               : "100%"
             } - 0px);
             z-index: 2;
+            box-sizing: border-box;
+            border-top: 2px solid ${shadow[bg]};
+            border-left: 2px solid ${shadow[bg]};
           }
         `}</style>
       </div>
