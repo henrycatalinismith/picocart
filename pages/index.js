@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import _ from "lodash"
 import { connect } from "react-redux"
 import Link from "next/link"
+import uuid from "uuid"
 import Document from "../components/document"
 import Bucket from "../components/bucket"
 import Input from "../components/input"
@@ -24,19 +25,38 @@ class Index extends React.Component {
   })
 
   static mapDispatchToProps = (dispatch, props) => ({
+    createCart: (id, name) => dispatch(actions.createCart({ id, name })),
+    updateCart: (id, name) => dispatch(actions.updateCart({ id, name })),
   });
 
   static propTypes = {
     carts: PropTypes.object,
     layout: PropTypes.object,
+    createCart: PropTypes.func,
+    updateCart: PropTypes.func,
   }
 
   onNewClick = () => {
-    this.setState({ toolbarMode: "new cart" })
+    const id = uuid()
+    const name = "untitled"
+    this.setState({
+      toolbarMode: "new cart",
+      id,
+      name,
+    })
+    this.props.createCart(id, name)
+  }
+
+  onChangeName = name => {
+    console.log("lol")
+    this.props.updateCart(this.state.id, name)
   }
 
   onOkClick = () => {
-    this.setState({ toolbarMode: "default" })
+    this.setState({
+      toolbarMode: "default",
+      id: undefined,
+    })
   }
 
   constructor(props) {
@@ -68,7 +88,12 @@ class Index extends React.Component {
              ),
              "new cart": (
                <div className="name-picker" style={{ display: "flex", maxWidth: "320px" }}>
-                 <Input value="name" flex={4} focusOnMount />
+                 <Input
+                   value={this.state.name}
+                   flex={4}
+                   focusOnMount
+                   onChange={this.onChangeName}
+                 />
                  <div style={{ minWidth: "4px" }} />
                  <Button bg={colors[12]} onClick={this.onOkClick}>
                    OK

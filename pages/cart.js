@@ -129,7 +129,7 @@ class Cart extends React.Component {
                 height={layout.editorHeight}
                 server={server}
                 onChange={changeCode}
-                code={cart && cart.code}
+                code={cart && cart.lua}
               />
             </EditorWrapper>
           </Toolbox>

@@ -40,11 +40,11 @@ export class Run extends React.Component {
 
           <path id="Case" fill={bg} d="M0,0 C0,0 14.1624756,4.84345139e-16 14.0817871,0 C14.0010986,-4.84345139e-16 14.0130005,1.99951172 14.0130005,1.99951172 L16,1.99951172 L16,16 L0,16 L0,0 Z"></path>
 
-          {cart && cart.code && (
+          {cart && cart.lua && (
             <g clipPath="url(#corner)">
               <Text raw color={colors[15]} x={4} y={4}>
                 {cart
-                  .code
+                  .lua
                   .split("\n")
                   .slice(0, 3)
                   .join("\n")
