@@ -71,23 +71,27 @@ class Button extends React.PureComponent {
 
     switch (n) {
       case 1:
-        offset.x = 12
+        offset.x = 15
         break
 
       case 2:
-        offset.x = 10
+        offset.x = 13
         break
 
       case 3:
-        offset.x = 8
+        offset.x = 11
         break
 
       case 4:
-        offset.x = 6
+        offset.x = 9
         break
 
       case 5:
-        offset.x = 4
+        offset.x = 7
+        break
+
+      case 6:
+        offset.x = 5
         break
     }
 
@@ -96,7 +100,7 @@ class Button extends React.PureComponent {
     const viewBox = [
       0,
       0,
-      26,
+      32.5,
       13,
     ].join(" ")
 
@@ -145,13 +149,13 @@ class Button extends React.PureComponent {
         <svg viewBox={viewBox} focusable="false">
 
           <g className="border">
-            {border([1, 1], [25, 1])}
-            {border([1, 12], [25, 12])}
+            {border([1, 1], [31.5, 1])}
+            {border([1, 12], [31.5, 12])}
             {border([0, 1], [0, 11])}
-            {border([26, 1], [26, 11])}
+            {border([32.5, 1], [32.5, 11])}
           </g>
 
-          <rect fill={bg} x={1} y={1 + yo} width={24} height={10} />
+          <rect fill={bg} x={1} y={1 + yo} width={30.5} height={10} />
 
           <g className="label">
             {letters}
@@ -160,8 +164,8 @@ class Button extends React.PureComponent {
           {!pushed && (
             <g className="shadow">
               <path d="M0,11 L0,12" stroke={colors[6]} strokeWidth={2} />
-              <path d="M26,11 L26,12" stroke={colors[6]} strokeWidth={2} />
-              <path d="M1,13 L25,13" stroke={colors[6]} strokeWidth={2} />
+              <path d="M32.5,11 L32.5,12" stroke={colors[6]} strokeWidth={2} />
+              <path d="M1,13 L31.5,13" stroke={colors[6]} strokeWidth={2} />
             </g>
           )}
 
@@ -173,7 +177,7 @@ class Button extends React.PureComponent {
             margin: 0;
             padding: 0;
             height: 32px;
-            width: 64px;
+            width: 80px;
             cursor: pointer;
           }
 

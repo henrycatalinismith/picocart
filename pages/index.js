@@ -82,9 +82,17 @@ class Index extends React.Component {
          <Toolbar bg={colors[13]}>
            {({
              "default": (
-               <Button bg={colors[12]} onClick={this.onNewClick}>
-                 NEW
-               </Button>
+               <>
+                 <Button bg={colors[12]} onClick={this.onNewClick}>
+                   NEW
+                 </Button>
+                 <Button bg={colors[11]} onClick={() => {}}>
+                   RENAME
+                 </Button>
+                 <Button bg={colors[8]} onClick={() => {}}>
+                   DELETE
+                 </Button>
+               </>
              ),
              "new cart": (
                <div className="name-picker" style={{ display: "flex", maxWidth: "320px" }}>
