@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import Link from "next/link"
 import Document from "../components/document"
 import Bucket from "../components/bucket"
+import Input from "../components/input"
 import Grid from "../components/grid"
 import Cart from "../components/cart"
 import Toolbar from "../components/toolbar"
@@ -30,8 +31,24 @@ class Index extends React.Component {
     layout: PropTypes.object,
   }
 
+  onNewClick = () => {
+    this.setState({ toolbarMode: "new cart" })
+  }
+
+  onOkClick = () => {
+    this.setState({ toolbarMode: "default" })
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      toolbarMode: "default",
+    }
+  }
+
   render() {
     const { carts, layout } = this.props
+    const { toolbarMode } = this.state
 
     return (
       <Document title="picocart">
@@ -43,9 +60,22 @@ class Index extends React.Component {
         >
 
          <Toolbar bg={colors[13]}>
-           <Button bg={colors[12]} onClick={() => {}}>
-             NEW
-           </Button>
+           {({
+             "default": (
+               <Button bg={colors[12]} onClick={this.onNewClick}>
+                 NEW
+               </Button>
+             ),
+             "new cart": (
+               <div className="name-picker" style={{ display: "flex", maxWidth: "320px" }}>
+                 <Input value="name" flex={4} focusOnMount />
+                 <div style={{ minWidth: "4px" }} />
+                 <Button bg={colors[12]} onClick={this.onOkClick}>
+                   OK
+                 </Button>
+               </div>
+             )
+           })[toolbarMode]}
          </Toolbar>
 
           <div className="library">

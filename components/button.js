@@ -19,7 +19,7 @@ class Button extends React.PureComponent {
   onClick = event => {
     this.props.onClick()
     this.setState({ pushed: true })
-    setTimeout(() => this.setState({ pushed: false }), 100)
+    this.timeout = setTimeout(() => this.setState({ pushed: false }), 100)
   }
 
   onMouseDown = event => {
@@ -48,6 +48,12 @@ class Button extends React.PureComponent {
     this.state = {
       pushed: false,
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout)
+    document.removeEventListener("mouseup", this.onMouseUp)
+    document.removeEventListener("touchmove", this.onTouchMove);
   }
 
   render() {

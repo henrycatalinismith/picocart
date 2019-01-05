@@ -1,8 +1,26 @@
 {
-  function loc() { return {start: { line: line(), column: column() } } }
-  function range() { return [offset(), offset() + text().length]; }
-  function listHelper(a,b,c) { return a == null ? [] : [a].concat(b.map(function(b) { return b[c || 2]; })); }
-  function opt(name, def) { return name in options ? options[name] : def }
+
+  const loc = () => ({
+    start: {
+      line: line(),
+      column: column(),
+    }
+  })
+
+  const range = () => [
+    offset(),
+    offset() + text().length,
+  ]
+
+  const list = (a, b, c) => (
+    a === null
+      ? []
+      : [a].concat(b.map(b => b[c || 2]))
+  )
+
+  const opt = (name, def) => name in options
+    ? options[name]
+    : def
 
   function expandMultiStatements(list) {
     var out = [];
