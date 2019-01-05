@@ -71,6 +71,10 @@ const middleware = createMiddleware((before, after) => ({
     db.carts.put(cart)
   },
 
+  [after(actions.DELETE_CART)]: (store, action) => {
+    db.carts.delete(action.cart.id)
+  },
+
   [after(actions.CHANGE_CODE)]: (store, action) => {
     const { carts } = store.getState()
     const cart = carts[action.cart.id]

@@ -20,11 +20,11 @@ const RegularBorder = () => (
   </g>
 )
 
-const BuzzBorder = () => (
+const BuzzBorder = ({ red }) => (
   <g
     transform="translate(-1.000000, -1.000000)"
-    stroke={colors[13]}
-    strokeWidth={1}
+    stroke={red ? colors[8] : colors[13]}
+    strokeWidth={red ? 1 : 0.5}
     strokeLinecap="square"
     fill="none"
   >
@@ -35,10 +35,8 @@ const BuzzBorder = () => (
 
     <style jsx>{`
       .cart__borderLine {
-        stroke: ${colors[13]};
-        stroke-width: 0.5;
         stroke-dasharray: 2;
-        animation: buzz 1s linear forwards infinite;
+        animation: buzz ${red ? "0.8" : "1" }s linear forwards infinite;
       }
 
       @keyframes buzz {
@@ -55,8 +53,9 @@ export class Run extends React.Component {
     cart: {},
     bg: colors[0],
     size: 64,
-    onClick: () => {},
+    onClick: undefined,
     buzz: false,
+    red: false,
   };
 
   static propTypes = {
@@ -65,19 +64,22 @@ export class Run extends React.Component {
     size: PropTypes.number,
     onClick: PropTypes.func,
     buzz: PropTypes.bool,
+    red: PropTypes.bool,
   };
 
-  handleClick = event => {
-    event.preventDefault()
-    this.props.onClick()
-    return false
+  onClick = event => {
+    if (this.props.onClick) {
+      event.preventDefault()
+      this.props.onClick(this.props.cart)
+      return false
+    }
   }
 
   render() {
-    const { cart, bg, size, buzz } = this.props
+    const { cart, bg, size, buzz, red } = this.props
 
     return (
-      <a className="cart" href={`/cart/${cart.id}`}>
+      <a className="cart" href={`/cart/${cart.id}`} onClick={this.onClick}>
         <svg className="cart__border" viewBox="0 0 16 16">
           <defs>
             <clipPath id="corner" transform="translate(-1.000000, -1.000000)">
@@ -101,7 +103,7 @@ export class Run extends React.Component {
             </g>
           )}
 
-          {buzz ? <BuzzBorder /> : <RegularBorder />}
+          {buzz ? <BuzzBorder red={red} /> : <RegularBorder />}
 
           <g transform="translate(0, 12)">
             <rect

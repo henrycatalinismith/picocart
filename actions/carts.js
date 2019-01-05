@@ -4,6 +4,7 @@ export default createActions([
   "LOAD_CARTS",
   "CREATE_CART",
   "UPDATE_CART",
+  "DELETE_CART",
 ], types => ({
 
   loadCarts: carts => ({
@@ -26,6 +27,11 @@ export default createActions([
       updatedAt: new Date,
       ...cart,
     },
+  }),
+
+  deleteCart: id => ({
+    type: types.DELETE_CART,
+    cart: { id },
   }),
 
 }))
