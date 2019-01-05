@@ -27,10 +27,19 @@ const updateOne = (carts, action) => {
   }
 }
 
+const deleteOne = (carts, action) => {
+  const {
+    [action.cart.id]: deletedCart,
+    ...remainingCarts
+  } = carts
+  return remainingCarts
+}
+
 export default createReducer({}, {
   [actions.PAGE_LOAD]: updateAll,
   [actions.LOAD_CARTS]: updateAll,
   [actions.CHANGE_CODE]: updateOne,
   [actions.CREATE_CART]: insertOne,
   [actions.UPDATE_CART]: updateOne,
+  [actions.DELETE_CART]: deleteOne,
 })

@@ -28,6 +28,7 @@ class Index extends React.Component {
   static mapDispatchToProps = (dispatch, props) => ({
     createCart: (id, name) => dispatch(actions.createCart({ id, name })),
     updateCart: (id, name) => dispatch(actions.updateCart({ id, name })),
+    deleteCart: id => dispatch(actions.deleteCart(id)),
   });
 
   static propTypes = {
@@ -35,13 +36,14 @@ class Index extends React.Component {
     layout: PropTypes.object,
     createCart: PropTypes.func,
     updateCart: PropTypes.func,
+    deleteCart: PropTypes.func,
   }
 
   onClickNew = () => {
     const id = uuid()
     const name = "untitled"
     this.setState({
-      toolbarMode: "new cart",
+      toolbarMode: "rename-cart",
       id,
       name,
     })
@@ -55,10 +57,13 @@ class Index extends React.Component {
   onClickOkay = () => this.setState({
     toolbarMode: "default",
     id: undefined,
+    name: undefined,
   })
 
   onCancelDelete = () => this.setState({
     toolbarMode: "default",
+    id: undefined,
+    name: undefined,
   })
 
   onCancelRename = () => this.setState({
@@ -71,6 +76,27 @@ class Index extends React.Component {
 
   onClickRename = () => this.setState({
     toolbarMode: "rename-picker",
+  })
+
+  onConfirmDelete = () => {
+    this.props.deleteCart(this.state.id)
+    this.setState({
+      toolbarMode: "default",
+      id: undefined,
+      name: undefined,
+    })
+  }
+
+  onTargetDelete = cart => this.setState({
+    toolbarMode: "delete-cart",
+    id: cart.id,
+    name: cart.name,
+  })
+
+  onTargetRename = cart => this.setState({
+    toolbarMode: "rename-cart",
+    id: cart.id,
+    name: cart.name,
   })
 
   constructor(props) {
@@ -109,7 +135,7 @@ class Index extends React.Component {
                </>
              ),
 
-             "new cart": (
+             "rename-cart": (
                <div className="name-picker" style={{ display: "flex", maxWidth: "320px" }}>
                  <Input
                    value={this.state.name}
@@ -137,13 +163,29 @@ class Index extends React.Component {
              ),
 
              "delete-picker": (
-               <div className="rename-picker" style={{ display: "flex", maxWidth: "320px", alignItems: "center" }}>
+               <div className="delete-picker" style={{ display: "flex", maxWidth: "320px", alignItems: "center" }}>
                  <Text color={colors[7]}>
                   DELETE WHAT?
                  </Text>
                  <div style={{ minWidth: "16px" }} />
                  <Button bg={colors[8]} onClick={this.onCancelDelete}>
                    CANCEL
+                 </Button>
+               </div>
+             ),
+
+             "delete-cart": (
+               <div className="delete-cart" style={{ display: "flex", maxWidth: "320px", alignItems: "center" }}>
+                 <Text color={colors[7]}>
+                  DELETE?
+                 </Text>
+                 <div style={{ minWidth: "16px" }} />
+                 <Button bg={colors[8]} onClick={this.onConfirmDelete}>
+                   YES
+                 </Button>
+                 <div style={{ minWidth: "16px" }} />
+                 <Button bg={colors[6]} onClick={this.onCancelDelete}>
+                   NO
                  </Button>
                </div>
              ),
@@ -159,10 +201,22 @@ class Index extends React.Component {
                   bg={colors[5]}
                   cart={carts[e]}
                   size={96}
-                  buzz={[
-                    "rename-picker",
-                    "delete-picker",
-                  ].includes(toolbarMode)}
+                  buzz={(
+                    ["rename-picker", "delete-picker"].includes(toolbarMode)
+                     || (
+                       toolbarMode === "delete-cart"
+                       && carts[e].id == this.state.id
+                     )
+                  )}
+                  red={(
+                    toolbarMode === "delete-cart"
+                    && carts[e].id == this.state.id
+                  )}
+                  onClick={({
+                    "default": undefined,
+                    "rename-picker": this.onTargetRename,
+                    "delete-picker": this.onTargetDelete,
+                  })[toolbarMode]}
                 />
               ))}
             </Grid>
