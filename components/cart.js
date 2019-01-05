@@ -5,12 +5,58 @@ import Text from "./text"
 
 const first = colors.slice(0, 7)
 
+const RegularBorder = () => (
+  <g
+    transform="translate(-1.000000, -1.000000)"
+    stroke={colors[13]}
+    strokeWidth={1}
+    strokeLinecap="square"
+    fill="none"
+  >
+    <path
+      className="cart__borderLine"
+      d="M1.5,1.5 L14.5,1.5 L14.5,3.5 L16.5,3.5 L16.5,16.5 L1.5,16.5 L1.5,1.5"
+    />
+  </g>
+)
+
+const BuzzBorder = () => (
+  <g
+    transform="translate(-1.000000, -1.000000)"
+    stroke={colors[13]}
+    strokeWidth={1}
+    strokeLinecap="square"
+    fill="none"
+  >
+    <path
+      className="cart__borderLine"
+      d="M1.5,1.5 L14.5,1.5 L14.5,3.5 L16.5,3.5 L16.5,16.5 L1.5,16.5 L1.5,1.5"
+    />
+
+    <style jsx>{`
+      .cart__borderLine {
+        stroke: ${colors[13]};
+        stroke-width: 0.5;
+        stroke-dasharray: 2;
+        animation: buzz 1s linear forwards infinite;
+      }
+
+      @keyframes buzz {
+        from { stroke-dashoffset: 1; }
+        to { stroke-dashoffset: 9; }
+      }
+    `}</style>
+
+  </g>
+)
+
 export class Run extends React.Component {
   static defaultProps = {
     cart: {},
     bg: colors[0],
     size: 64,
     onClick: () => {},
+    buzz: false,
   };
 
   static propTypes = {
@@ -18,6 +64,7 @@ export class Run extends React.Component {
     bg: PropTypes.string,
     size: PropTypes.number,
     onClick: PropTypes.func,
+    buzz: PropTypes.bool,
   };
 
   handleClick = event => {
@@ -27,7 +74,7 @@ export class Run extends React.Component {
   }
 
   render() {
-    const { cart, bg, size } = this.props
+    const { cart, bg, size, buzz } = this.props
 
     return (
       <a className="cart" href={`/cart/${cart.id}`}>
@@ -54,6 +101,8 @@ export class Run extends React.Component {
             </g>
           )}
 
+          {buzz ? <BuzzBorder /> : <RegularBorder />}
+
           <g transform="translate(0, 12)">
             <rect
               width={16}
@@ -67,19 +116,6 @@ export class Run extends React.Component {
               raw
               color={colors[7]}
             >{(cart.name || "").toUpperCase()}</Text>
-          </g>
-
-          <g
-            transform="translate(-1.000000, -1.000000)"
-            stroke={colors[13]}
-            strokeWidth={1}
-            strokeLinecap="square"
-            fill="none"
-          >
-            <path
-              className="cart__borderLine"
-              d="M1.5,1.5 L14.5,1.5 L14.5,3.5 L16.5,3.5 L16.5,16.5 L1.5,16.5 L1.5,1.5"
-            />
           </g>
 
         </svg>

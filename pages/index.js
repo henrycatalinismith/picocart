@@ -8,6 +8,7 @@ import Bucket from "../components/bucket"
 import Input from "../components/input"
 import Grid from "../components/grid"
 import Cart from "../components/cart"
+import Text from "../components/text"
 import Toolbar from "../components/toolbar"
 import Button from "../components/button"
 import Header from "../components/header"
@@ -36,7 +37,7 @@ class Index extends React.Component {
     updateCart: PropTypes.func,
   }
 
-  onNewClick = () => {
+  onClickNew = () => {
     const id = uuid()
     const name = "untitled"
     this.setState({
@@ -48,16 +49,29 @@ class Index extends React.Component {
   }
 
   onChangeName = name => {
-    console.log("lol")
     this.props.updateCart(this.state.id, name)
   }
 
-  onOkClick = () => {
-    this.setState({
-      toolbarMode: "default",
-      id: undefined,
-    })
-  }
+  onClickOkay = () => this.setState({
+    toolbarMode: "default",
+    id: undefined,
+  })
+
+  onCancelDelete = () => this.setState({
+    toolbarMode: "default",
+  })
+
+  onCancelRename = () => this.setState({
+    toolbarMode: "default",
+  })
+
+  onClickDelete = () => this.setState({
+    toolbarMode: "delete-picker",
+  })
+
+  onClickRename = () => this.setState({
+    toolbarMode: "rename-picker",
+  })
 
   constructor(props) {
     super(props)
@@ -83,17 +97,18 @@ class Index extends React.Component {
            {({
              "default": (
                <>
-                 <Button bg={colors[12]} onClick={this.onNewClick}>
+                 <Button bg={colors[12]} onClick={this.onClickNew}>
                    NEW
                  </Button>
-                 <Button bg={colors[11]} onClick={() => {}}>
+                 <Button bg={colors[11]} onClick={this.onClickRename}>
                    RENAME
                  </Button>
-                 <Button bg={colors[8]} onClick={() => {}}>
+                 <Button bg={colors[8]} onClick={this.onClickDelete}>
                    DELETE
                  </Button>
                </>
              ),
+
              "new cart": (
                <div className="name-picker" style={{ display: "flex", maxWidth: "320px" }}>
                  <Input
@@ -103,11 +118,36 @@ class Index extends React.Component {
                    onChange={this.onChangeName}
                  />
                  <div style={{ minWidth: "4px" }} />
-                 <Button bg={colors[12]} onClick={this.onOkClick}>
+                 <Button bg={colors[12]} onClick={this.onClickOkay}>
                    OK
                  </Button>
                </div>
-             )
+             ),
+
+             "rename-picker": (
+               <div className="rename-picker" style={{ display: "flex", maxWidth: "320px", alignItems: "center" }}>
+                 <Text color={colors[7]}>
+                   RENAME WHAT?
+                 </Text>
+                 <div style={{ minWidth: "16px" }} />
+                 <Button bg={colors[8]} onClick={this.onCancelRename}>
+                   CANCEL
+                 </Button>
+               </div>
+             ),
+
+             "delete-picker": (
+               <div className="rename-picker" style={{ display: "flex", maxWidth: "320px", alignItems: "center" }}>
+                 <Text color={colors[7]}>
+                  DELETE WHAT?
+                 </Text>
+                 <div style={{ minWidth: "16px" }} />
+                 <Button bg={colors[8]} onClick={this.onCancelDelete}>
+                   CANCEL
+                 </Button>
+               </div>
+             ),
+
            })[toolbarMode]}
          </Toolbar>
 
@@ -119,6 +159,10 @@ class Index extends React.Component {
                   bg={colors[5]}
                   cart={carts[e]}
                   size={96}
+                  buzz={[
+                    "rename-picker",
+                    "delete-picker",
+                  ].includes(toolbarMode)}
                 />
               ))}
             </Grid>

@@ -28,3 +28,12 @@ storiesOf("<Cart ∕>", module)
       </Grid>
     </Center>
   ))
+
+  .add("buzz", () => (
+    <Center bg={colors[7]}>
+      <Cart bg={colors[5]} buzz size={128} cart={{
+        name: "example",
+        code: "line(0, 0, 128, 128, 12)\n",
+      }} />
+    </Center>
+  ))
