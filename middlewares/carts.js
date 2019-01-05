@@ -12,6 +12,14 @@ const middleware = createMiddleware((before, after) => ({
       carts: "++id,createdAt,updatedAt,name,code",
     })
 
+    db.version(2).stores({
+      carts: "++id,createdAt,updatedAt,name,lua,js,png",
+    }).upgrade(tx => {
+      return tx.carts.toCollection().modify(cart => {
+        cart.lua = cart.code
+      });
+    })
+
     db.carts.count().then(n => {
       console.log(n)
 
@@ -23,7 +31,7 @@ const middleware = createMiddleware((before, after) => ({
             createdAt: new Date,
             updatedAt: new Date,
             name: "example 1",
-            code: ([
+            lua: ([
               "line(0, 0, 127, 127, 12)",
               "line(0, 127, 127, 0, 14)",
             ]).join("\n"),
@@ -34,7 +42,7 @@ const middleware = createMiddleware((before, after) => ({
             createdAt: new Date,
             updatedAt: new Date,
             name: "example 2",
-            code: ([
+            lua: ([
               "line(63, 0, 63, 127, 12)",
               "line(0, 63, 127, 63, 8)",
             ]).join("\n"),
@@ -49,6 +57,18 @@ const middleware = createMiddleware((before, after) => ({
       const loaded = _.keyBy(carts, "id")
       store.dispatch(actions.loadCarts(loaded))
     })
+  },
+
+  [after(actions.CREATE_CART)]: (store, action) => {
+    const { carts } = store.getState()
+    const cart = carts[action.cart.id]
+    db.carts.put(cart)
+  },
+
+  [after(actions.UPDATE_CART)]: (store, action) => {
+    const { carts } = store.getState()
+    const cart = carts[action.cart.id]
+    db.carts.put(cart)
   },
 
   [after(actions.CHANGE_CODE)]: (store, action) => {

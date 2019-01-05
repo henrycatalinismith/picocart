@@ -21,12 +21,14 @@ const FocusOutline = () => (
 
 class Input extends React.PureComponent {
   static propTypes = {
+    onChange: PropTypes.func,
     value: PropTypes.string,
     flex: PropTypes.number,
     focusOnMount: PropTypes.bool,
   }
 
   static defaultProps = {
+    onChange: () => {},
     value: "",
     flex: undefined,
     focusOnMount: false,
@@ -37,6 +39,7 @@ class Input extends React.PureComponent {
   }
 
   onChange = event => {
+    this.props.onChange(event.target.value)
     this.setState({ value: event.target.value })
   }
 

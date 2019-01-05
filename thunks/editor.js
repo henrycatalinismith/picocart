@@ -1,14 +1,14 @@
 import actions from "../actions"
 
 const thunks = {
-  changeCode(code) {
+  changeCode(lua) {
     return (dispatch, getState) => {
       const { editor } = getState()
-      const cart = {
+
+      dispatch(actions.updateCart({
         id: editor.cartId,
-        code,
-      }
-      dispatch(actions.changeCode(cart))
+        lua,
+      }))
     }
   },
 

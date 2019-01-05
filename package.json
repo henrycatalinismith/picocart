@@ -57,6 +57,7 @@
     "redux-thunk": "^2.3.0",
     "safer-eval": "^1.2.3",
     "sequelize": "^4.42.0",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "uuid": "^3.3.2"
   }
 }
