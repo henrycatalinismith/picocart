@@ -22,7 +22,7 @@ StatatementList =
     {  
         if ( a === null ) return [];
         if ( b === null ) return a;
-        return listHelper(a,b,1);
+        return list(a,b,1);
     } 
 
 ReservedWord = "if" / "then" / "elseif" / "else" / "do" / "end" / "return" / "local" / "nil" / "true" / "false"
@@ -439,19 +439,19 @@ funcnamesuffix =
 explist = 
     a:Expression b:(ws? "," ws? e:(Expression / &{ return eMsg("Malformed argument list."); } ))*
     {
-         return listHelper(a,b,3); 
+         return list(a,b,3); 
     }
 
 varlist = 
 a:var b:(ws? "," ws? e:var)*
 {
-     return listHelper(a,b,3); 
+     return list(a,b,3); 
 } 
 
 namelist = 
     a:Identifier b:(ws? "," ws? e:Identifier)*
     {
-         return listHelper(a,b,3); 
+         return list(a,b,3); 
     } 
 
 args =
@@ -493,7 +493,7 @@ ObjectExpression =
             range: range()
         };
 
-        var props = listHelper(f,s,3);
+        var props = list(f,s,3);
         var numeric = 0;
         var longProps = [];
         for ( var idx in props ) {
@@ -639,7 +639,7 @@ funcbody =
 paramlist = 
     a:Identifier ws? b:("," ws? Identifier)*
     {
-        return listHelper(a,b); 
+        return list(a,b); 
     } /
     ws? { 
         return [] 

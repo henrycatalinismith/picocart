@@ -38,7 +38,7 @@ export class Editor extends React.PureComponent {
     const code = (html || ascii || "").split("\n").join("<br>")
 
     return (
-      <>
+      <React.Fragment>
         <ContentEditable
           className="code"
           innerRef={this.div}
@@ -52,7 +52,7 @@ export class Editor extends React.PureComponent {
         />
         <style jsx>{`
           .code {
-            font-family: "PICO-8", Monaco, Courier, monospace;
+            font-family: PICO-8, Monaco, Courier, monospace;
             font-size: 18px;
             font-weight: bold;
             background-color: ${colors[7]};
@@ -60,6 +60,8 @@ export class Editor extends React.PureComponent {
             height: 100%;
             line-height: 1.7rem;
             color: ${colors[1]};
+            padding: 8px;
+            box-sizing: border-box;
 
             ${height ? (`
               max-height: ${height}px;
@@ -76,7 +78,7 @@ export class Editor extends React.PureComponent {
             margin: 0;
           }
         `}</style>
-      </>
+      </React.Fragment>
     )
   }
 }
