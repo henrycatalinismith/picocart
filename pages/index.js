@@ -110,6 +110,30 @@ class Index extends React.Component {
     const { carts, layout } = this.props
     const { toolbarMode } = this.state
 
+    let columnCount = 2
+    if (layout.viewportWidth) {
+      if (layout.viewportWidth > 300) {
+        columnCount = 4
+      }
+      if (layout.viewportWidth > 500) {
+        columnCount = 5
+      }
+      if (layout.viewportWidth > 600) {
+        columnCount = 6
+      }
+      if (layout.viewportWidth > 700) {
+        columnCount = 7
+      }
+      if (layout.viewportWidth > 800) {
+        columnCount = 8
+      }
+    }
+
+    const columnWidth = (
+      layout.viewportWidth - 4 - 4
+      - (16 * columnCount)
+    ) / columnCount
+
     return (
       <Document title="picocart">
         <Header />
@@ -194,13 +218,13 @@ class Index extends React.Component {
          </Toolbar>
 
           <div className="library">
-            <Grid n={4} w={96}>
+            <Grid n={columnCount} w={columnWidth} gap={16}>
               {_.keys(carts).map((e, i) => (
                 <Cart
                   key={carts[e].id}
                   bg={colors[5]}
                   cart={carts[e]}
-                  size={96}
+                  size={columnWidth}
                   buzz={(
                     ["rename-picker", "delete-picker"].includes(toolbarMode)
                      || (
@@ -225,8 +249,9 @@ class Index extends React.Component {
 
         <style jsx>{`
           .library {
-            height: calc(100vh - 32px - 8px - 8px);
+            height: calc(100vh - 32px - 56px - 8px - 8px);
             padding: 8px;
+            overflow-y: auto;
           }
         `}</style>
 

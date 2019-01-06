@@ -38,7 +38,7 @@ export class Editor extends React.PureComponent {
     const code = (html || ascii || "").split("\n").join("<br>")
 
     return (
-      <React.Fragment>
+      <>
         <ContentEditable
           className="code"
           innerRef={this.div}
@@ -78,7 +78,7 @@ export class Editor extends React.PureComponent {
             margin: 0;
           }
         `}</style>
-      </React.Fragment>
+      </>
     )
   }
 }

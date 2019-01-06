@@ -1,7 +1,7 @@
 import { createReducer } from "../signalbox";
 import actions from "../actions"
 
-const update = (layout, action) => {
+const updateAll = (layout, action) => {
   return {
     ...layout,
     ...action.layout,
@@ -9,8 +9,8 @@ const update = (layout, action) => {
 }
 
 export default createReducer({}, {
-  [actions.PAGE_LOAD]: update,
-  [actions.RESIZE_VIEWPORT]: update,
-  [actions.UPDATE_LAYOUT]: update,
-  [actions.MOVE_RESIZER]: update,
+  [actions.PAGE_LOAD]: updateAll,
+  [actions.RESIZE_VIEWPORT]: updateAll,
+  [actions.UPDATE_LAYOUT]: updateAll,
+  [actions.MOVE_RESIZER]: updateAll,
 })
