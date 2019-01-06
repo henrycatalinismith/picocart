@@ -7,21 +7,6 @@ const shadow = {
   [colors[15]]: colors[9],
 }
 
-const BorderHack = ({ bg }) => (
-  <div style={{
-    position: "absolute",
-    top: "0px",
-    right: "0px",
-    bottom: "0px",
-    left: "0px",
-    border: `1px solid ${shadow[bg]}`,
-    borderWidth: "0 0 1px 0",
-    borderTop: `2px solid ${shadow[bg]}`,
-    borderBottom: `1px solid rgba(171, 82, 54, 0.1);`,
-    zIndex: 0,
-  }}/>
-)
-
 class Toolbar extends React.PureComponent {
   static propTypes = {
     children: PropTypes.any,

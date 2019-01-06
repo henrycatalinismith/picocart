@@ -4,23 +4,22 @@ import colors from "../colors"
 
 class Bucket extends React.PureComponent {
   static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    thickness: PropTypes.number,
+    children: PropTypes.any,
+    flexDirection: PropTypes.string,
+    smallThickness: PropTypes.number,
   }
 
   static defaultProps = {
-    width: undefined,
-    height: undefined,
-    thickness: 4,
+    children: undefined,
+    flexDirection: "column",
+    smallThickness: 4,
   }
 
   render() {
     const {
       children,
-      height,
-      thickness,
-      width,
+      flexDirection,
+      smallThickness,
     } = this.props
 
     return (
@@ -30,11 +29,24 @@ class Bucket extends React.PureComponent {
           .bucket {
             border-color: ${colors[14]};
             border-style: solid;
-            border-right-width: ${thickness}px;
-            border-bottom-width: ${thickness}px;
-            border-left-width: ${thickness}px;
+            border-right-width: ${smallThickness}px;
+            border-bottom-width: ${smallThickness}px;
+            border-left-width: ${smallThickness}px;
+            border-top-width: 0;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: ${flexDirection};
+            flex: 32;
           }
+
+          @media (min-width: 1000px) {
+            .bucket {
+              border-right-width: 16px;
+              border-bottom-width: 16px;
+              border-left-width: 16px;
+            }
+          }
+
         `}</style>
       </div>
     )

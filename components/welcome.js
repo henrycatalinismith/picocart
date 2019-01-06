@@ -87,7 +87,8 @@ class Welcome extends React.PureComponent {
           .welcome {
             background-color: ${colors[1]};
             border-top: 2px solid ${colors[4]};
-            height: calc(100vh - 32px - 6px);
+            height: 100%;
+            width: 100%;
             overflow-y: auto;
 
             box-sizing: border-box;

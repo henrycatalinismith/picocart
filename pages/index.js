@@ -36,22 +36,7 @@ class Index extends React.Component {
 
     return (
       <Document title="picocart">
-        <Header />
-        <Bucket
-          width={layout.bucketWidth}
-          height={layout.bucketHeight}
-          thickness={layout.bucketThickness}
-        >
-
         <Welcome />
-
-        </Bucket>
-
-        <style jsx>{`
-          .index {
-          }
-        `}</style>
-
       </Document>
     )
   }
