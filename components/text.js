@@ -33,7 +33,7 @@ export default class Text extends React.PureComponent {
 
     let viewbox = [
       -0.5,
-      -0.5,
+      -0,
       (string.length * 3) + (Math.max(0, string.length - 1)),
       4
     ]
