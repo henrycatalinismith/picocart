@@ -52,6 +52,7 @@ export class Editor extends React.PureComponent {
         />
         <style jsx>{`
           .code {
+            border-left: 2px solid ${colors[15]};
             font-family: PICO-8, Monaco, Courier, monospace;
             font-size: 18px;
             font-weight: bold;

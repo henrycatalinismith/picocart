@@ -246,6 +246,7 @@ class Index extends React.Component {
           }
 
           .library {
+            border-left: 2px solid ${colors[2]};
             box-sizing: border-box;
             height: 100%;
             padding: 8px;
