@@ -38,10 +38,7 @@ const serverInitialState = {
     status: "idle",
   },
   layout: {
-    mode: "document",
     orientation: "portrait",
-    stage: false,
-    toolbox: false,
     headerWidth: 32,
     headerHeight: 32,
     bucketWidth: undefined,
