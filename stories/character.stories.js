@@ -95,3 +95,34 @@ storiesOf("<Character ∕>", module)
     </Center>
   ))
 
+  .add("border", () => (
+    <Center bg={colors[1]}>
+      <Grid n={6} w={(Math.min(window.innerHeight, window.innerWidth) / 6) - 32}>
+        {upperCase.map(c => (
+          <svg style={style} width="38.4" height="64" viewBox="-2 -2 6 8">
+            <Character
+              borderColor={colors[0]}
+              color={colors[7]}
+            >{c}</Character>
+          </svg>
+        ))}
+      </Grid>
+    </Center>
+  ))
+
+  .add("thick border", () => (
+    <Center bg={colors[1]}>
+      <Grid n={6} w={(Math.min(window.innerHeight, window.innerWidth) / 6) - 32}>
+        {upperCase.map(c => (
+          <svg style={style} width="38.4" height="64" viewBox="-4 -4 10 12">
+            <Character
+              borderColor={colors[12]}
+              borderMultiplier={3}
+              color={colors[1]}
+            >{c}</Character>
+          </svg>
+        ))}
+      </Grid>
+    </Center>
+  ))
+

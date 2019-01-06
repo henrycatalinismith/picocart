@@ -33,6 +33,7 @@ class Bucket extends React.PureComponent {
             border-right-width: ${thickness}px;
             border-bottom-width: ${thickness}px;
             border-left-width: ${thickness}px;
+            box-sizing: border-box;
           }
         `}</style>
       </div>

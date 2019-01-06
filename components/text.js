@@ -11,6 +11,8 @@ export default class Text extends React.PureComponent {
     raw: PropTypes.bool,
     x: PropTypes.number,
     y: PropTypes.number,
+    borderColor: PropTypes.string,
+    borderMultiplier: PropTypes.number,
   };
 
   static defaultProps = {
@@ -20,19 +22,30 @@ export default class Text extends React.PureComponent {
     raw: false,
     x: 0,
     y: 0,
+    borderColor: undefined,
+    borderMultiplier: 2,
   };
 
   render() {
-    const { children, fontSize, color, raw, x, y } = this.props
+    const { children, fontSize, color, raw, x, y, borderColor, borderMultiplier } = this.props
 
     const string = typeof children === "string" ? children : children.toString()
 
-    const viewbox = [
+    let viewbox = [
       -0.5,
-      -0,
+      -0.5,
       (string.length * 3) + (Math.max(0, string.length - 1)),
       4
-    ].join(" ")
+    ]
+
+    if (borderColor) {
+      viewbox[0] *= borderMultiplier/4
+      viewbox[1] *= borderMultiplier
+      viewbox[2] += borderMultiplier
+      viewbox[3] += borderMultiplier
+    }
+
+    viewbox = viewbox.join("\n")
 
     const pixelSize = fontSize / 5
 
@@ -52,6 +65,8 @@ export default class Text extends React.PureComponent {
           x={x + (i * 4)}
           y={y}
           color={color}
+          borderColor={borderColor}
+          borderMultiplier={borderMultiplier}
         >{letter}</Character>
       )
     })

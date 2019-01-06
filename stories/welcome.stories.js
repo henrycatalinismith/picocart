@@ -3,13 +3,13 @@ import { storiesOf } from "@storybook/react"
 
 import colors from "../colors"
 import Center from "../components/center"
-import Play from "../components/play"
+import Grid from "../components/grid"
+import Welcome from "../components/welcome"
 
-storiesOf("<Play ∕>", module)
+storiesOf("<Welcome ∕>", module)
 
   .add("default", () => (
     <Center bg={colors[7]}>
-      <Play />
+      <Welcome />
     </Center>
   ))
-

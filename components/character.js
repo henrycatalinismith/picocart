@@ -10,6 +10,8 @@ export default class Character extends React.PureComponent {
     y: PropTypes.number,
     scale: PropTypes.number,
     strokeMultiplier: PropTypes.number,
+    borderColor: PropTypes.string,
+    borderMultiplier: PropTypes.number,
   };
 
   static defaultProps = {
@@ -18,11 +20,13 @@ export default class Character extends React.PureComponent {
     x: 0,
     y: 0,
     scale: 1,
-    strokeMultiplier: 1,
+    strokeMultiplier: 1.08,
+    borderColor: undefined,
+    borderMultiplier: 2,
   };
 
   render() {
-    const { children, color, x, y, scale, strokeMultiplier } = this.props
+    const { children, color, x, y, scale, strokeMultiplier, double, borderColor, borderMultiplier } = this.props
 
     const char = typeof children === "string" ? children : children.toString()
     let i = 0
@@ -31,10 +35,19 @@ export default class Character extends React.PureComponent {
       return (
         <g
           fill="none"
-          stroke={color}
           strokeLinecap="square"
-          strokeWidth={scale * strokeMultiplier}
-        >{paths}</g>
+        >
+          {borderColor && (
+            <g
+              stroke={borderColor}
+              strokeWidth={borderMultiplier}
+            >{paths}</g>
+          )}
+          <g
+            stroke={color}
+            strokeWidth={scale * strokeMultiplier}
+          >{paths}</g>
+        </g>
       )
     }
 
