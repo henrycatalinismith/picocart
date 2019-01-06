@@ -75,13 +75,11 @@ class Welcome extends React.PureComponent {
         <br />
         <br />
         <br />
-        <div style={{ transform: "scale(1.5)", width: "100%", display: "flex", justifyContent: "center"}}>
-          <Button shadow={colors[13]} onClick={() => {
-            window.location.href = "/library"
-          }}>
-            Launch
-          </Button>
-        </div>
+        <Button shadow={colors[13]} onClick={() => {
+          window.location.href = "/library"
+        }}>
+          Launch
+        </Button>
 
         <style jsx>{`
           .welcome {
