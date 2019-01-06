@@ -33,6 +33,7 @@ const context = {
 
 const serverInitialState = {
   carts: {},
+  content: {},
   editor: {},
   emulator: {
     status: "idle",

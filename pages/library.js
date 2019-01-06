@@ -3,14 +3,12 @@ import _ from "lodash"
 import { connect } from "react-redux"
 import uuid from "uuid"
 import Document from "../components/document"
-import Bucket from "../components/bucket"
 import Input from "../components/input"
 import Grid from "../components/grid"
 import Cart from "../components/cart"
 import Text from "../components/text"
 import Toolbar from "../components/toolbar"
 import Button from "../components/button"
-import Header from "../components/header"
 import actions from "../actions"
 import colors from "../colors"
 
@@ -21,7 +19,7 @@ class Index extends React.Component {
 
   static mapStateToProps = state => ({
     carts: state.carts,
-    layout: state.layout,
+    content: state.content,
   })
 
   static mapDispatchToProps = (dispatch, props) => ({
@@ -32,7 +30,7 @@ class Index extends React.Component {
 
   static propTypes = {
     carts: PropTypes.object,
-    layout: PropTypes.object,
+    content: PropTypes.object,
     createCart: PropTypes.func,
     updateCart: PropTypes.func,
     deleteCart: PropTypes.func,
@@ -106,43 +104,37 @@ class Index extends React.Component {
   }
 
   render() {
-    const { carts, layout } = this.props
+    const { carts, content } = this.props
     const { toolbarMode } = this.state
 
     let columnCount = 2
-    if (layout.viewportWidth) {
-      if (layout.viewportWidth > 300) {
+    if (content.width) {
+      if (content.width > 300) {
         columnCount = 4
       }
-      if (layout.viewportWidth > 500) {
+      if (content.width > 500) {
         columnCount = 5
       }
-      if (layout.viewportWidth > 600) {
+      if (content.width > 600) {
         columnCount = 6
       }
-      if (layout.viewportWidth > 700) {
+      if (content.width > 700) {
         columnCount = 7
       }
-      if (layout.viewportWidth > 800) {
+      if (content.width > 800) {
         columnCount = 8
       }
     }
 
     const columnWidth = (
-      layout.viewportWidth - 4 - 4
+      content.width - 4 - 4
       - (16 * columnCount)
     ) / columnCount
 
     return (
       <Document title="picocart">
-        <Header />
-        <Bucket
-          width={layout.bucketWidth}
-          height={layout.bucketHeight}
-          thickness={layout.bucketThickness}
-        >
-
-         <Toolbar bg={colors[13]}>
+        <div className="library-page">
+          <Toolbar bg={colors[13]}>
            {({
              "default": (
                <>
@@ -244,16 +236,24 @@ class Index extends React.Component {
               ))}
             </Grid>
           </div>
-        </Bucket>
 
         <style jsx>{`
+          .library-page {
+            flex-direction: column;
+            display: flex;
+            height: 100%;
+            width: 100%;
+          }
+
           .library {
-            height: calc(100vh - 32px - 56px - 8px - 8px);
+            box-sizing: border-box;
+            height: 100%;
             padding: 8px;
             overflow-y: auto;
           }
         `}</style>
 
+        </div>
       </Document>
     )
   }

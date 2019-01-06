@@ -3,7 +3,6 @@ import { createActions } from "../signalbox";
 export default createActions([
   "MOVE_RESIZER",
   "PAGE_LOAD",
-  "RESIZE_VIEWPORT",
   "UPDATE_LAYOUT",
 ], types => ({
   moveResizer: (x, y) => ({
@@ -16,14 +15,6 @@ export default createActions([
     type: types.PAGE_LOAD,
     layout: {},
     carts: {},
-  }),
-
-  resizeViewport: (viewportWidth, viewportHeight) => ({
-    type: types.RESIZE_VIEWPORT,
-    layout: {
-      viewportWidth,
-      viewportHeight,
-    }
   }),
 
   updateLayout: layout => ({

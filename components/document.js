@@ -1,6 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { connect } from "react-redux"
 import NextHead from "next/head"
+import Viewport from "../components/viewport"
+import Header from "../components/header"
+import Bucket from "../components/bucket"
+import Content from "../components/content"
 import colors from "../colors"
 
 const Font = () => (
@@ -16,14 +21,18 @@ const Font = () => (
 )
 
 
-export default class Document extends React.PureComponent {
+export class Document extends React.PureComponent {
+  static mapStateToProps = state => ({
+    viewport: state.viewport,
+  })
+
   static propTypes = {
     children: PropTypes.any,
-    title: PropTypes.string,
+    viewport: PropTypes.object,
   };
 
   render() {
-    const { children, title } = this.props
+    const { children, title, viewport } = this.props
     return (
       <>
         <NextHead key="head">
@@ -46,9 +55,17 @@ export default class Document extends React.PureComponent {
           }
         `}</style>
         <Font />
-        {children}
+        <Viewport {...viewport}>
+          <Header />
+          <Bucket>
+            <Content>
+              {children}
+            </Content>
+          </Bucket>
+        </Viewport>
       </>
     )
   }
 }
 
+export default connect(Document.mapStateToProps)(Document)

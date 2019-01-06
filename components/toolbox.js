@@ -4,16 +4,6 @@ export default ({ children, width, height, orientation }) => {
   let w = width
   let h = height
 
-  if (orientation === "portrait") {
-    w = w - 8
-    h = h - 4
-  }
-
-  if (orientation === "landscape") {
-    w = w - 4
-    h = h - 4
-  }
-
   return (
     <div className="toolbox">
       {children}
@@ -32,12 +22,8 @@ export default ({ children, width, height, orientation }) => {
 
 
           ${(orientation == "portrait") ? (`
-            border: 4px solid ${colors[14]};
-            border-top-width: 0px;
             order: 2;
           `) : (`
-            border-left: 4px solid ${colors[14]};
-            border-bottom: 4px solid ${colors[14]};
             order: 1;
             ${(!width && !height) ? (`
               min-width: 200px;

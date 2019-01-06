@@ -3,7 +3,6 @@ import _ from "lodash"
 import { connect } from "react-redux"
 import Head from "next/head"
 import Document from "../components/document"
-import Header from "../components/header"
 import Stage from "../components/stage"
 import Screen from "../components/screen"
 import Resizer from "../components/resizer"
@@ -94,7 +93,6 @@ class Cart extends React.Component {
 
     return (
       <Document title="cart editor">
-        <Header />
 
         <div className="cart-maker">
           <Stage
@@ -148,7 +146,8 @@ class Cart extends React.Component {
         <style jsx>{`
           .cart-maker {
             display: flex;
-            height: calc(100vh - ${layout.headerHeight}px);
+            height: 100%;
+            width: 100%;
 
             ${(layout.orientation == "portrait") ? (`
               flex-direction: column;

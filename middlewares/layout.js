@@ -13,6 +13,7 @@ const o = (w, h) =>
 const middleware = createMiddleware((before, after) => ({
   [before(actions.PAGE_LOAD)](store, action) {
     const layout = {}
+    const { content } = action
     const header = document.querySelector(".header")
     const iOS = window.navigator.userAgent.match(/(iPad|iPhone|iPod)/g)
 
@@ -20,15 +21,6 @@ const middleware = createMiddleware((before, after) => ({
 
     layout.viewportWidth = window.innerWidth
     layout.viewportHeight = window.innerHeight
-
-    if (iOS) {
-      require("inobounce")
-      layout.viewportHeight = innerHeight()
-      if (o(layout.viewportWidth, layout.viewportHeight) === "portrait") {
-        layout.viewportHeight -= 44
-      }
-      window.scrollTo(0, 0)
-    }
 
     layout.orientation = o(layout.viewportWidth, layout.viewportHeight)
     layout.headerWidth = header.offsetWidth
@@ -66,23 +58,14 @@ const middleware = createMiddleware((before, after) => ({
       )
       if (isLandscape && looksPortrait) {
         layout.resizerWidth = 16
-        layout.resizerHeight = (
-          layout.viewportHeight
-          - layout.headerHeight
-        )
+        layout.resizerHeight = content.height
         layout.toolboxWidth = 200
-        layout.toolboxHeight = (
-          layout.viewportHeight
-          - layout.headerHeight
-        )
+        layout.toolboxHeight = content.height
         layout.stageWidth = (
           layout.viewportWidth
           - layout.toolboxWidth
         )
-        layout.stageHeight = (
-          layout.viewportHeight
-          - layout.headerHeight
-        )
+        layout.stageHeight = content.height
         layout.screenSize = Math.min(
           layout.stageWidth,
           layout.stageHeight
@@ -94,6 +77,7 @@ const middleware = createMiddleware((before, after) => ({
   },
 
   [before(actions.RESIZE_VIEWPORT)](store, action) {
+    console.log(action.layout)
     const { viewportWidth, viewportHeight } = action.layout
 
     const state = store.getState()
