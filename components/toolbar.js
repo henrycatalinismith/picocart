@@ -46,6 +46,8 @@ class Toolbar extends React.PureComponent {
             position: relative;
             justify-content: space-evenly;
             height: ${height}px;
+            min-height: ${height}px;
+            max-height: ${height}px;
             width: calc(${width
               ? `${width}px`
               : "100%"
