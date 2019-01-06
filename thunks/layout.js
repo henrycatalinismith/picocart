@@ -1,6 +1,5 @@
 import _ from "lodash"
 import actions from "../actions"
-import emulator from "./emulator"
 
 const canvasSizeHack =  _.debounce(dispatch => {
   const c = document.querySelector("canvas")

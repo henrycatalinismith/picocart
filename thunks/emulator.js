@@ -1,4 +1,3 @@
-import escodegen from "escodegen"
 import lua2js from "lua2js"
 import peg from "pegjs"
 import grammar from "../emulator/grammar.pegjs"

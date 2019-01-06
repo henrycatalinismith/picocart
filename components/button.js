@@ -8,12 +8,14 @@ class Button extends React.PureComponent {
     onClick: PropTypes.func,
     children: PropTypes.any,
     bg: PropTypes.string,
+    shadow: PropTypes.string,
   }
 
   static defaultProps = {
     onClick: () => {},
     children: "",
     bg: colors[8],
+    shadow: colors[6],
   }
 
   onClick = event => {
@@ -57,7 +59,7 @@ class Button extends React.PureComponent {
   }
 
   render() {
-    const { children, bg } = this.props
+    const { children, bg, shadow } = this.props
     const { pushed } = this.state
 
     const label = typeof children === "string" ? children : children.toString()
@@ -92,6 +94,10 @@ class Button extends React.PureComponent {
 
       case 6:
         offset.x = 5
+        break
+
+      case 7:
+        offset.x = 3.5
         break
     }
 
@@ -163,9 +169,9 @@ class Button extends React.PureComponent {
 
           {!pushed && (
             <g className="shadow">
-              <path d="M0,11 L0,12" stroke={colors[6]} strokeWidth={2} />
-              <path d="M32.5,11 L32.5,12" stroke={colors[6]} strokeWidth={2} />
-              <path d="M1,13 L31.5,13" stroke={colors[6]} strokeWidth={2} />
+              <path d="M0,11 L0,12" stroke={shadow} strokeWidth={2} />
+              <path d="M32.5,11 L32.5,12" stroke={shadow} strokeWidth={2} />
+              <path d="M1,13 L31.5,13" stroke={shadow} strokeWidth={2} />
             </g>
           )}
 

@@ -24,3 +24,15 @@ storiesOf("<Text ∕>", module)
     </Center>
   ))
 
+  .add("border", () => (
+    <Center bg={colors[7]}>
+      <Text
+        fontSize={64}
+        color={colors[14]}
+        borderColor={colors[0]}
+        borderMultiplier={1.5}
+      >picocart
+      </Text>
+    </Center>
+  ))
+

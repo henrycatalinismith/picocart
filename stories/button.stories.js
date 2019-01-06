@@ -29,7 +29,7 @@ storiesOf("<Button ∕>", module)
   .add("sizes", () => (
     <Center bg={colors[7]}>
       <Grid n={1} w={(Math.min(window.innerHeight, window.innerWidth) / 6) - 32}>
-        {["A", "AB", "ABC", "ABCD", "ABCDE"].map(label => (
+        {["A", "AB", "ABC", "ABCD", "ABCDE", "ABCDEF", "ABCDEFG"].map(label => (
           <Button>
             {label}
           </Button>

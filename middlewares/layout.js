@@ -33,8 +33,6 @@ const middleware = createMiddleware((before, after) => ({
     layout.orientation = o(layout.viewportWidth, layout.viewportHeight)
     layout.headerWidth = header.offsetWidth
     layout.headerHeight = header.offsetHeight
-    //layout.bucketWidth = bucket.offsetWidth
-    //layout.bucketHeight = bucket.offsetHeight
 
     if (window.location.pathname.startsWith("/cart")) {
       const stage = document.querySelector(".stage")
@@ -131,16 +129,6 @@ const middleware = createMiddleware((before, after) => ({
         stageHeight = viewportHeight - headerHeight
         toolboxWidth = halfWidth
         toolboxHeight = viewportHeight - headerHeight
-
-        if (toolboxWidth > 320) {
-          //toolboxWidth = 320
-          //stageWidth = viewportWidth - resizerWidth - toolboxWidth
-        }
-
-        if (toolboxWidth < 200) {
-          //toolboxWidth = 200
-          //stageWidth = viewportWidth - resizerWidth - toolboxWidth
-        }
       }
 
       screenSize = Math.min(stageWidth, stageHeight)
