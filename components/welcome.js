@@ -83,7 +83,7 @@ class Welcome extends React.PureComponent {
         <div style={{ transform: "scale(1.4)" }}>
           <Button bg={colors[14]} shadow={colors[13]} onClick={() => {
             window.location.href = "/library"
-          }}>Try It!</Button>
+          }}>Start</Button>
         </div>
 
         <style jsx>{`
