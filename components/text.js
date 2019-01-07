@@ -39,8 +39,8 @@ export default class Text extends React.PureComponent {
     ]
 
     if (borderColor) {
-      viewbox[0] *= borderMultiplier/4
-      viewbox[1] *= borderMultiplier
+      viewbox[0] -= borderMultiplier/2
+      viewbox[1] -= borderMultiplier/2
       viewbox[2] += borderMultiplier
       viewbox[3] += borderMultiplier
     }
