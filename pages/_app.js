@@ -70,10 +70,14 @@ export function makeStore (initialState = serverInitialState, options) {
 }
 
 class _App extends App {
-  static getInitialProps({ ctx }) {
+  static getInitialProps({ Component, ctx }) {
+    const pageProps = Component.getInitialProps
+      ? Component.getInitialProps(ctx)
+      : {}
     ctx.store.dispatch(actions.pageRequest(ctx.req))
-    console.log(ctx.req)
-    return {}
+    return {
+      ...pageProps,
+    }
   }
 
   componentDidMount () {
