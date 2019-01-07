@@ -42,9 +42,6 @@ const serverInitialState = {
     orientation: "portrait",
     headerWidth: 32,
     headerHeight: 32,
-    bucketWidth: undefined,
-    bucketHeight: undefined,
-    bucketThickness: 4,
     editorHeight: undefined,
     screenSize: undefined,
     stageWidth: undefined,
@@ -75,6 +72,7 @@ export function makeStore (initialState = serverInitialState, options) {
 class _App extends App {
   static getInitialProps({ ctx }) {
     ctx.store.dispatch(actions.pageRequest(ctx.req))
+    console.log(ctx.req)
     return {}
   }
 

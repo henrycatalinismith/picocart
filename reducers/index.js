@@ -7,6 +7,7 @@ import editor from "./editor"
 import emulator from "./emulator"
 import engine from "./engine"
 import layout from "./layout"
+import location from "./location"
 import os from "./os"
 import platform from "./platform"
 import viewport from "./viewport"
@@ -19,6 +20,7 @@ export default combineReducers({
   emulator,
   engine,
   layout,
+  location,
   os,
   platform,
   viewport,
