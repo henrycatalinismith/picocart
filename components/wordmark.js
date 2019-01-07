@@ -22,7 +22,7 @@ export default ({ width = 150, height, fill = colors[7], stroke = colors[2] }) =
 
       <style jsx>{`
         .wordmark {
-          height: 28px;
+          height: ${height}px;
           padding: 2px;
         }
 
