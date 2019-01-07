@@ -53,7 +53,7 @@ const serverInitialState = {
     resizerHeight: undefined,
     toolboxWidth: undefined,
     toolboxHeight: undefined,
-  }
+  },
 }
 
 export function makeStore (initialState = serverInitialState, options) {
@@ -73,6 +73,11 @@ export function makeStore (initialState = serverInitialState, options) {
 }
 
 class _App extends App {
+  static getInitialProps({ ctx }) {
+    ctx.store.dispatch(actions.pageRequest(ctx.req))
+    return {}
+  }
+
   componentDidMount () {
     window.store.dispatch(thunks.pageLoad())
   }
