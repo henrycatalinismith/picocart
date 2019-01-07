@@ -2,6 +2,7 @@ import carts from "./carts"
 import editor from "./editor"
 import emulator from "./emulator"
 import layout from "./layout"
+import page from "./page"
 import viewport from "./viewport"
 
 const actions = {
@@ -9,6 +10,7 @@ const actions = {
   ...editor,
   ...emulator,
   ...layout,
+  ...page,
   ...viewport,
 };
 
