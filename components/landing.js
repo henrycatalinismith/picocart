@@ -19,7 +19,7 @@ const buttonHref = os => {
   switch (os.name) {
     case "Android": return "/install"
     case "iOS": return "/install"
-    default: return "/library"
+    default: return "/studio"
   }
 }
 

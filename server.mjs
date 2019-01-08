@@ -3,7 +3,11 @@ import Sequelize from "sequelize"
 import fs from "fs"
 import next from "next"
 import path from "path"
-import models from './models'
+
+import models from "./models"
+import routes from "./routes"
+
+console.log(routes)
 
 const dir = path.resolve("./static")
 const files = fs.readdirSync(dir)
@@ -13,6 +17,7 @@ async function main() {
   const dev = process.env.NODE_ENV !== "production"
   const app = next({ dev })
   const handle = app.getRequestHandler()
+  const router = routes.getRequestHandler(app)
 
   await app.prepare()
   const server = express()
@@ -35,10 +40,7 @@ async function main() {
     res.send(`lol ${users.length}`)
   })
 
-  server.get('/cart/:id', (req, res) => {
-    const mergedQuery = Object.assign({}, req.query, req.params);
-    return app.render(req, res, '/cart', mergedQuery);
-  });
+  server.use(router)
 
   server.get("*", (req, res) => {
     return handle(req, res)

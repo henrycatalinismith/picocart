@@ -79,7 +79,7 @@ export class Run extends React.Component {
     const { cart, bg, size, buzz, red } = this.props
 
     return (
-      <a className="cart" href={`/cart/${cart.id}`} onClick={this.onClick}>
+      <a className="cart" href={`/studio/${cart.id}`} onClick={this.onClick}>
         <svg className="cart__border" viewBox="0 0 16 16">
           <defs>
             <clipPath id="corner" transform="translate(-1.000000, -1.000000)">

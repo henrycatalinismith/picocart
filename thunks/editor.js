@@ -14,7 +14,7 @@ const thunks = {
 
   exitEditor() {
     return (dispatch, getState) => {
-      window.location.href = "/library"
+      window.location.href = "/studio"
     }
   },
 }
