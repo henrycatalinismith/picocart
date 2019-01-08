@@ -24,7 +24,7 @@ const middleware = createMiddleware((before, after) => ({
     layout.headerWidth = header.offsetWidth
     layout.headerHeight = header.offsetHeight
 
-    if (window.location.pathname.startsWith("/cart")) {
+    if (window.location.pathname.startsWith("/studio/")) {
       const stage = document.querySelector(".stage")
       const screen = document.querySelector(".screen__canvas")
       const resizer = document.querySelector(".resizer")
@@ -83,7 +83,7 @@ const middleware = createMiddleware((before, after) => ({
     const { headerHeight } = state.layout
     const headerWidth = viewportWidth
 
-    if (window.location.pathname.startsWith("/cart")) {
+    if (window.location.pathname.startsWith("/studio/")) {
       let {
         screenSize,
         stageWidth,

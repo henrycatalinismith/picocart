@@ -8,7 +8,7 @@ const canvasSizeHack =  _.debounce(dispatch => {
 }, 100)
 
 const editorHeightHack = _.debounce(dispatch => {
-  if (window.location.pathname.startsWith("/cart")) {
+  if (window.location.pathname.startsWith("/studio/")) {
     return
   }
   setTimeout(() => {
@@ -44,7 +44,7 @@ const thunks = {
       )
 
       window.addEventListener("resize", throttledDispatchResize)
-      if (window.location.pathname.startsWith("/cart")) {
+      if (window.location.pathname.startsWith("/studio/")) {
         canvasSizeHack()
         editorHeightHack(dispatch)
       }
@@ -57,7 +57,7 @@ const thunks = {
         window.innerWidth,
         window.innerHeight
       ))
-      if (window.location.pathname.startsWith("/cart")) {
+      if (window.location.pathname.startsWith("/studio/")) {
         canvasSizeHack()
         editorHeightHack(dispatch)
       }
