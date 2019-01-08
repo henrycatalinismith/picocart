@@ -4,18 +4,17 @@ import { connect } from "react-redux"
 import uuid from "uuid"
 import Document from "../components/document"
 import Bucket from "../components/bucket"
-import Landing from "../components/landing"
+import Installer from "../components/installer"
 import Header from "../components/header"
 import actions from "../actions"
 import colors from "../colors"
 
-class Index extends React.Component {
+class Install extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
     return {}
   }
 
   static mapStateToProps = state => ({
-    layout: state.layout,
     os: state.os,
   })
 
@@ -23,8 +22,8 @@ class Index extends React.Component {
   });
 
   static propTypes = {
-    layout: PropTypes.object,
     os: PropTypes.object,
+    query: PropTypes.object,
   }
 
   constructor(props) {
@@ -34,17 +33,18 @@ class Index extends React.Component {
   }
 
   render() {
-    const { layout, os } = this.props
+    const { os, query } = this.props
+    console.log(this.props)
 
     return (
       <Document title="picocart">
-        <Landing os={os} />
+        <Installer os={os} />
       </Document>
     )
   }
 }
 
 export default connect(
-  Index.mapStateToProps,
-  Index.mapDispatchToProps
-)(Index)
+  Install.mapStateToProps,
+  Install.mapDispatchToProps
+)(Install)
