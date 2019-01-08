@@ -73,14 +73,11 @@ export default class Installer extends React.PureComponent {
             <StepTitle>
               Hi Android Peeps
             </StepTitle>
-            <StepText>
-              Please add this site to your home screen
-            </StepText>
 
             <StepText>
-              Sorry the Android instructions aren't better.
+              Sorry the Android install doesn't work yet.
               There's so much else to do and I don't have
-              an Android device to test this on yet.
+              an Android device to test it on yet.
             </StepText>
           </>
         )}
