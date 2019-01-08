@@ -7,24 +7,39 @@ import Rotate from "./rotate"
 import Wordmark from "./wordmark"
 import Pulse from "./pulse"
 
-class Welcome extends React.PureComponent {
+const buttonText = os => {
+  switch (os.name) {
+    case "Android": return "Install"
+    case "iOS": return "Install"
+    default: return "Start"
+  }
+}
+
+const buttonHref = os => {
+  switch (os.name) {
+    case "Android": return "/install"
+    case "iOS": return "/install"
+    default: return "/library"
+  }
+}
+
+export default class Landing extends React.PureComponent {
   static propTypes = {
+    os: PropTypes.object,
   }
 
   static defaultProps = {
+    os: {},
   }
 
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
   render() {
-    // const { } = this.props
+    const { os } = this.props
     // const { } = this.state
-    //
-    // re
 
     return (
       <div className="landing-page">
@@ -82,8 +97,8 @@ class Welcome extends React.PureComponent {
 
         <div style={{ transform: "scale(1.4)" }}>
           <Button bg={colors[14]} shadow={colors[13]} onClick={() => {
-            window.location.href = "/library"
-          }}>Start</Button>
+            window.location.href = buttonHref(os)
+          }}>{buttonText(os)}</Button>
         </div>
 
         <style jsx>{`
@@ -103,92 +118,9 @@ class Welcome extends React.PureComponent {
             align-items: center;
             position: relative;
           }
-
         `}</style>
       </div>
     )
   }
 }
 
-    /*
-    return (
-      <div className="welcome">
-
-        <Text
-          fontSize={32}
-          color={colors[7]}
-          borderColor={colors[5]}
-        >HELLO!!
-        </Text>
-
-        <br />
-        <Text
-          fontSize={16}
-          color={colors[7]}
-          borderColor={colors[5]}
-        >picocart isn't ready yet!
-        </Text>
-
-        <br />
-        <Text
-          fontSize={64}
-          color={colors[14]}
-          borderColor={colors[2]}
-        >   lol
-        </Text>
-
-        <br />
-        <br />
-        <Text
-          fontSize={32}
-          color={colors[7]}
-          borderColor={colors[0]}
-        >PICO-8!
-        </Text>
-
-        <br />
-        <Text
-          fontSize={32}
-          color={colors[7]}
-          borderColor={colors[0]}
-        >ON UR PHONE!
-        </Text>
-
-        <br />
-        <Text
-          fontSize={50}
-          color={colors[14]}
-          borderColor={colors[2]}
-        > lol
-        </Text>
-
-        <br />
-        <br />
-        <br />
-        <Button shadow={colors[13]} onClick={() => {
-          window.location.href = "/library"
-        }}>
-          Launch
-        </Button>
-
-        <style jsx>{`
-          .welcome {
-            background-color: ${colors[1]};
-            border-top: 2px solid ${colors[4]};
-            border-left: 2px solid ${colors[4]};
-            padding: 16px;
-            height: 100%;
-            width: 100%;
-            overflow-y: auto;
-            box-sizing: border-box;
-            padding-top: 16px;
-          }
-
-        `}</style>
-      </div>
-    )
-  }
-}
-    */
-
-export default Welcome
