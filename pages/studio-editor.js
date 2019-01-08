@@ -49,7 +49,7 @@ const ViewportHack = () => (
   </div>
 )
 
-class Cart extends React.Component {
+class StudioEditor extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
     store.dispatch(actions.editCart(query.id))
     return { id: query.id }
@@ -162,7 +162,7 @@ class Cart extends React.Component {
 }
 
 export default connect(
-  Cart.mapStateToProps,
-  Cart.mapDispatchToProps
-)(Cart)
+  StudioEditor.mapStateToProps,
+  StudioEditor.mapDispatchToProps
+)(StudioEditor)
 

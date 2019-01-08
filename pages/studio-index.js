@@ -12,7 +12,7 @@ import Button from "../components/button"
 import actions from "../actions"
 import colors from "../colors"
 
-class Index extends React.Component {
+class StudioIndex extends React.Component {
   static getInitialProps({ store, isServer, pathname, query }) {
     return {}
   }
@@ -261,6 +261,6 @@ class Index extends React.Component {
 }
 
 export default connect(
-  Index.mapStateToProps,
-  Index.mapDispatchToProps
-)(Index)
+  StudioIndex.mapStateToProps,
+  StudioIndex.mapDispatchToProps
+)(StudioIndex)
